@@ -3,8 +3,8 @@
 <head>
 <style>
   h1 {
-    text-align: center;
     font-size: 36px;
+    text-align: center;
   }
 </style>
 </head>
