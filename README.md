@@ -1,3 +1,1 @@
-<center>
-# ⚔️ ♥️ Java Dungeon Game ♥️ ⚔️
-<center>
+# Trabalho Prático - Programação Orientada a Objetos - ⚔️ ♥️ Java Dungeon Game ♥️ ⚔️
