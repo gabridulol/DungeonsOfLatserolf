@@ -1,14 +1,41 @@
-## ⚔️ ♥️ Java Dungeon - Roguelike ♥️ ⚔️
-Em [NOME DO JOGO], seu objetivo é explorar e escapar de uma masmorra. Nessa aventura, seu personagem enfrentará monstros em busca de três chaves que destrancam a saída.
+## ⚔️ ♥️ Java Dungeon Game - Roguelike ♥️ ⚔️
+
+Em **Java Dungeon - Roguelike**, seu objetivo é explorar e escapar de uma masmorra. Nessa aventura, seu personagem enfrentará monstros em busca de três chaves que destrancam a saída.
 
 ## Organização do Projeto
 
+A estrutura do projeto é organizada da seguinte forma:
+
+```
 JavaDungeonGame/
 ├── src/
     ├── br/
         ├── com/
             ├── dungeon/
                 ├── /* OUTROS PASTAS */
+```
+
+Neste diretório, você encontrará o código-fonte do jogo. As pastas internas contêm os arquivos Java que compõem o jogo.
+
+[Adicione uma descrição mais detalhada da estrutura e do conteúdo das pastas, se desejar.]
+
+## Como Executar
+
+[Adicione instruções sobre como executar o jogo ou quaisquer pré-requisitos necessários, se aplicável.]
+
+## Recursos
+
+[Se você tiver recursos adicionais, como imagens, áudios ou documentação, você pode criar seções separadas para eles aqui.]
+
+## Contribuição
+
+Se você deseja contribuir para o projeto, fique à vontade para abrir uma issue ou enviar um pull request. Agradecemos sua contribuição!
+
+## Licença
+
+Este projeto é licenciado sob a [Nome da Licença, se aplicável]. Veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+[Adicione qualquer informação adicional que julgar relevante para o seu projeto.]
 
 
 
