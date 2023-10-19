@@ -1,2 +1,2 @@
-# ⚔️ ♥️ Java Dungeon - Roguelike RPG ♥️ ⚔️
+# ⚔️ ♥️ Java Dungeon - Roguelike ♥️ ⚔️
 Em [NOME DO JOGO], seu objetivo é explorar e escapar de uma masmorra. Nessa aventura, seu personagem enfrentará monstros em busca de três chaves que destrancam a saída.
