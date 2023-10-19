@@ -1,1 +1,2 @@
-# Trabalho Prático - Programação Orientada a Objetos - ⚔️ ♥️ Java Dungeon Game ♥️ ⚔️
+# ⚔️ ♥️ Java Dungeon - Roguelike RPG ♥️ ⚔️
+Em [NOME DO JOGO], seu objetivo é explorar e escapar de uma masmorra. Nessa aventura, seu personagem enfrentará monstros em busca de três chaves que destrancam a saída.
