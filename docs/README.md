@@ -8,11 +8,19 @@ A estrutura do projeto é organizada da seguinte forma:
 
 ```
 JavaDungeonGame/
+├── assets/
+│
+├── bin/
+│
+├── docs/
+│
 ├── src/
-    ├── br/
-        ├── com/
-            ├── dungeon/
-                ├── /* OUTROS PASTAS */
+│    ├── br/
+│        ├── com/
+│            ├── dungeon/
+│                ├── /* OUTROS PASTAS */
+│
+├── lib/
 ```
 
 Neste diretório, você encontrará o código-fonte do jogo. As pastas internas contêm os arquivos Java que compõem o jogo.
