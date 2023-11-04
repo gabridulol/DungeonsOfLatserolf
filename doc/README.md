@@ -1,26 +1,22 @@
-## ⚔️ ♥️ Java Dungeon Game - Roguelike ♥️ ⚔️
+## ⚔️ ♥️ NomeDoJogo ♥️ ⚔️
 
-Em **Java Dungeon - Roguelike**, seu objetivo é explorar e escapar de uma masmorra. Nessa aventura, seu personagem enfrentará monstros em busca de três chaves que destrancam a saída.
+Em **NomeDoJogo**...
 
 ## Organização do Projeto
 
 A estrutura do projeto é organizada da seguinte forma:
 
 ```
-JavaDungeonGame/
+DungeonsOfLatserolf/
 ├── assets/
-│
 ├── bin/
-│
-├── docs/
-│
-├── src/
-│    ├── br/
-│        ├── com/
-│            ├── dungeon/
-│                ├── /* OUTROS PASTAS */
-│
+├── doc/
 ├── lib/
+├── src/
+│   ├── DungeonsOfLatserolf/
+│       ├── controller/
+│       ├── model/
+│       ├── view/
 ```
 
 Neste diretório, você encontrará o código-fonte do jogo. As pastas internas contêm os arquivos Java que compõem o jogo.
@@ -44,6 +40,7 @@ Se você deseja contribuir para o projeto, fique à vontade para abrir uma issue
 Este projeto é licenciado sob a [Nome da Licença, se aplicável]. Veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 [Adicione qualquer informação adicional que julgar relevante para o seu projeto.]
+
 
 
 
