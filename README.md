@@ -14,9 +14,9 @@ DungeonsOfLatserolf/
 ├── lib/
 ├── src/
 │   ├── DungeonsOfLatserolf/
-│       ├── controller/
-│       ├── model/
-│       ├── view/
+│       ├── components/
+│       ├── entities/
+│       ├── system/
 ```
 
 Neste diretório, você encontrará o código-fonte do jogo. As pastas internas contêm os arquivos Java que compõem o jogo.
