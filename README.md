@@ -14,8 +14,8 @@ DungeonsOfLatserolf/
 ├── lib/
 ├── src/
 │   ├── DungeonsOfLatserolf/
-│       ├── components/
-│       ├── entities/
+│       ├── component/
+│       ├── entity/
 │       ├── system/
 ```
 
