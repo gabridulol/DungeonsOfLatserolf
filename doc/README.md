@@ -1,6 +1,6 @@
-## ⚔️ ♥️ NomeDoJogo ♥️ ⚔️
+## ⚔️ ♥️ Dungeons of Latserolf ♥️ ⚔️
 
-Em **NomeDoJogo**...
+Em **Dungeons of Latserolf**...
 
 ## Organização do Projeto
 
