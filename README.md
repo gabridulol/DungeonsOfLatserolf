@@ -41,10 +41,6 @@ Este projeto é licenciado sob a [Nome da Licença, se aplicável]. Veja o arqui
 
 [Adicione qualquer informação adicional que julgar relevante para o seu projeto.]
 
-
-
-
-
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
