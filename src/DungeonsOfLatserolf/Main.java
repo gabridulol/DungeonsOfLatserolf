@@ -2,6 +2,7 @@ package DungeonsOfLatserolf;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 public class Main {
