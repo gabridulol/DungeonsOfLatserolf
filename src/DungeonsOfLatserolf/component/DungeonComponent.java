@@ -3,24 +3,27 @@ package DungeonsOfLatserolf.component;
 import java.util.Random;
 
 public class DungeonComponent {
-
-    private static final int WIDTH = 31;
-    private static final int HEIGHT = 31;
-    // private static final double DOOR_PROBABILITY = 0.1;
-    private static final double MONSTER_PROBABILITY = 0.1;
-    private static final double CHEST_PROBABILITY = 0.01;
-    private static final char BOARD = 'O';
+    // Tileset do Mapa
+    private static final char BOARD = '\u25A0';
     private static final char WALL = '#';
-    private static final char vWALL = '║';
-    private static final char hWALL = '═';
+    private static final char VERTICAL_WALL = '║';
+    private static final char HORIZONTAL_WALL = '═';
     private static final char FLOOR = '.';
     // private static final char DOOR = 'D';
     private static final char CHEST = 'C';
     private static final char MONSTER = 'M';
     private static final char START = 'S';
-    public static final int START_X = WIDTH / 2;
+
+    // Propriedades do Mapa
+    private static final int WIDTH = 31;
+    private static final int HEIGHT = 31;
+    // private static final double DOOR_PROBABILITY = 0.1;
+    private static final double MONSTER_PROBABILITY = 0.1;
+    private static final double CHEST_PROBABILITY = 0.01;
+    private static final int START_X = WIDTH / 2;
     private static final int START_Y = HEIGHT / 2;
 
+    // Mapa
     private char DungeonComponent[][];
 
     public DungeonComponent() {
@@ -86,12 +89,22 @@ public class DungeonComponent {
         }
     }
 
+    // UPDATE - Precisa ser melhor elaborado
     private void buildDoorDungeonComponent(char[][] DungeonComponent) {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (DungeonComponent[x][y] == FLOOR) {
-                    if (Math.random() < MONSTER_PROBABILITY) {
-                        DungeonComponent[x][y] = MONSTER;
+                    boolean surroundedByWalls = false;
+                    if ((x > 0 && x < WIDTH - 1) && DungeonComponent[x - 1][y] == WALL && DungeonComponent[x + 1][y] == WALL) {
+                        surroundedByWalls = true;
+                    }
+                    if ((y > 0 && y < HEIGHT - 1) && DungeonComponent[x][y - 1] == WALL && DungeonComponent[x][y + 1] == WALL) {
+                        surroundedByWalls = true;
+                    }
+                    if (surroundedByWalls) {
+                        if (Math.random() < MONSTER_PROBABILITY) {
+                            DungeonComponent[x][y] = MONSTER;
+                        }
                     }
                 }
                 if (DungeonComponent[x][y] == FLOOR) {
@@ -103,21 +116,29 @@ public class DungeonComponent {
         }
     }
 
+    // UPDATE - Precisa ser melhor elaborado para os tiles que serão utilizados...são utilizados 16 tiles
     private void buildWallTileDungeonComponent(char[][] DungeonComponent) {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (DungeonComponent[x][y] == WALL) {
+
                     if (DungeonComponent[x + 1][y] == WALL)
-                        DungeonComponent[x][y] = vWALL;
+                        DungeonComponent[x][y] = VERTICAL_WALL;
+                    
                     if (DungeonComponent[x - 1][y] == WALL)
-                        DungeonComponent[x][y] = vWALL;
+                        DungeonComponent[x][y] = VERTICAL_WALL;
+                    if (DungeonComponent[x + 1][y] == BOARD)
+                        DungeonComponent[x][y] = VERTICAL_WALL;
+            
+                    if (DungeonComponent[x + 1][y] == BOARD)
+                        DungeonComponent[x][y] = VERTICAL_WALL;
                 }
             }
         }
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (DungeonComponent[x][y] == WALL) {
-                    DungeonComponent[x][y] = hWALL;
+                    DungeonComponent[x][y] = HORIZONTAL_WALL;
                 }
             }
         }
