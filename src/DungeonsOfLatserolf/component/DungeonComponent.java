@@ -127,6 +127,7 @@ public class DungeonComponent {
                     
                     if (DungeonComponent[x - 1][y] == WALL)
                         DungeonComponent[x][y] = VERTICAL_WALL;
+                        
                     if (DungeonComponent[x + 1][y] == BOARD)
                         DungeonComponent[x][y] = VERTICAL_WALL;
             
