@@ -2,7 +2,11 @@ package DungeonsOfLatserolf;
 
 import java.util.Random;
 
-public class MapComponent {
+public class DungeonLevelMap {
+    // Mapa
+    // private boolean isExplored;
+    // private TileComponent[][] DungeonComponent;
+
     // Tileset do Mapa
     private static final char BOARD = '\u25A0';
     private static final char WALL = '#';
@@ -26,7 +30,7 @@ public class MapComponent {
     // Mapa
     private char DungeonComponent[][];
 
-    public MapComponent() {
+    public DungeonLevelMap() {
         this.DungeonComponent = new char[WIDTH][HEIGHT];
         generateDungeonComponent(this.DungeonComponent, START_X, START_Y);
 
