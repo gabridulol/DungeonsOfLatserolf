@@ -1,6 +1,6 @@
 package DungeonsOfLatserolf;
 
-public class Player {
+public class CharacterEntity {
     private int health;
     private int attack;
     private int keysCollected;
@@ -10,7 +10,7 @@ public class Player {
     private static int minAttack;
     private static int maxHealth;
 
-    public Player() {
+    public CharacterEntity() {
         health = 100;
         attack = 5;
         keysCollected = 0;
