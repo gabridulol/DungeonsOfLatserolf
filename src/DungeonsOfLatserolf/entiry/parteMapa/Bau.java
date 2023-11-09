@@ -16,4 +16,9 @@ public class Bau extends PartesMapa{
     public void setDrop(boolean key) {
         this.key = key;
     }
+
+    @Override
+    public boolean verificaTile() {
+        return true;
+    }
 }
