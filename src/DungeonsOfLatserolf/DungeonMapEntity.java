@@ -1,8 +1,8 @@
-package DungeonsOfLatserolf.entity;
+package DungeonsOfLatserolf;
 
 public class DungeonMapEntity {
     private boolean isCompleted;
-    private MapComponent ;
+    private MapComponent dungeonMap;
 
     public boolean isCompleted() {
         return isCompleted;

@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf.entity;
+package DungeonsOfLatserolf;
 
 public class GameWindowEntity {
     

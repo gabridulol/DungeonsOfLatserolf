@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf.system;
+package DungeonsOfLatserolf;
 
 public class LevelManagerSystem {
     

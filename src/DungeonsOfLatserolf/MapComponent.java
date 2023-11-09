@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf.component;
+package DungeonsOfLatserolf;
 
 import java.util.Random;
 
