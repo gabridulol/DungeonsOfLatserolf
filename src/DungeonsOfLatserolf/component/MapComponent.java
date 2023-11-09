@@ -2,7 +2,7 @@ package DungeonsOfLatserolf.component;
 
 import java.util.Random;
 
-public class DungeonComponent {
+public class MapComponent {
     // Tileset do Mapa
     private static final char BOARD = '\u25A0';
     private static final char WALL = '#';
@@ -26,7 +26,7 @@ public class DungeonComponent {
     // Mapa
     private char DungeonComponent[][];
 
-    public DungeonComponent() {
+    public MapComponent() {
         this.DungeonComponent = new char[WIDTH][HEIGHT];
         generateDungeonComponent(this.DungeonComponent, START_X, START_Y);
 

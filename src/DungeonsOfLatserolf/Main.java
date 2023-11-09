@@ -7,6 +7,7 @@ import java.awt.Font;
 
 public class Main {
     public static void main(String[] args) {
+        // GameWindow
         JFrame windowFrame = new JFrame("Dungeons of Latserolf");
         JLabel textLabel = new JLabel("Welcome to Dungeons of Latserolf!");
         textLabel.setHorizontalAlignment(JLabel.CENTER);
