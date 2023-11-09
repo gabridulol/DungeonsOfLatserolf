@@ -10,4 +10,14 @@ public class Chao extends PartesMapa{
     public boolean verificaTile() {
         return true;
     }
+
+    @Override
+    public boolean isSafe() {
+        return true;
+    }
+
+    @Override
+    public boolean podeInteragir(){
+        return false;
+    }
 }

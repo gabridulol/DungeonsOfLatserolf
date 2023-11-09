@@ -15,6 +15,14 @@ public abstract class PartesMapa {
             return false;
     }
 
+    public boolean isSafe(){
+        return false;
+    }
+
+    public boolean podeInteragir(){
+        return false;
+    }
+
     public char getTiel() {
         return tiel;
     }

@@ -8,6 +8,7 @@ public class Porta extends PartesMapa{
     public Porta(boolean monster, int x, int y) {
         super('P', x, y);
         this.monster = monster;
+        this.open = false;
     }
 
     public boolean verificaAbertura() {
@@ -32,6 +33,23 @@ public class Porta extends PartesMapa{
 
     @Override
     public boolean verificaTile() {
+        return true;
+    }
+
+    @Override
+    public boolean isSafe() {
+        if (this.open) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean podeInteragir(){
+        if (this.open) {
+            return false;
+        }
         return true;
     }
 }

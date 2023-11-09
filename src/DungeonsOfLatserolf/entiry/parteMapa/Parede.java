@@ -10,4 +10,14 @@ public class Parede extends PartesMapa{
     public boolean verificaTile() {
         return true;
     }
+
+    @Override
+    public boolean isSafe() {
+        return false;
+    }
+
+    @Override
+    public boolean podeInteragir(){
+        return false;
+    }
 }
