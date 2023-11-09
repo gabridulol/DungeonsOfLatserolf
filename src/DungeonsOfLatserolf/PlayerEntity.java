@@ -2,11 +2,12 @@ package DungeonsOfLatserolf;
 
 public class PlayerEntity {
     private int idPlayer;
+    private String playerEmail;
     private String playerName;
     private int playerScore;
 
-    public PlayerEntity(int idPlayer, String playerName, int playerScore) {
-        this.idPlayer = idPlayer;
+    public PlayerEntity(String playerEmail, String playerName, int playerScore) {
+        this.playerEmail = playerEmail;
         this.playerName = playerName;
         this.playerScore = playerScore;
     }
@@ -17,6 +18,14 @@ public class PlayerEntity {
 
     public void setIdPlayer(int idPlayer) {
         this.idPlayer = idPlayer;
+    }
+
+    public String getPlayerEmail() {
+        return playerEmail;
+    }
+
+    public void setPlayerEmail(String playerEmail) {
+        this.playerEmail = playerEmail;
     }
 
     public String getPlayerName() {
@@ -33,5 +42,5 @@ public class PlayerEntity {
 
     public void setPlayerScore(int playerScore) {
         this.playerScore = playerScore;
-    }
+    }    
 }
