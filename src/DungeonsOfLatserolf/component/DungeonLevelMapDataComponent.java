@@ -2,7 +2,7 @@ package DungeonsOfLatserolf.component;
 
 import java.util.ArrayList;
 
-public class DataDungeonLevelMapComponent {
+public class DungeonLevelMapDataComponent {
     private int level;
     private ArrayList<Integer> size;
     private int totalKeys;

@@ -12,12 +12,20 @@ public abstract class TileTypeEntity {
     public TileComponent getTileType() {
         return tile;
     }
-    
+
     public char getCharTileType() {
         return tile.getTileType();
     }
 
     public void setTileType(TileComponent tile) {
         this.tile = tile;
+    }
+
+    public boolean isWalkable(){
+        return false;
+    }
+
+    public boolean isInteractable(){
+        return false;
     }
 }
