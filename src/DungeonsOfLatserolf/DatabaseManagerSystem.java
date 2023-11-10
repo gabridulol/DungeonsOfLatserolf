@@ -11,6 +11,8 @@ public class DatabaseManagerSystem {
     private static final String USER = "root";
     private static final String PASSWORD = "r4@P36~y_buT";
 
+    private PlayerEntity playerEntity;
+
     private static Connection connection;
 
     private static final String SQL_INSERT_NEW_USER = "INSERT INTO TBPlayer (playerEmail, playerName, playerScore) VALUES (?, ?, ?)";
@@ -55,7 +57,7 @@ public class DatabaseManagerSystem {
         }
     }
 
-    public String userLogin(String playerEmail) {
+    public boolean userLogin(String playerEmail) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String result = null;
@@ -64,16 +66,24 @@ public class DatabaseManagerSystem {
             preparedStatement.setString(1, playerEmail);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                result = resultSet.getString("playerName") + " " + resultSet.getInt("playerScore");
+                this.playerEntity = new PlayerEntity(
+                    resultSet.getString("playerEmail"),
+                    resultSet.getString("playerName"),
+                    resultSet.getInt("playerScore")
+                    );
+                System.out.println("Login realizar com sucesso!");
+                resultSet.close();
+                preparedStatement.close();
+                return true;
             } else {
-                result = "User not found";
+                result = "Usuário não encontrado.";
+                resultSet.close();
+                preparedStatement.close();
+                return false;
             }
-            resultSet.close();
-            preparedStatement.close();
-            return result;
         } catch (Exception exception) {
             exception.printStackTrace();
-            return null;
+            return false;
         }
     }
 

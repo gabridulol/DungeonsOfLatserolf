@@ -1,22 +1,21 @@
 package DungeonsOfLatserolf;
 
  public abstract class TileType {
-// public class TileType {
-    TileComponent tileType;
+    private TileComponent tile;
 
-    public TileType(TileComponent tileType) {
-        this.tileType = tileType;
+    public TileType(TileComponent tile) {
+        this.tile = tile;
     }
 
     public TileComponent getTileType() {
-        return tileType;
+        return tile;
     }
     
     public char getCharTileType() {
-        return tileType.getTileType();
+        return tile.getTileType();
     }
 
-    public void setTileType(TileComponent tileType) {
-        this.tileType = tileType;
+    public void setTileType(TileComponent tile) {
+        this.tile = tile;
     }
 }

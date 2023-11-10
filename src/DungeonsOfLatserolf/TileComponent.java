@@ -16,11 +16,11 @@ public enum TileComponent {
 
     private final char tileType;
 
-    private TileComponent(char tileType) {
+    TileComponent(char tileType) {
         this.tileType = tileType;
     }
 
     public char getTileType() {
         return tileType;
-    }   
+    }
 }
