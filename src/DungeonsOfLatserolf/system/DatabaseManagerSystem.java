@@ -1,10 +1,12 @@
-package DungeonsOfLatserolf;
+package DungeonsOfLatserolf.system;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import DungeonsOfLatserolf.entity.PlayerEntity;
 
 public class DatabaseManagerSystem {
     private static final String URL = "jdbc:mysql://localhost:3306/DungeonsOfLatserolf";

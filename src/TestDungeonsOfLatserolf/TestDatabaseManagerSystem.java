@@ -2,8 +2,8 @@ package TestDungeonsOfLatserolf;
 
 import java.util.Scanner;
 
-import DungeonsOfLatserolf.DatabaseManagerSystem;
-import DungeonsOfLatserolf.PlayerEntity;
+import DungeonsOfLatserolf.entity.PlayerEntity;
+import DungeonsOfLatserolf.system.DatabaseManagerSystem;
 
 public class TestDatabaseManagerSystem {
 

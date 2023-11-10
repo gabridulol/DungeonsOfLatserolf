@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf;
+package DungeonsOfLatserolf.component;
 
 import java.util.ArrayList;
 

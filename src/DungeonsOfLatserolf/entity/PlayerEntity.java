@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf;
+package DungeonsOfLatserolf.entity;
 
 public class PlayerEntity {
     private int idPlayer;

@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf;
+package DungeonsOfLatserolf.component;
 
 public enum TileComponent {
     BOARD('\u25A0'),
