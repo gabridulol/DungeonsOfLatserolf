@@ -1,9 +1,11 @@
 package DungeonsOfLatserolf.entity;
 
+import DungeonsOfLatserolf.component.AssetComponent;
 import DungeonsOfLatserolf.component.TileComponent;
 
 public abstract class TileTypeEntity {
     private TileComponent tile;
+    private AssetComponent asset;
 
     public TileTypeEntity(TileComponent tile) {
         this.tile = tile;

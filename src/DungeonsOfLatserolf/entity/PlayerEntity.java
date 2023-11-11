@@ -1,6 +1,17 @@
 package DungeonsOfLatserolf.entity;
 
+import java.util.ArrayList;
+
+import DungeonsOfLatserolf.component.AssetComponent;
+import DungeonsOfLatserolf.component.PlayerInventoryComponent;
+import DungeonsOfLatserolf.component.PlayerStatsComponent;
+
 public class PlayerEntity {
+    private ArrayList<AssetComponent> sprite;
+    private PlayerStatsComponent stats;
+    private PlayerInventoryComponent inventory;
+
+    
     private int health;
     private int attack;
     private int keysCollected;
