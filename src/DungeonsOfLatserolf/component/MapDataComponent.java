@@ -2,18 +2,21 @@ package DungeonsOfLatserolf.component;
 
 import java.util.ArrayList;
 
-public class DungeonLevelMapDataComponent {
+import DungeonsOfLatserolf.entity.TileTypeEntity;
+
+public class MapDataComponent {
     private int level;
+    private TileTypeEntity[][] map;
     private ArrayList<Integer> size;
     private int totalKeys;
     private boolean isCompleted;
 
-    public DataDungeonLevelMapComponent(int level, int width, int height, int totalKeys, boolean isCompleted) {
-        this.level = level;
+    public MapDataComponent() {
+        this.level = 0;
+        this.map = new TileTypeEntity[0][0];
         this.size = new ArrayList<Integer>(2);
-        this.size.add(width);
-        this.size.add(height);
-        this.totalKeys = totalKeys;
+        this.totalKeys = 0;
+        this.isCompleted = false;
     }
 
     public int getLevel() {
@@ -22,6 +25,14 @@ public class DungeonLevelMapDataComponent {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public TileTypeEntity[][] getMap() {
+        return map;
+    }
+
+    public void setMap(TileTypeEntity[][] map) {
+        this.map = map;
     }
 
     public ArrayList<Integer> getSize() {

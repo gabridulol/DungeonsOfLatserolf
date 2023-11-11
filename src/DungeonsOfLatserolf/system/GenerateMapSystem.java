@@ -1,12 +1,9 @@
-package DungeonsOfLatserolf.entity;
+package DungeonsOfLatserolf.system;
 
-import java.util.Random;
+import DungeonsOfLatserolf.component.MapDataComponent;
+import DungeonsOfLatserolf.entity.MapEntity;
 
-import DungeonsOfLatserolf.component.DungeonLevelMapDataComponent;
-
-public class DungeonLevelMapEntity {
-    private TileTypeEntity[][] dungeonLevelMap;
-    private DungeonLevelMapDataComponent dataLevelMapComponent;
+public class GenerateMapSystem {
 
 }
 

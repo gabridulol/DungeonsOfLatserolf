@@ -62,7 +62,6 @@ public class DatabaseManagerSystem {
     public boolean userLogin(String playerEmail) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String result = null;
         try {
             preparedStatement = getConnection().prepareStatement(SQL_SELECT_USER_BY_EMAIL);
             preparedStatement.setString(1, playerEmail);
@@ -78,7 +77,7 @@ public class DatabaseManagerSystem {
                 preparedStatement.close();
                 return true;
             } else {
-                result = "Usuário não encontrado.";
+                System.out.println("Não foi possível realizar o login!");
                 resultSet.close();
                 preparedStatement.close();
                 return false;
@@ -89,10 +88,10 @@ public class DatabaseManagerSystem {
         }
     }
 
-    public String selectAllUsers() {
+    public void selectAllUsers() {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String result = "\nSCORES\n";
+        String result = "\nSCOREBOARD\n";
         try {
             preparedStatement = getConnection().prepareStatement(SQL_SELECT_ALL_USERS);
             resultSet = preparedStatement.executeQuery();
@@ -101,10 +100,9 @@ public class DatabaseManagerSystem {
             }
             resultSet.close();
             preparedStatement.close();
-            return result;
+            System.out.println(result);
         } catch (Exception exception) {
             exception.printStackTrace();
-            return null;
         }
     }
 

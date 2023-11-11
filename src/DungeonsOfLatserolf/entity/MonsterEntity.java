@@ -1,4 +1,4 @@
-package DungeonsOfLatserolf.entiry.Seres;
+package DungeonsOfLatserolf.entity;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ public class MonsterEntity {
     private String[] names = {"Galinha", "Goblin", "Esqueleto", "Lich", "Dragon"};
     Random rand = new Random();
 
-    public Monster (){
+    public MonsterEntity(){
         int random = rand.nextInt(names.length);
         name = names[random];
         

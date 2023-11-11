@@ -2,19 +2,27 @@ package DungeonsOfLatserolf.entity;
 
 import DungeonsOfLatserolf.component.TileComponent;
 
-public class ChestEntity extends TileTypeEntity{
+public class ChestEntity extends TileTypeEntity {
     private boolean isOpenChest;
     private boolean isKeyChest;
-    private int chestDrop;
+    private int goldPieces;
 
-    public ChestEntity(boolean isKeyChest, int chestDrop) {
+    public ChestEntity() {
         super(TileComponent.CHEST);
-        this.isKeyChest = isKeyChest;
-        this.chestDrop = chestDrop;
         this.isOpenChest = false;
+        this.isKeyChest = false;
+        this.goldPieces = 0;
     }
 
-    public boolean getKeyChest() {
+    public boolean isOpenChest() {
+        return isOpenChest;
+    }
+
+    public void setOpenChest(boolean isOpenChest) {
+        this.isOpenChest = isOpenChest;
+    }
+
+    public boolean isKeyChest() {
         return isKeyChest;
     }
 
@@ -22,28 +30,21 @@ public class ChestEntity extends TileTypeEntity{
         this.isKeyChest = isKeyChest;
     }
 
-    public int getChestDrop() {
-        return chestDrop;
+    public int getGoldPieces() {
+        return goldPieces;
     }
 
-    public void setChestDrop(int chestDrop) {
-        this.chestDrop = chestDrop;
-    }
-
-    public void setOpenChest(boolean isOpenChest) {
-        this.isOpenChest = isOpenChest;
+    public void setGoldPieces(int goldPieces) {
+        this.goldPieces = goldPieces;
     }
 
     @Override
     public boolean isWalkable() {
-        if (this.isOpenChest) {
-            return true;
-        }
-        return false;
+        return true;
     }
-    
+
     @Override
-    public boolean isInteractable(){
+    public boolean isInteractable() {
         if (this.isOpenChest) {
             return false;
         }
