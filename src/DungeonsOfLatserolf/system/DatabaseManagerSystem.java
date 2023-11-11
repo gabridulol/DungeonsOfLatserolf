@@ -6,24 +6,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DungeonsOfLatserolf.entity.PlayerEntity;
+import DungeonsOfLatserolf.entity.UserEntity;
 
 public class DatabaseManagerSystem {
     private static final String URL = "jdbc:mysql://localhost:3306/DungeonsOfLatserolf";
     private static final String USER = "root";
     private static final String PASSWORD = "r4@P36~y_buT";
 
-    private PlayerEntity playerEntity;
+    private static final String SQL_INSERT_NEW_USER = "INSERT INTO TBUser (userEmail, userName, userScore) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM TBUser WHERE userEmail = ?";
+    private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM TBUser WHERE idUser IS NOT NULL ORDER BY userScore DESC";
+    private static final String SQL_UPDATE_USER_SCORE = "UPDATE TBUser SET userScore = ? WHERE userEmail = ? AND userName = ? AND userScore < ?";
+    private static final String SQL_DELETE_DATABASE = "DELETE FROM TBUser";
 
-    private static Connection connection;
+    private UserEntity currentUser;
 
-    private static final String SQL_INSERT_NEW_USER = "INSERT INTO TBPlayer (playerEmail, playerName, playerScore) VALUES (?, ?, ?)";
-    private static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM TBPlayer WHERE playerEmail = ?";
-    private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM TBPlayer WHERE idPlayer IS NOT NULL ORDER BY playerScore DESC";
-    private static final String SQL_UPDATE_USER_SCORE = "UPDATE TBPlayer SET playerScore = ? WHERE playerEmail = ? AND playerName = ? AND playerScore < ?";
-    private static final String SQL_DELETE_DATABASE = "DELETE FROM TBPlayer";
+    private Connection connection;
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         try {
             if (connection == null) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -45,13 +45,13 @@ public class DatabaseManagerSystem {
         }
     }
 
-    public void insertNewUser(PlayerEntity playerEntity) {
+    public void insertNewUser(UserEntity currentUser) {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = getConnection().prepareStatement(SQL_INSERT_NEW_USER);
-            preparedStatement.setString(1, playerEntity.getPlayerEmail());
-            preparedStatement.setString(2, playerEntity.getPlayerName());
-            preparedStatement.setInt(3, playerEntity.getPlayerScore());
+            preparedStatement.setString(1, currentUser.getUserEmail());
+            preparedStatement.setString(2, currentUser.getUserName());
+            preparedStatement.setInt(3, currentUser.getUserScore());
             preparedStatement.execute();
             preparedStatement.close();
         } catch (SQLException exception) {
@@ -59,32 +59,32 @@ public class DatabaseManagerSystem {
         }
     }
 
-    public boolean userLogin(String playerEmail) {
+    public UserEntity userLogin(String userEmail) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = getConnection().prepareStatement(SQL_SELECT_USER_BY_EMAIL);
-            preparedStatement.setString(1, playerEmail);
+            preparedStatement.setString(1, userEmail);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                this.playerEntity = new PlayerEntity(
-                    resultSet.getString("playerEmail"),
-                    resultSet.getString("playerName"),
-                    resultSet.getInt("playerScore")
+                this.currentUser = new UserEntity(
+                    resultSet.getString("userEmail"),
+                    resultSet.getString("userName")
                     );
+                this.currentUser.setUserScore(resultSet.getInt("userScore"));
                 System.out.println("Login realizar com sucesso!");
                 resultSet.close();
                 preparedStatement.close();
-                return true;
+                return this.currentUser;
             } else {
                 System.out.println("Não foi possível realizar o login!");
                 resultSet.close();
                 preparedStatement.close();
-                return false;
+                return null;
             }
         } catch (Exception exception) {
             exception.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -96,7 +96,7 @@ public class DatabaseManagerSystem {
             preparedStatement = getConnection().prepareStatement(SQL_SELECT_ALL_USERS);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                result += resultSet.getString("playerName") + " " + resultSet.getInt("playerScore") + "\n";
+                result += resultSet.getString("userName") + " " + resultSet.getInt("userScore") + "\n";
             }
             resultSet.close();
             preparedStatement.close();
@@ -106,14 +106,14 @@ public class DatabaseManagerSystem {
         }
     }
 
-    public void updateUserScore(PlayerEntity playerEntity, int newPlayerScore) {
+    public void updateUserScore(UserEntity currentUser, int newUserScore) {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = getConnection().prepareStatement(SQL_UPDATE_USER_SCORE);
-            preparedStatement.setInt(1, newPlayerScore);
-            preparedStatement.setString(2, playerEntity.getPlayerEmail());
-            preparedStatement.setString(3, playerEntity.getPlayerName());
-            preparedStatement.setInt(4, newPlayerScore);
+            preparedStatement.setInt(1, newUserScore);
+            preparedStatement.setString(2, currentUser.getUserEmail());
+            preparedStatement.setString(3, currentUser.getUserName());
+            preparedStatement.setInt(4, newUserScore);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (Exception exception) {
@@ -130,5 +130,13 @@ public class DatabaseManagerSystem {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    public UserEntity getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserEntity currentUser) {
+        this.currentUser = currentUser;
     }
 }

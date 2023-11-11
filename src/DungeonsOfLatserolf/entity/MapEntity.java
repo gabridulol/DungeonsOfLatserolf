@@ -3,21 +3,17 @@ package DungeonsOfLatserolf.entity;
 import DungeonsOfLatserolf.component.MapDataComponent;
 
 public class MapEntity {
-    MapDataComponent mapDataComponent;
-
-    public MapEntity() {
-        this.mapDataComponent = new MapDataComponent();
+    MapDataComponent mapData;
+    
+    public MapEntity(MapDataComponent mapData) {
+        this.mapData = mapData;
     }
 
-    public MapEntity(MapDataComponent mapDataComponent) {
-        this.mapDataComponent = mapDataComponent;
+    public MapDataComponent getMapData() {
+        return mapData;
     }
 
-    public MapDataComponent getMapDataComponent() {
-        return mapDataComponent;
-    }
-
-    public void setMapDataComponent(MapDataComponent mapDataComponent) {
-        this.mapDataComponent = mapDataComponent;
+    public void setMapData(MapDataComponent mapData) {
+        this.mapData = mapData;
     }
 }

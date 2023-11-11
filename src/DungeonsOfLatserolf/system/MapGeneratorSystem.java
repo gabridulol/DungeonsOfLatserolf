@@ -1,10 +1,7 @@
 package DungeonsOfLatserolf.system;
 
-import DungeonsOfLatserolf.component.MapDataComponent;
-import DungeonsOfLatserolf.entity.MapEntity;
-
-public class GenerateMapSystem {
-
+public class MapGeneratorSystem {
+    
 }
 
 // package DungeonsOfLatserolf;

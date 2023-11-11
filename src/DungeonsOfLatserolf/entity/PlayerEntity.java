@@ -1,46 +1,139 @@
 package DungeonsOfLatserolf.entity;
 
 public class PlayerEntity {
-    private int idPlayer;
-    private String playerEmail;
-    private String playerName;
-    private int playerScore;
+    private int health;
+    private int attack;
+    private int keysCollected;
+    private int XP;
+    private int level;
+    private static int maxAttack;
+    private static int minAttack;
+    private static int maxHealth;
 
-    public PlayerEntity(String playerEmail, String playerName, int playerScore) {
-        this.playerEmail = playerEmail;
-        this.playerName = playerName;
-        this.playerScore = playerScore;
+    public PlayerEntity() {
+        health = 100;
+        attack = 5;
+        keysCollected = 0;
+        XP = 0;
+        level = 1;
+        maxHealth = 100;
+        maxAttack = 30;
+        minAttack = 5;
     }
 
-    public int getIdPlayer() {
-        return idPlayer;
+    // getters
+    public int getHealth() {
+        return health;
     }
 
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
+    public int getAttack() {
+        return attack;
     }
 
-    public String getPlayerEmail() {
-        return playerEmail;
+    public int getKeysCollected() {
+        return keysCollected;
     }
 
-    public void setPlayerEmail(String playerEmail) {
-        this.playerEmail = playerEmail;
+    public int getXP() {
+        return XP;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public int getLevel() {
+        return level;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public int getMaxAttack() {
+        return maxAttack;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
-    }    
+    // setters
+    public void setHealth(int health) {
+        if (health > maxHealth) {
+            this.health = maxHealth;
+        } else if (health < 0) {
+            this.health = 0;
+        } else {
+            this.health = health;
+        }
+    }
+
+    public void setAttack(int attack) {
+        if (attack > maxAttack) {
+            this.attack = maxAttack;
+        } else if (attack < minAttack) {
+            this.attack = minAttack;
+        } else {
+            this.attack = attack;
+        }
+    }
+
+    public void setKeysCollected(int keysCollected) {
+        this.keysCollected = keysCollected;
+    }
+
+    public void setXP(int XP) {
+        this.XP = XP;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    // adders
+    public void addHealth(int health) {
+        if (this.health + health > maxHealth) {
+            this.health = maxHealth;
+        } else {
+            this.health += health;
+        }
+    }
+
+    public void addAttack(int attack) {
+        if (this.attack + attack > maxAttack) {
+            this.attack = maxAttack;
+        } else {
+            this.attack += attack;
+        }
+    }
+
+    public void addKeysCollected(int keysCollected) {
+        this.keysCollected += keysCollected;
+    }
+
+    public void addXP(int XP) {
+        this.XP += XP;
+    }
+
+    public void addLevel(int level) {
+        this.level += level;
+    }
+
+    // subtractors
+    public void subtractHealth(int health) {
+        if (health < 0) {
+            this.health = 0;
+        } else {
+            this.health -= health;
+        }
+    }
+
+    public void subtractAttack(int attack) {
+        if (attack < 0) {
+            this.attack = 0;
+        } else {
+            this.attack -= attack;
+        }
+    }
+
+    // other methods
+
+    public void levelUp() {
+        level++;
+
+    }
+
 }

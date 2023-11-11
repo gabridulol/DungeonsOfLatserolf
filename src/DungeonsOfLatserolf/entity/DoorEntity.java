@@ -2,40 +2,35 @@ package DungeonsOfLatserolf.entity;
 
 import DungeonsOfLatserolf.component.TileComponent;
 
-public class DoorEntity extends TileTypeEntity{
-    
-    private boolean monster;
-    private boolean open;
+public class DoorEntity extends TileTypeEntity {
+    private boolean isOpenDoor;
+    private boolean isMonsterDoor;
 
-    public DoorEntity(boolean monster) {
+    public DoorEntity() {
         super(TileComponent.SIMPLE_DOOR);
-        this.monster = monster;
-        this.open = false;
+        this.isOpenDoor = false;
+        this.isMonsterDoor = false;
     }
 
-    public boolean verificaAbertura() {
-        return this.open;
+    public boolean isOpenDoor() {
+        return isOpenDoor;
     }
 
-    public boolean getMonster() {
-        return monster;
+    public void setOpenDoor(boolean isOpenDoor) {
+        this.isOpenDoor = isOpenDoor;
     }
 
-    public void setMonster(boolean monster) {
-        this.monster = monster;
+    public boolean isMonsterDoor() {
+        return isMonsterDoor;
     }
 
-    public boolean getOpen() {
-        return open;
-    }
-
-    public void setOpen(boolean open) {
-        this.open = open;
+    public void setMonsterDoor(boolean isMonsterDoor) {
+        this.isMonsterDoor = isMonsterDoor;
     }
 
     @Override
     public boolean isWalkable() {
-        if (this.open) {
+        if (this.isOpenDoor) {
             return true;
         }
 
@@ -43,8 +38,8 @@ public class DoorEntity extends TileTypeEntity{
     }
 
     @Override
-    public boolean isInteractable(){
-        if (this.open) {
+    public boolean isInteractable() {
+        if (this.isOpenDoor) {
             return false;
         }
         return true;
