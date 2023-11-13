@@ -8,15 +8,11 @@ A estrutura do projeto é organizada da seguinte forma:
 
 ```
 DungeonsOfLatserolf/
-├── assets/
 ├── bin/
 ├── doc/
 ├── lib/
+├── res/
 ├── src/
-│   ├── DungeonsOfLatserolf/
-│       ├── component/
-│       ├── entity/
-│       ├── system/
 ```
 
 Neste diretório, você encontrará o código-fonte do jogo. As pastas internas contêm os arquivos Java que compõem o jogo.

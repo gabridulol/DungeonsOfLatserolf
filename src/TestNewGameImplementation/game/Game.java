@@ -7,9 +7,8 @@ import TestNewGameImplementation.controller.PlayerController;
 import TestNewGameImplementation.display.Display;
 import TestNewGameImplementation.entity.GameObject;
 import TestNewGameImplementation.entity.Player;
+import TestNewGameImplementation.gfx.SpriteLibrary;
 import TestNewGameImplementation.input.Input;
-
-import java.awt.Rectangle;
 
 public class Game {
     private Display display;
@@ -18,11 +17,14 @@ public class Game {
 
     private Input input;
 
+    private SpriteLibrary spriteLibrary;
+
     public Game(int width, int height) {
         input = new Input();
         display = new Display(width, height, input);
         gameObjects = new ArrayList<>();
         gameObjects.add(new Player(new PlayerController(input)));
+        spriteLibrary = new SpriteLibrary();
     }
 
     public void update() {
