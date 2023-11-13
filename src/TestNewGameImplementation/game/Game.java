@@ -11,6 +11,8 @@ import TestNewGameImplementation.gfx.SpriteLibrary;
 import TestNewGameImplementation.input.Input;
 
 public class Game {
+    public static final int SPRITE_SIZE = 16;
+
     private Display display;
 
     private List<GameObject> gameObjects;
@@ -20,11 +22,11 @@ public class Game {
     private SpriteLibrary spriteLibrary;
 
     public Game(int width, int height) {
-        input = new Input();
         display = new Display(width, height, input);
         gameObjects = new ArrayList<>();
-        gameObjects.add(new Player(new PlayerController(input)));
+        input = new Input();
         spriteLibrary = new SpriteLibrary();
+        gameObjects.add(new Player(new PlayerController(input), spriteLibrary));
     }
 
     public void update() {

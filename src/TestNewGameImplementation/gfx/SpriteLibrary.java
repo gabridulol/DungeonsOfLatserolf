@@ -35,14 +35,24 @@ public class SpriteLibrary {
     }
 
     private String[] getSheetsInFolder(String basePath) {
-        URL resource = SpriteLibrary.class.getClassLoader().getResource(basePath);
-        File file = new File(resource.getFile());
-        return file.list((current, name) -> new File(current, name).isFile());
+        URL resource = ClassLoader.getSystemResource(basePath);
+        if (resource != null) {
+            File file = new File(resource.getFile());
+            return file.list((current, name) -> new File(current, name).isFile());
+        }
+        return new String[0]; // or handle the null resource case appropriately
+    }
+    
+    private String[] getFolderNames(String basePath) {
+        URL resource = ClassLoader.getSystemResource(basePath);
+        if (resource != null) {
+            File file = new File(resource.getFile());
+            return file.list((current, name) -> new File(current, name).isDirectory());
+        }
+        return new String[0]; // or handle the null resource case appropriately
     }
 
-    private String[] getFolderNames(String basePath) {
-        URL resource = SpriteLibrary.class.getClassLoader().getResource(basePath);
-        File file = new File(resource.getFile());
-        return file.list((current, name) -> new File(current, name).isDirectory());
+    public SpriteSet getUnit(String name) {
+        return units.get(name);
     }
 }
