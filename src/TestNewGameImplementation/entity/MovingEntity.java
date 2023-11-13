@@ -16,7 +16,7 @@ public abstract class MovingEntity extends GameObject {
         super();
         this.controller = controller;
         this.movement = new Movement(2);
-        this.animationManager = new AnimationManager(spriteLibrary.getUnit("finn"));
+        this.animationManager = new AnimationManager(spriteLibrary.getUnit("hero"));
     }
 
     @Override

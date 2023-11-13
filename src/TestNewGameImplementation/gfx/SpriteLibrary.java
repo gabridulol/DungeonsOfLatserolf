@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class SpriteLibrary {
-    private static final String PATH_TO_UNITS = "./res/sprites/units";
+    private static final String PATH_TO_UNITS = "res/sprites/units";
 
     private Map<String, SpriteSet> units;
 
