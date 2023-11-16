@@ -9,6 +9,7 @@ A estrutura do projeto é organizada da seguinte forma:
 ```
 DungeonsOfLatserolf/
 ├── bin/
+├── db/
 ├── doc/
 ├── lib/
 ├── res/

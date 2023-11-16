@@ -1,5 +1,7 @@
 package DungeonsOfLatserolf.system;
 
+import DungeonsOfLatserolf.component.MapDataComponent;
+
 public class MapGeneratorSystem {
     
 }

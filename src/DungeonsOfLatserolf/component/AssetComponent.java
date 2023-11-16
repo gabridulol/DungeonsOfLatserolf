@@ -8,12 +8,10 @@ import javax.imageio.ImageIO;
 
 public class AssetComponent {
     private BufferedImage asset;
-    private String path;
 
     public AssetComponent(String path) {
-        this.path = path;
         try {
-            this.asset = ImageIO.read(new File(this.path));
+            this.asset = ImageIO.read(new File(path));
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -25,13 +23,5 @@ public class AssetComponent {
 
     public void setAsset(BufferedImage asset) {
         this.asset = asset;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 }
