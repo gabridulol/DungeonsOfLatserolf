@@ -2,8 +2,8 @@ package TestDungeonsOfLatserolf;
 
 import java.util.Scanner;
 
-import DungeonsOfLatserolf.entity.UserEntity;
-import DungeonsOfLatserolf.system.DatabaseManagerSystem;
+import DungeonsOfLatserolf.database.DatabaseManagerSystem;
+import DungeonsOfLatserolf.database.UserEntity;
 
 public class TestDatabaseManagerSystem {
     static final Scanner scanner = new Scanner(System.in);

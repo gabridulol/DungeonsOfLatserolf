@@ -2,7 +2,7 @@ package DungeonsOfLatserolf.system;
 
 import java.util.ArrayList;
 
-import DungeonsOfLatserolf.entity.MapEntity;
+import DungeonsOfLatserolf.map.MapEntity;
 
 public class LevelManagerSystem {
     

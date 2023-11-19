@@ -1,12 +1,12 @@
 package TestDungeonsOfLatserolf;
 
-import DungeonsOfLatserolf.component.TileComponent;
-import DungeonsOfLatserolf.entity.ChestEntity;
-import DungeonsOfLatserolf.entity.DoorEntity;
-import DungeonsOfLatserolf.entity.FloorEntity;
-import DungeonsOfLatserolf.entity.StartEntity;
-import DungeonsOfLatserolf.entity.TileTypeEntity;
-import DungeonsOfLatserolf.entity.WallEntity;
+import DungeonsOfLatserolf.map.tile.Chest;
+import DungeonsOfLatserolf.map.tile.Door;
+import DungeonsOfLatserolf.map.tile.Floor;
+import DungeonsOfLatserolf.map.tile.Start;
+import DungeonsOfLatserolf.map.tile.TileComponent;
+import DungeonsOfLatserolf.map.tile.TileTypeEntity;
+import DungeonsOfLatserolf.map.tile.Wall;
 
 public class TestTileType {
     public static void main(String[] args) {
