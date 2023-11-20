@@ -7,7 +7,6 @@ public class Door extends TileTypeEntity {
     private boolean openDoor;
     private MonsterEntity monsterDoor;
 
-
     public Door(MonsterEntity monsterDoor, AssetImage assetImage, AssetImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openDoor = false;
@@ -28,6 +27,11 @@ public class Door extends TileTypeEntity {
 
     public void setMonsterDoor(MonsterEntity monsterDoor) { // destroi o monstro
         this.monsterDoor = monsterDoor;
+    }
+
+    public void setDoorEmpty(){
+        this.openDoor = true;
+        this.monsterDoor = null;
     }
 
     @Override
