@@ -10,6 +10,11 @@ public class Start extends TileTypeEntity{
         this.openOutput = false;
     }
 
+    public void canBeOpened(int keys) {
+        if (keys == 3)
+            this.openOutput = true;
+    }
+
     public boolean getOpenOutput() {  // ver se a porta esta aberta
         return openOutput;
     }

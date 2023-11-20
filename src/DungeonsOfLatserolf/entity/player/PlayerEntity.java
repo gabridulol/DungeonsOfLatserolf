@@ -77,14 +77,6 @@ public class PlayerEntity {
     //     this.keysCollected = keysCollected;
     // }
 
-    // public void setXP(int XP) {
-    //     this.XP = XP;
-    // }
-
-    // public void setLevel(int level) {
-    //     this.level = level;
-    // }
-
     // // adders
     // public void addHealth(int health) {
     //     if (this.health + health > maxHealth) {
