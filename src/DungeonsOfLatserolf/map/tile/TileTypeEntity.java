@@ -3,38 +3,25 @@ package DungeonsOfLatserolf.map.tile;
 import DungeonsOfLatserolf.graphics.AssetImage;
 
 public abstract class TileTypeEntity {
-    private TileComponent tile;
-    private AssetImage asset;
+    private AssetImage assetImage;
+    private AssetImage assetOpen;
 
-    public TileTypeEntity(TileComponent tile) {
-        this.tile = tile;
-    }
-
-    public TileComponent getTileType() {
-        return tile;
-    }
-
-    public char getCharTileType() {
-        return tile.getTileType();
-    }
-
-    public void setTileType(TileComponent tile) {
-        this.tile = tile;
+    public TileTypeEntity(AssetImage asset, AssetImage assetOpen) {
+        this.assetImage = asset;
+        this.assetOpen = assetOpen;
     }
 
     public AssetImage getAsset() {
-        return asset;
+        return assetImage;
     }
 
-    public void setAsset(AssetImage asset) {
-        this.asset = asset;
+    public AssetImage getAssetOpen() {
+        return assetOpen;
     }
 
-    public boolean isWalkable(){
-        return false;
-    }
+    public abstract AssetImage getAssetImage();
+    
+    public abstract boolean isWalkable();
 
-    public boolean isInteractable(){
-        return false;
-    }
+    public abstract boolean isInteractable();
 }

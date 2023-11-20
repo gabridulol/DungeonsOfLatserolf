@@ -1,8 +1,15 @@
 package DungeonsOfLatserolf.map.tile;
 
+import DungeonsOfLatserolf.graphics.AssetImage;
+
 public class Floor extends TileTypeEntity{
-    public Floor() {
-        super(TileComponent.FLOOR);
+    public Floor(AssetImage assetImage) {
+        super(assetImage, null);
+    }
+
+    @Override
+    public AssetImage getAssetImage(){
+        return getAsset();
     }
 
     @Override

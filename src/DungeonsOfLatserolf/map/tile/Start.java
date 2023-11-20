@@ -1,10 +1,29 @@
 package DungeonsOfLatserolf.map.tile;
 
+import DungeonsOfLatserolf.graphics.AssetImage;
+
 public class Start extends TileTypeEntity{
-    public boolean isUnlocked;
+    public boolean openOutput;
     
-    public Start(int x, int y) {
-        super(TileComponent.START);
+    public Start(AssetImage assetImage, AssetImage assetImageOpen) {
+        super(assetImage, assetImageOpen);
+        this.openOutput = false;
+    }
+
+    public boolean getOpenOutput() {  // ver se a porta esta aberta
+        return openOutput;
+    }
+
+    public void setOpenOutput(boolean openOutput) { // abrir a porta
+        this.openOutput = openOutput;
+    }
+
+    @Override
+    public AssetImage getAssetImage(){
+        if (this.openOutput) {
+            return getAssetOpen();
+        }
+        return getAsset();
     }
 
     @Override

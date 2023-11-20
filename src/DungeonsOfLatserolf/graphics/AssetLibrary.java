@@ -19,6 +19,10 @@ public class AssetLibrary {
         loadAssets();
     }
 
+    public BufferedImage getImage(String fileName) {
+        return assets.get(fileName);
+    }
+
     private void loadAssets() {
         File assetsFolder = new File(PATH_TO_ASSETS);
 
@@ -56,10 +60,6 @@ public class AssetLibrary {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public BufferedImage getImage(String fileName) {
-        return assets.get(fileName);
     }
 
     public <K, V> void printHashMap() {
