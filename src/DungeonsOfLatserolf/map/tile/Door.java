@@ -1,34 +1,46 @@
 package DungeonsOfLatserolf.map.tile;
 
+import DungeonsOfLatserolf.entity.monster.MonsterEntity;
+import DungeonsOfLatserolf.graphics.AssetImage;
+
 public class Door extends TileTypeEntity {
-    private boolean isOpenDoor;
-    private boolean isMonsterDoor;
+    private boolean openDoor;
+    private MonsterEntity monsterDoor;
 
-    public Door() {
-        super(TileComponent.SIMPLE_DOOR);
-        this.isOpenDoor = false;
-        this.isMonsterDoor = false;
+
+    public Door(MonsterEntity monsterDoor, AssetImage assetImage, AssetImage assetImageOpen) {
+        super(assetImage, assetImageOpen);
+        this.openDoor = false;
+        this.monsterDoor = monsterDoor;
     }
 
-    public boolean isOpenDoor() {
-        return isOpenDoor;
+    public boolean getOpenDoor() {  // ver se a porta esta aberta
+        return openDoor;
     }
 
-    public void setOpenDoor(boolean isOpenDoor) {
-        this.isOpenDoor = isOpenDoor;
+    public void setOpenDoor(boolean openDoor) { // abrir a porta
+        this.openDoor = openDoor;
     }
 
-    public boolean isMonsterDoor() {
-        return isMonsterDoor;
+    public MonsterEntity getMonsterDoor() { // ver se tem um monstro e qual é
+        return monsterDoor;
     }
 
-    public void setMonsterDoor(boolean isMonsterDoor) {
-        this.isMonsterDoor = isMonsterDoor;
+    public void setMonsterDoor(MonsterEntity monsterDoor) { // destroi o monstro
+        this.monsterDoor = monsterDoor;
+    }
+
+    @Override
+    public AssetImage getAssetImage(){
+        if (this.openDoor) {
+            return getAssetOpen();
+        }
+        return getAsset();
     }
 
     @Override
     public boolean isWalkable() {
-        if (this.isOpenDoor) {
+        if (this.openDoor) {
             return true;
         }
 
@@ -37,7 +49,7 @@ public class Door extends TileTypeEntity {
 
     @Override
     public boolean isInteractable() {
-        if (this.isOpenDoor) {
+        if (this.openDoor) {
             return false;
         }
         return true;
