@@ -53,4 +53,8 @@ public class AssetLibrary {
     public BufferedImage getImage(String fileName) {
         return assets.get(fileName);
     }
+
+    public HashMap<String, BufferedImage> getAssets() {
+        return assets;
+    }
 }
