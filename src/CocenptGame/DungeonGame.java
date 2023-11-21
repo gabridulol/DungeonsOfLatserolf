@@ -211,28 +211,58 @@ public class DungeonGame {
 
     private static void createAndShowGUI(char[][] dungeon, int cellSize) {
         JFrame frame = new JFrame("Dungeons of Latserolf");
-        frame.setPreferredSize(new Dimension(1000, 1000));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.setBackground(Color.BLACK);
+        frame.setPreferredSize(new Dimension(900, 600));
         frame.setResizable(false);
-
+        frame.setLayout(new GridBagLayout());
+    
+        // Defina a cor de fundo do JFrame
+        frame.getContentPane().setBackground(new Color(23, 17, 26)); // #17111a
+    
         DungeonPanel dungeonPanel = new DungeonPanel(dungeon, cellSize, cellSize, cellSize);
-        frame.add(dungeonPanel, BorderLayout.CENTER);
-
+    
         JLabel combatLabel = new JLabel("START");
-        combatLabel.setForeground(Color.BLACK);
+        combatLabel.setBackground(new Color(23, 17, 26));
+        combatLabel.setForeground(Color.WHITE);
         combatLabel.setHorizontalAlignment(SwingConstants.CENTER);
         Font customFont = new Font("JetBrains Mono", Font.BOLD, 24);
         combatLabel.setFont(customFont);
-        frame.add(combatLabel, BorderLayout.NORTH);
-
+    
         JLabel doorOpens = new JLabel("DOORS & CHESTS : " + door);
-        doorOpens.setForeground(Color.BLACK);
+        doorOpens.setBackground(new Color(23, 17, 26));
+        doorOpens.setForeground(Color.WHITE);
         doorOpens.setHorizontalAlignment(SwingConstants.CENTER);
         doorOpens.setFont(customFont);
-        frame.add(doorOpens, BorderLayout.SOUTH);
-
+    
+        // Defina a cor de fundo dos JLabels
+        combatLabel.setOpaque(true);
+        doorOpens.setOpaque(true);
+    
+        // Set constraints for dungeonPanel
+        GridBagConstraints gbcDungeonPanel = new GridBagConstraints();
+        gbcDungeonPanel.gridx = 0;
+        gbcDungeonPanel.gridy = 0;
+        gbcDungeonPanel.weightx = 1.0;
+        gbcDungeonPanel.weighty = 1.0;
+        gbcDungeonPanel.fill = GridBagConstraints.BOTH;
+        frame.add(dungeonPanel, gbcDungeonPanel);
+    
+        // Set constraints for combatLabel
+        GridBagConstraints gbcCombatLabel = new GridBagConstraints();
+        gbcCombatLabel.gridx = 0;
+        gbcCombatLabel.gridy = 1;
+        gbcCombatLabel.weightx = 1.0;
+        gbcCombatLabel.fill = GridBagConstraints.HORIZONTAL;
+        frame.add(combatLabel, gbcCombatLabel);
+    
+        // Set constraints for doorOpens
+        GridBagConstraints gbcDoorOpens = new GridBagConstraints();
+        gbcDoorOpens.gridx = 0;
+        gbcDoorOpens.gridy = 2;
+        gbcDoorOpens.weightx = 1.0;
+        gbcDoorOpens.fill = GridBagConstraints.HORIZONTAL;
+        frame.add(doorOpens, gbcDoorOpens);
+    
         frame.pack();
         frame.setVisible(true);
 
