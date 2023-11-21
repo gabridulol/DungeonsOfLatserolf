@@ -1,19 +1,16 @@
 package DungeonsOfLatserolf.map;
 
-import DungeonsOfLatserolf.map.tile.TileTypeEntity;
 
 public class MapData {
     private int level;
-    private TileTypeEntity[][] map;
     private int width;
     private int height;
     private int totalKeys;
     private boolean isCompleted;
 
-    public MapData(int level, TileTypeEntity[][] map, int width, int height, int totalKeys,
+    public MapData(int level, int width, int height, int totalKeys,
             boolean isCompleted) {
         this.level = level;
-        this.map = map;
         this.width = width;
         this.height = height;
         this.totalKeys = totalKeys;
@@ -26,14 +23,6 @@ public class MapData {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public TileTypeEntity[][] getMap() {
-        return map;
-    }
-
-    public void setMap(TileTypeEntity[][] map) {
-        this.map = map;
     }
 
     public int getWidth() {
