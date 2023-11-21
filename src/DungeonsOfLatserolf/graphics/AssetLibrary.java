@@ -28,13 +28,10 @@ public class AssetLibrary {
 
         if (assetsFolder.exists() && assetsFolder.isDirectory()) {
             String[] assetsNames = assetsFolder.list();
-
             if (assetsNames != null) {
-                
                 for (String assetName : assetsNames) {
                     String keyString = assetName.substring(0, assetName.length() - 4);
                     BufferedImage valueImage = loadImage(assetName);
-
                     if (keyString != null && valueImage != null) {
                         assets.put(keyString, valueImage);
                     }
@@ -44,7 +41,6 @@ public class AssetLibrary {
             else {
                 System.out.println("Folder is empty.");
             }
-
         } 
         
         else {
@@ -54,12 +50,19 @@ public class AssetLibrary {
 
     public BufferedImage loadImage(String fileName) {
         String filePath = PATH_TO_ASSETS + "/" + fileName;
+
         try {
             return ImageIO.read(new File(filePath));
-        } catch (IOException e) {
+        } 
+        
+        catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public HashMap<String, BufferedImage> getAssets() {
+        return assets;
     }
 
     public <K, V> void printHashMap() {
