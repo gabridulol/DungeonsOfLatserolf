@@ -4,6 +4,8 @@ import java.awt.Font;
 
 import javax.swing.*;
 
+import DungeonsOfLatserolf.entity.player.components.PlayerController;
+
 public class Display extends JFrame {
     public Display() {
         initializeUI();
@@ -20,6 +22,10 @@ public class Display extends JFrame {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.NORTH);
         add(label);
+
+        PlayerController playerController = new PlayerController();
+
+        addKeyListener(playerController);
 
         setLocationRelativeTo(null);
         setVisible(true);

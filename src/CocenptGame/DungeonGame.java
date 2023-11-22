@@ -35,8 +35,8 @@ public class DungeonGame {
     public static void main(String[] args) {
         int cellSize = 16; // Size of each cell in pixels
 
-        int width = 41;
-        int height = 41;
+        int width = 31;
+        int height = 31;
         char[][] dungeon = generateDungeon(width, height);
 
         try {
@@ -215,11 +215,11 @@ public class DungeonGame {
         frame.setPreferredSize(new Dimension(900, 600));
         frame.setResizable(false);
         frame.setLayout(new GridBagLayout());
-    
+        
         // Defina a cor de fundo do JFrame
         frame.getContentPane().setBackground(new Color(23, 17, 26)); // #17111a
     
-        DungeonPanel dungeonPanel = new DungeonPanel(dungeon, cellSize, cellSize, cellSize);
+        DungeonPanel dungeonPanel = new DungeonPanel(dungeon, cellSize, characterX, characterY);
     
         JLabel combatLabel = new JLabel("START");
         combatLabel.setBackground(new Color(23, 17, 26));
