@@ -28,6 +28,18 @@ public class PlayerEntity {
         this.image = new AssetImage("player.png");
     }
 
+    public int getAttack(){
+        return this.playerStats.getAttack();
+    }
+
+    public int getDefense(){
+        return this.playerStats.getDefense();
+    }
+
+    public int getHealth(){
+        return this.playerStats.getHealth();
+    }
+
     public void addScore(int score){
         this.playerStats.setScore(this.playerStats.getScore() + score);
     }
