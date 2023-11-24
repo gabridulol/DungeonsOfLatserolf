@@ -1,6 +1,129 @@
 package DungeonsOfLatserolf.map;
 
+import DungeonsOfLatserolf.map.tile.*;
+
+import java.util.Random;
+
+import DungeonsOfLatserolf.graphics.AssetImage;
+import DungeonsOfLatserolf.graphics.AssetLibrary;
+import DungeonsOfLatserolf.map.MapData;
+
 public class MapGeneratorSystem {
+    private MapData mapData;
+    private AssetLibrary imagens;
+
+    public MapGeneratorSystem(AssetLibrary imagens) {
+        this.mapData = new MapData(31, 31, 3, 1);
+        this.imagens = imagens;
+    }
+
+    public MapData getMapData() {
+        return mapData;
+    }
+
+    public void setMapData(MapData mapData) {
+        this.mapData = mapData;
+    }
+
+    private void buildWallTileDungeon(TileTypeEntity dungeonMap[][]){
+        int width = mapData.getSizeMap()[1];
+        int height = mapData.getSizeMap()[0];
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
+                    dungeonMap[x][y] = new Wall(imagens.getImage("board(0)"));
+                } else {
+                    dungeonMap[x][y] = new Wall(imagens.getHorizontalWallImage());
+                }
+            }
+        }
+    }
+
+    private static void shuffleArray(int[] arr) {
+        Random random = new Random();
+        for (int i = arr.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            int temp = arr[index];
+            arr[index] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    private void buildTileDungeonComponent(TileTypeEntity dungeonMap[][]) {
+        int width = mapData.getSizeMap()[1];
+        int height = mapData.getSizeMap()[0];
+        Random random = new Random();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (dungeonMap[x][y] instanceof Floor) {
+                    boolean surroundedByWalls = false;
+
+                    if ((x > 0 && x < width - 1) && dungeonMap[x - 1][y] instanceof Wall && dungeonMap[x + 1][y] instanceof Wall) {
+                        surroundedByWalls = true;
+                    }
+                    
+                    if ((y > 0 && y < height - 1) && dungeonMap[x][y - 1] instanceof Wall && dungeonMap[x][y + 1] instanceof Wall) {
+                        surroundedByWalls = true;
+                    }
+
+                    if (surroundedByWalls) {
+                        if (Math.random() < mapData.getDoorProbability()) {
+                            dungeonMap[x][y] = new Door(null, imagens.getDoorImage(), imagens.getOpenDoorImage());
+                        }
+                    }
+                }
+
+                if (dungeonMap[x][y] instanceof Floor) {
+                    if (Math.random() < mapData.getChestProbability()) {
+                        dungeonMap[x][y] = new Chest(imagens.getChestImage(), imagens.getOpenChestImage());
+                    }
+                }
+            }
+        }
+
+        dungeonMap[mapData.getStartPosition()[0]][mapData.getStartPosition()[1]] = new Start(imagens.getStartImage(), null);
+
+        int exitX, exitY;
+        do {
+            exitX = random.nextInt(width);
+            exitY = random.nextInt(height);
+        } while (!(dungeonMap[exitY][exitX] instanceof Floor));
+
+        dungeonMap[exitY][exitX] = new Start(imagens.getStartImage(), null); // End
+
+    }
+
+
+    private void buildBacktrackingDungeon(TileTypeEntity dungeonMap[][], int x, int y){
+        int[] dx = { 1, -1, 0, 0 };
+        int[] dy = { 0, 0, 1, -1 };
+
+        int[] directions = { 0, 1, 2, 3 };
+        shuffleArray(directions);
+        for (int dir : directions) {
+            int nx = x + dx[dir] * 2;
+            int ny = y + dy[dir] * 2;
+
+            if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length && dungeonMap[ny][nx] instanceof Wall) {
+                dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getFloorImage()); // ta esquisito isso
+                dungeonMap[ny][nx] = new Floor(imagens.getFloorImage());
+                buildBacktrackingDungeon(dungeonMap, nx, ny);
+            }
+        }
+    }
+
+
+    public void buildDungeon(TileTypeEntity dungeonMap[][]) {
+        // buildDungeonComponent(mapData.getSizeMap()[0], mapData.getSizeMap()[1]);
+        dungeonMap = new TileTypeEntity [mapData.getSizeMap()[1]][mapData.getSizeMap()[1]];
+        buildWallTileDungeon(dungeonMap);
+        buildBacktrackingDungeon(dungeonMap, mapData.getStartPosition()[0], mapData.getStartPosition()[1]);
+        buildTileDungeonComponent(dungeonMap);
+        
+    }
+
     
 }
 

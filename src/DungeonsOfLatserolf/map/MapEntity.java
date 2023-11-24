@@ -1,22 +1,22 @@
 package DungeonsOfLatserolf.map;
 
+import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.tile.TileTypeEntity;
 
 public class MapEntity {
-    private MapData mapData;
+    private MapGeneratorSystem mapSystem;
     private TileTypeEntity[][] map;
     
-    public MapEntity(MapData mapData) {
-        this.mapData = mapData;
-        this.map = new TileTypeEntity[mapData.getWidth()][mapData.getHeight()];
+    public MapEntity(AssetLibrary imagens) {
+        mapSystem = new MapGeneratorSystem(imagens);
     }
 
-    public MapData getMapData() {
-        return mapData;
+    public MapGeneratorSystem getMapSystem() {
+        return mapSystem;
     }
 
-    public void setMapData(MapData mapData) {
-        this.mapData = mapData;
+    public void setMapSystem(MapGeneratorSystem mapSystem) {
+        this.mapSystem = mapSystem;
     }
 
     public TileTypeEntity[][] getMap() {
@@ -25,6 +25,10 @@ public class MapEntity {
 
     public void setMap(TileTypeEntity[][] map) {
         this.map = map;
+    }
+
+    public void buildMap() {
+        mapSystem.buildDungeon(map);
     }
 
     // public boolean 

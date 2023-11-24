@@ -19,6 +19,10 @@ public class AssetLibrary {
         loadAssets();
     }
 
+    public void setAssets(HashMap<String, BufferedImage> assets) {
+        this.assets = assets;
+    }
+
     public BufferedImage getImage(String fileName) {
         return assets.get(fileName);
     }

@@ -1,14 +1,14 @@
 package DungeonsOfLatserolf.map.tile;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
+import java.awt.image.BufferedImage;
 
 public class Wall extends TileTypeEntity{
-    public Wall(AssetImage assetImage) {
+    public Wall(BufferedImage assetImage) {
         super(assetImage, null);
     }
 
     @Override
-    public AssetImage getAssetImage(){
+    public BufferedImage getAssetImage(){
         return getAsset();
     }
     

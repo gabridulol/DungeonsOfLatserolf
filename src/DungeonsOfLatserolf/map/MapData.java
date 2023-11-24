@@ -1,20 +1,86 @@
 package DungeonsOfLatserolf.map;
 
+import java.util.ArrayList;
 
 public class MapData {
+    private boolean isCompleted;    
+    private int[] sizeMap = new int[2];
+    private int[] startPosition = new int[2];
+    private int keysMap;
+    private double doorProbability;
+    private double monsterProbability;
+    private double chestProbability;
     private int level;
-    private int width;
-    private int height;
-    private int totalKeys;
-    private boolean isCompleted;
 
-    public MapData(int level, int width, int height, int totalKeys,
-            boolean isCompleted) {
-        this.level = level;
-        this.width = width;
-        this.height = height;
+    private int totalKeys;
+
+    public MapData(int width, int height, int totalKeys, int level) {
+        isCompleted = false;
+        this.sizeMap[0] = width;
+        this.sizeMap[1] = height;
+        startPosition[0] = width / 2;
+        startPosition[1] = height / 2;
         this.totalKeys = totalKeys;
-        this.isCompleted = isCompleted;
+        doorProbability = 0.1;
+        monsterProbability = 0.7;
+        chestProbability = 0.01;
+        this.level = level;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void completedMap() {
+        isCompleted = true;
+    }
+
+    public int[] getSizeMap() {
+        return sizeMap;
+    }
+
+    public void setSizeMap(int[] sizeMap) {
+        this.sizeMap = sizeMap;
+    }
+
+    public int[] getStartPosition() {
+        return startPosition;
+    }
+
+    public void setStartPosition(int[] startPosition) {
+        this.startPosition = startPosition;
+    }
+
+    public int getKeysMap() {
+        return keysMap;
+    }
+
+    public void setKeysMap(int keysMap) {
+        this.keysMap = keysMap;
+    }
+
+    public double getDoorProbability() {
+        return doorProbability;
+    }
+
+    public void setDoorProbability(double doorProbability) {
+        this.doorProbability = doorProbability;
+    }
+
+    public double getMonsterProbability() {
+        return monsterProbability;
+    }
+
+    public void setMonsterProbability(double monsterProbability) {
+        this.monsterProbability = monsterProbability;
+    }
+
+    public double getChestProbability() {
+        return chestProbability;
+    }
+
+    public void setChestProbability(double chestProbability) {
+        this.chestProbability = chestProbability;
     }
 
     public int getLevel() {
@@ -25,22 +91,6 @@ public class MapData {
         this.level = level;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getTotalKeys() {
         return totalKeys;
     }
@@ -49,11 +99,4 @@ public class MapData {
         this.totalKeys = totalKeys;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
-    }
 }

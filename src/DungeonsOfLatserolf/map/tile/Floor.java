@@ -1,14 +1,15 @@
 package DungeonsOfLatserolf.map.tile;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
+import java.awt.image.BufferedImage;
+
 
 public class Floor extends TileTypeEntity{
-    public Floor(AssetImage assetImage) {
+    public Floor(BufferedImage assetImage) {
         super(assetImage, null);
     }
 
     @Override
-    public AssetImage getAssetImage(){
+    public BufferedImage getAssetImage(){
         return getAsset();
     }
 

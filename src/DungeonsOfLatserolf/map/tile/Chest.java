@@ -1,20 +1,20 @@
 package DungeonsOfLatserolf.map.tile;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
+import java.awt.image.BufferedImage;
 
 public class Chest extends TileTypeEntity {
     private boolean openChest;
     private boolean keyChest;
     private int goldPieces;
 
-    public Chest (int goldPieces, AssetImage asset, AssetImage assetOpen) {
+    public Chest (int goldPieces, BufferedImage asset, BufferedImage assetOpen) {
         super(asset, assetOpen);
         this.openChest = false;
         this.keyChest = false;
         this.goldPieces = goldPieces;
     }
 
-    public Chest (AssetImage assetImage, AssetImage assetImageOpen) {
+    public Chest (BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openChest = false;
         this.keyChest = true;
@@ -52,7 +52,7 @@ public class Chest extends TileTypeEntity {
     }
 
     @Override
-    public AssetImage getAssetImage(){
+    public BufferedImage getAssetImage(){
         if (this.openChest) {
             return getAssetOpen();
         }

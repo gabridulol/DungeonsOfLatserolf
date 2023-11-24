@@ -1,13 +1,14 @@
 package DungeonsOfLatserolf.map.tile;
 
+import java.awt.image.BufferedImage;
+
 import DungeonsOfLatserolf.entity.monster.MonsterEntity;
-import DungeonsOfLatserolf.graphics.AssetImage;
 
 public class Door extends TileTypeEntity {
     private boolean openDoor;
     private MonsterEntity monsterDoor;
 
-    public Door(MonsterEntity monsterDoor, AssetImage assetImage, AssetImage assetImageOpen) {
+    public Door(MonsterEntity monsterDoor, BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openDoor = false;
         this.monsterDoor = monsterDoor;
@@ -35,7 +36,7 @@ public class Door extends TileTypeEntity {
     }
 
     @Override
-    public AssetImage getAssetImage(){
+    public BufferedImage getAssetImage(){
         if (this.openDoor) {
             return getAssetOpen();
         }

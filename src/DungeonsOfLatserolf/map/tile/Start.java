@@ -1,11 +1,11 @@
 package DungeonsOfLatserolf.map.tile;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
+import java.awt.image.BufferedImage;
 
 public class Start extends TileTypeEntity{
     public boolean openOutput;
     
-    public Start(AssetImage assetImage, AssetImage assetImageOpen) {
+    public Start(BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openOutput = false;
     }
@@ -24,7 +24,7 @@ public class Start extends TileTypeEntity{
     }
 
     @Override
-    public AssetImage getAssetImage(){
+    public BufferedImage getAssetImage(){
         if (this.openOutput) {
             return getAssetOpen();
         }
