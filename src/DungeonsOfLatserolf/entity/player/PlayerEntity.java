@@ -2,15 +2,105 @@ package DungeonsOfLatserolf.entity.player;
 
 import java.util.ArrayList;
 
-import DungeonsOfLatserolf.entity.player.components.PlayerController;
-import DungeonsOfLatserolf.entity.player.components.PlayerStats;
 import DungeonsOfLatserolf.graphics.AssetImage;
+import DungeonsOfLatserolf.map.tile.Chest;
+import DungeonsOfLatserolf.database.UserEntity;
+import DungeonsOfLatserolf.entity.monster.MonsterEntity;
+import DungeonsOfLatserolf.entity.player.components.PlayerComponent;
 
 public class PlayerEntity {
     
-    private ArrayList<AssetImage> sprite;
-    private PlayerStats stats;
-    private PlayerController controller;
+    private PlayerComponent playerStats;
+    private UserEntity user;
+    private AssetImage image;
+
+    // Para iniciar com um valor padrão
+    public PlayerEntity() {
+        this.playerStats = new PlayerComponent();
+        // this.user = new UserEntity();
+        // this.image = new AssetImage("player.png");
+    }
+
+    // Para iniciar com um valor específico
+    public PlayerEntity(int level, int score, int totalKeys, ArrayList<int[]> positionPlayer, int health, int attack, int defense) {
+        this.playerStats = new PlayerComponent(level, score, totalKeys, positionPlayer, health, attack, defense);
+        // this.user = new UserEntity();
+        // this.image = new AssetImage("player.png");
+    }
+
+    public int getAttack(){
+        return this.playerStats.getAttack();
+    }
+
+    public int getDefense(){
+        return this.playerStats.getDefense();
+    }
+
+    public int getHealth(){
+        return this.playerStats.getHealth();
+    }
+
+    public void addScore(int score){
+        this.playerStats.setScore(this.playerStats.getScore() + score);
+    }
+
+    public void addTotalKeys(int totalKeys){
+        this.playerStats.setTotalKeys(this.playerStats.getTotalKeys() + totalKeys);
+    }
+
+    public void upLevel(){
+        this.playerStats.setAttack(this.playerStats.getAttack() + 10);
+        this.playerStats.setDefense(this.playerStats.getDefense() + 10);
+        this.playerStats.setHealth(this.playerStats.getHealth() + 10);
+        this.playerStats.setScore(this.playerStats.getScore() + 100);
+    }
+
+    public void resetFight(int health){
+        this.playerStats.setHealth(health);
+    }
+
+    public void resetPlayer(){
+        this.playerStats.setScore(0);
+        this.playerStats.setTotalKeys(0);
+        this.playerStats.setPositionPlayer(new ArrayList<int[]>());
+        this.playerStats.setHealth(100);
+        this.playerStats.setAttack(10);
+        this.playerStats.setDefense(10);
+    }
+
+    public void catchItems(Chest chest){
+        if(chest.getKeyChest()){
+            this.playerStats.setTotalKeys(this.playerStats.getTotalKeys() + 1);
+        }
+        else{
+            this.playerStats.setScore(this.playerStats.getScore() + chest.getGoldPieces());
+        }
+    }
+
+
+    public PlayerComponent getPlayerStats() {
+        return playerStats;
+    }
+
+    public void setPlayerStats(PlayerComponent playerStats) {
+        this.playerStats = playerStats;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public AssetImage getImage() {
+        return image;
+    }
+
+    public void setImage(AssetImage image) {
+        this.image = image;
+    }
 
     // public PlayerEntity() {
     //     health = 100;

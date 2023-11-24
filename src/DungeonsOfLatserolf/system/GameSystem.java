@@ -23,10 +23,14 @@ import DungeonsOfLatserolf.map.MapEntity;
 
 
 public class GameSystem {
+    // private static final int cellSize = 16; // 16x16 pixels
+    // private static final double zoom = 5.0f; // 5x zoom
+
     private AssetLibrary assetLibrary;
     private MapEntity mapEntity;
     private PlayerEntity player;
     private Display display;
+
     private float zoom;
     private int cellSize;
 

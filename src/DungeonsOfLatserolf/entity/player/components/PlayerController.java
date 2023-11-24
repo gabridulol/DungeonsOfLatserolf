@@ -1,29 +1,36 @@
 package DungeonsOfLatserolf.entity.player.components;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import DungeonsOfLatserolf.input.KeyboardInput;
+public class PlayerController implements KeyListener {
 
-public class PlayerController {
-    private KeyboardInput input;
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
 
-    public PlayerController(KeyboardInput input) {
-        this.input = input;
+        if (keyCode == KeyEvent.VK_A) {
+            // moveCharacter(-1, 0, dungeonPanel, cellSize, combatLabel, doorOpens);
+            System.err.println("A");
+        } else if (keyCode == KeyEvent.VK_D) {
+            // moveCharacter(1, 0, dungeonPanel, cellSize, combatLabel, doorOpens);
+            System.out.println("D");
+        } else if (keyCode == KeyEvent.VK_W) {
+            // moveCharacter(0, -1, dungeonPanel, cellSize, combatLabel, doorOpens);
+            System.out.println("W");
+        } else if (keyCode == KeyEvent.VK_S) {
+            // moveCharacter(0, 1, dungeonPanel, cellSize, combatLabel, doorOpens);
+            System.out.println("S");
+        }
     }
 
-    public boolean isRequestingUp() {
-        return input.isPressed(KeyEvent.VK_W);
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Not needed for this example
     }
 
-    public boolean isRequestingDown() {
-        return input.isPressed(KeyEvent.VK_S);
-    }
-
-    public boolean isRequestingLeft() {
-        return input.isPressed(KeyEvent.VK_A);
-    }
-
-    public boolean isRequestingRight() {
-        return input.isPressed(KeyEvent.VK_D);
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Not needed for this example
     }
 }
