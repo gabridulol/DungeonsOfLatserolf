@@ -3,13 +3,13 @@ package DungeonsOfLatserolf.entity.player;
 import java.util.ArrayList;
 
 import DungeonsOfLatserolf.entity.player.components.PlayerController;
-import DungeonsOfLatserolf.entity.player.components.PlayerStats;
+import DungeonsOfLatserolf.entity.player.components.PlayerComponent;
 import DungeonsOfLatserolf.graphics.AssetImage;
 
 public class PlayerEntity {
     
     private ArrayList<AssetImage> sprite;
-    private PlayerStats stats;
+    private PlayerComponent stats;
     private PlayerController controller;
 
     // public PlayerEntity() {
