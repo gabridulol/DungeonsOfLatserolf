@@ -33,8 +33,10 @@ public class MapGeneratorSystem {
             for (int y = 0; y < height; y++) {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
                     dungeonMap[x][y] = new Wall(imagens.getImage("board(0)"));
-                } else {
-                    dungeonMap[x][y] = new Wall(imagens.getHorizontalWallImage());
+                } 
+
+                else {
+                    dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
                 }
             }
         }
@@ -70,20 +72,20 @@ public class MapGeneratorSystem {
 
                     if (surroundedByWalls) {
                         if (Math.random() < mapData.getDoorProbability()) {
-                            dungeonMap[x][y] = new Door(null, imagens.getDoorImage(), imagens.getOpenDoorImage());
+                            dungeonMap[x][y] = new Door(null, imagens.getImage("door(0)"), imagens.getImage("door(1)"));
                         }
                     }
                 }
 
                 if (dungeonMap[x][y] instanceof Floor) {
                     if (Math.random() < mapData.getChestProbability()) {
-                        dungeonMap[x][y] = new Chest(imagens.getChestImage(), imagens.getOpenChestImage());
+                        dungeonMap[x][y] = new Chest(imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
                     }
                 }
             }
         }
 
-        dungeonMap[mapData.getStartPosition()[0]][mapData.getStartPosition()[1]] = new Start(imagens.getStartImage(), null);
+        // dungeonMap[mapData.getStartPosition()[0]][mapData.getStartPosition()[1]] = new Start(imagens.getImage("start(0)"), null);
 
         int exitX, exitY;
         do {
@@ -91,7 +93,7 @@ public class MapGeneratorSystem {
             exitY = random.nextInt(height);
         } while (!(dungeonMap[exitY][exitX] instanceof Floor));
 
-        dungeonMap[exitY][exitX] = new Start(imagens.getStartImage(), null); // End
+        dungeonMap[exitY][exitX] = new Start(imagens.getImage("start(0)"), null); // End
 
     }
 
@@ -107,7 +109,7 @@ public class MapGeneratorSystem {
             int ny = y + dy[dir] * 2;
 
             if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length && dungeonMap[ny][nx] instanceof Wall) {
-                dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getFloorImage()); // ta esquisito isso
+                dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getImage()); // ta esquisito isso
                 dungeonMap[ny][nx] = new Floor(imagens.getFloorImage());
                 buildBacktrackingDungeon(dungeonMap, nx, ny);
             }
