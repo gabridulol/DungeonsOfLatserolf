@@ -8,7 +8,7 @@ public class MonsterEntity {
     private int attack;
     private int defense;
     private int health;
-    private int XP;
+    private int score;
     private int level;
 
     Random rand = new Random();
@@ -21,15 +21,14 @@ public class MonsterEntity {
             "Uma criatura lendária que tem escamas, asas e garras. Ele tem uma cor variada, dependendo de seu elemento, como vermelho para fogo, azul para água, ou verde para terra. Ele usa sua respiração, como fogo, gelo, ou veneno, para atacar seus inimigos. Ele é sábio e orgulhoso, e guarda tesouros e segredos em sua caverna. Ele é respeitado e temido por todos." };
 
     public MonsterEntity() {
-        int random = rand.nextInt(names.length);
+        int random = rand.nextInt(names.length) + 1; 
         name = names[random];
         description = descriptions[random];
         
         health = (rand.nextInt(10) + 5 + random * 2) ;
         attack = ((rand.nextInt(10) + 5 + random * 2) / 3);
+        score = attack*defense + level*health;
     }
-
-    
 
     public int getDefense() {
         return defense;
@@ -48,7 +47,7 @@ public class MonsterEntity {
     }
 
     public void setXP(int xP) {
-        XP = xP;
+        score = xP;
     }
 
     public void setLevel(int level) {
@@ -73,7 +72,7 @@ public class MonsterEntity {
     }
 
     public int getXP() {
-        return XP;
+        return score;
     }
 
     public int getLevel() {
