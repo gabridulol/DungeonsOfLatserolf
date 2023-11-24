@@ -30,27 +30,6 @@ public class PlayerComponent {
         this.defense = defense;
     }
 
-    public void addScore(int score){
-        this.score += score;
-    }
-
-    public void addTotalKeys(){
-        this.totalKeys++;
-    }
-
-    public void upLevel(){
-        this.attack += 10;
-        this.defense += 10;
-        this.health += 10;
-        this.score += 100;
-    }
-
-    public void resetFight(int attack, int defense, int health){
-        this.attack = attack;
-        this.defense = defense;
-        this.health = health;
-    }
-
     public ArrayList<int[]> getPositionPlayer() {
         return positionPlayer;
     }
