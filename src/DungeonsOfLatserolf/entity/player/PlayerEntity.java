@@ -17,15 +17,27 @@ public class PlayerEntity {
     // Para iniciar com um valor padrão
     public PlayerEntity() {
         this.playerStats = new PlayerComponent();
-        this.user = new UserEntity();
-        this.image = new AssetImage("player.png");
+        // this.user = new UserEntity();
+        // this.image = new AssetImage("player.png");
     }
 
     // Para iniciar com um valor específico
     public PlayerEntity(int level, int score, int totalKeys, ArrayList<int[]> positionPlayer, int health, int attack, int defense) {
         this.playerStats = new PlayerComponent(level, score, totalKeys, positionPlayer, health, attack, defense);
-        this.user = new UserEntity();
-        this.image = new AssetImage("player.png");
+        // this.user = new UserEntity();
+        // this.image = new AssetImage("player.png");
+    }
+
+    public int getAttack(){
+        return this.playerStats.getAttack();
+    }
+
+    public int getDefense(){
+        return this.playerStats.getDefense();
+    }
+
+    public int getHealth(){
+        return this.playerStats.getHealth();
     }
 
     public void addScore(int score){
@@ -65,6 +77,30 @@ public class PlayerEntity {
         }
     }
 
+
+    public PlayerComponent getPlayerStats() {
+        return playerStats;
+    }
+
+    public void setPlayerStats(PlayerComponent playerStats) {
+        this.playerStats = playerStats;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public AssetImage getImage() {
+        return image;
+    }
+
+    public void setImage(AssetImage image) {
+        this.image = image;
+    }
 
     // public PlayerEntity() {
     //     health = 100;
