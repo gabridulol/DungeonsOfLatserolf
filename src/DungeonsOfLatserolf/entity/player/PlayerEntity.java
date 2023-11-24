@@ -43,12 +43,6 @@ public class PlayerEntity {
         this.playerStats.setScore(this.playerStats.getScore() + 100);
     }
 
-    public void resetFight(int attack, int defense, int health){
-        this.playerStats.setAttack(attack);
-        this.playerStats.setDefense(defense);
-        this.playerStats.setHealth(health);
-    }
-
     public void resetPlayer(){
         this.playerStats.setScore(0);
         this.playerStats.setTotalKeys(0);
@@ -65,6 +59,30 @@ public class PlayerEntity {
         else{
             this.playerStats.setScore(this.playerStats.getScore() + chest.getGoldPieces());
         }
+    }
+
+    public PlayerComponent getPlayerStats() {
+        return playerStats;
+    }
+
+    public void setPlayerStats(PlayerComponent playerStats) {
+        this.playerStats = playerStats;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public AssetImage getImage() {
+        return image;
+    }
+
+    public void setImage(AssetImage image) {
+        this.image = image;
     }
 
     // public PlayerEntity() {
