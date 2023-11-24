@@ -43,9 +43,7 @@ public class PlayerEntity {
         this.playerStats.setScore(this.playerStats.getScore() + 100);
     }
 
-    public void resetFight(int attack, int defense, int health){
-        this.playerStats.setAttack(attack);
-        this.playerStats.setDefense(defense);
+    public void resetFight(int health){
         this.playerStats.setHealth(health);
     }
 
@@ -66,6 +64,7 @@ public class PlayerEntity {
             this.playerStats.setScore(this.playerStats.getScore() + chest.getGoldPieces());
         }
     }
+
 
     // public PlayerEntity() {
     //     health = 100;

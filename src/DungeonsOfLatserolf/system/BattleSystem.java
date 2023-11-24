@@ -49,13 +49,14 @@ public class BattleSystem {
                 first =  true;
             }
         else{
-            
+            System.out.println("O monstro começa atacando");
+            first = false;
         }
 
 
         while(monster.getHealth()>0 || player.getHealth()>0){
             if(first){
-                
+                monster.setHealth(player.getAttack());
             }
 
 
