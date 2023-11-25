@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PlayerComponent {
     private int score;
     private int totalKeys;
-    private ArrayList<int[]> positionPlayer;
+    private int[] positionPlayer;
     private int health;
     private int attack;
     private int defense;
@@ -14,14 +14,14 @@ public class PlayerComponent {
     public PlayerComponent() {
         this.score = 0;
         this.totalKeys = 0;
-        this.positionPlayer = new ArrayList<int[]>();
+        this.positionPlayer = new int[2];
         this.health = 100;
         this.attack = 10;
         this.defense = 10;
     }
 
     // Para inicar com um valor específico
-    public PlayerComponent(int level, int score, int totalKeys, ArrayList<int[]> positionPlayer, int health, int attack, int defense) {
+    public PlayerComponent(int level, int score, int totalKeys, int[] positionPlayer, int health, int attack, int defense) {
         this.score = score;
         this.totalKeys = totalKeys;
         this.positionPlayer = positionPlayer;
@@ -30,11 +30,11 @@ public class PlayerComponent {
         this.defense = defense;
     }
 
-    public ArrayList<int[]> getPositionPlayer() {
+    public int[] getPositionPlayer() {
         return positionPlayer;
     }
 
-    public void setPositionPlayer(ArrayList<int[]> positionPlayer) {
+    public void setPositionPlayer(int[] positionPlayer) {
         this.positionPlayer = positionPlayer;
     }
 

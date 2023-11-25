@@ -6,6 +6,7 @@ import DungeonsOfLatserolf.map.tile.TileTypeEntity;
 public class MapEntity {
     private MapGeneratorSystem mapSystem;
     private TileTypeEntity[][] map;
+
     
     public MapEntity(AssetLibrary imagens) {
         mapSystem = new MapGeneratorSystem(imagens);
@@ -23,14 +24,16 @@ public class MapEntity {
         return map;
     }
 
+    public MapData getMapData() {
+        return mapSystem.getMapData();
+    }
+
     public void setMap(TileTypeEntity[][] map) {
         this.map = map;
     }
 
     public void buildMap() {
-        mapSystem.buildDungeon(map);
+        map = mapSystem.buildDungeon(map);
     }
-
-    // public boolean 
 
 }

@@ -16,7 +16,7 @@ public class DungeonGame {
 
     private static int door = 0;
 
-    private static float zoom = 5.0f; // Fixed zoom factor
+    private static float zoom = 2.0f; // Fixed zoom factor
 
     private static BufferedImage boardImage;
     private static BufferedImage floorImage;
@@ -150,11 +150,11 @@ public class DungeonGame {
         // Set character's initial position to the entrance
         characterX = startX;
         characterY = startY;
-
+        System.out.println(width);
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (dungeon[x][y] == WALL) {
-
+                    System.out.println(x+1);
                     if (dungeon[x + 1][y] == WALL)
                         dungeon[x][y] = VERTICAL_WALL;
 

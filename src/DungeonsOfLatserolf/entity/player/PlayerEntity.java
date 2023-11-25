@@ -22,10 +22,14 @@ public class PlayerEntity {
     }
 
     // Para iniciar com um valor específico
-    public PlayerEntity(int level, int score, int totalKeys, ArrayList<int[]> positionPlayer, int health, int attack, int defense) {
+    public PlayerEntity(int level, int score, int totalKeys, int[] positionPlayer, int health, int attack, int defense) {
         this.playerStats = new PlayerComponent(level, score, totalKeys, positionPlayer, health, attack, defense);
         // this.user = new UserEntity();
         // this.image = new AssetImage("player.png");
+    }
+
+    public int[] getPositionPlayer(){
+        return playerStats.getPositionPlayer();
     }
 
     public int getAttack(){
@@ -62,7 +66,7 @@ public class PlayerEntity {
     public void resetPlayer(){
         this.playerStats.setScore(0);
         this.playerStats.setTotalKeys(0);
-        this.playerStats.setPositionPlayer(new ArrayList<int[]>());
+        this.playerStats.setPositionPlayer(new int[]{0,0});
         this.playerStats.setHealth(100);
         this.playerStats.setAttack(10);
         this.playerStats.setDefense(10);

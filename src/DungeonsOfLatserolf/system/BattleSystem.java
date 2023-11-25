@@ -51,7 +51,7 @@ public class BattleSystem {
         System.out.println("Você se depara com " + monster.getName());
         System.out.println(monster.getDescription());
 
-        int pIciative = rollIniciative(player.getgetAttack(), player.getDefense());
+        int pIciative = rollIniciative(player.getAttack(), player.getDefense());
         int mIciative = rollIniciative(monster.getAttack(), monster.getDefense());
         boolean first;
 

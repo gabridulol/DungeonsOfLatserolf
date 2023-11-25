@@ -25,21 +25,36 @@ public class MapGeneratorSystem {
         this.mapData = mapData;
     }
 
-    private void buildWallTileDungeon(TileTypeEntity dungeonMap[][]){
+    public AssetLibrary getImagemDoSistema() {
+        return imagens;
+    }
+
+    private void
+    // private TileTypeEntity[][]
+    buildWallTileDungeon(TileTypeEntity dungeonMap[][]){
         int width = mapData.getSizeMap()[1];
         int height = mapData.getSizeMap()[0];
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
-                    dungeonMap[x][y] = new Wall(imagens.getImage("board(0)"));
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1) { //borda
+                    if (x == 0 || x == width - 1)
+                        dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
+                    else
+                        dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
+
+                    // System.out.println("wall");
                 } 
 
                 else {
-                    dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
+                    dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
+                    // System.out.println("wall");
                 }
             }
         }
+        
+        // return dungeonMap;
+
     }
 
     private static void shuffleArray(int[] arr) {
@@ -52,7 +67,9 @@ public class MapGeneratorSystem {
         }
     }
 
-    private void buildTileDungeonComponent(TileTypeEntity dungeonMap[][]) {
+    private void 
+    // private TileTypeEntity[][]
+    buildTileDungeon(TileTypeEntity dungeonMap[][]) {
         int width = mapData.getSizeMap()[1];
         int height = mapData.getSizeMap()[0];
         Random random = new Random();
@@ -95,10 +112,50 @@ public class MapGeneratorSystem {
 
         dungeonMap[exitY][exitX] = new Start(imagens.getImage("start(0)"), null); // End
 
+        // return dungeonMap;
+
     }
 
+    private void
+    // private TileTypeEntity[][] 
+    buildVerticalWall(TileTypeEntity dungeonMap[][]){
 
-    private void buildBacktrackingDungeon(TileTypeEntity dungeonMap[][], int x, int y){
+        int width = mapData.getSizeMap()[1];
+        int height = mapData.getSizeMap()[0];
+
+        for (int x = 1; x < width-1; x++) {
+            for (int y = 1; y < height-1; y++) {
+                if (dungeonMap[x][y] instanceof Wall) {
+                    if (!(dungeonMap[x][y-1] instanceof Wall && dungeonMap[x][y+1] instanceof Wall))
+                        if (dungeonMap[x + 1][y] instanceof Wall || dungeonMap[x - 1][y] instanceof Wall)
+                            dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
+
+                    // if (dungeonMap[x - 1][y] instanceof Wall)
+                    //     dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
+
+                    // if (dungeonMap[x + 1][y] instanceof BOARD)
+                    //     dungeonMap[x][y] = VERTICAL_WALL;
+
+                    // if (dungeonMap[x + 1][y] instanceof BOARD)
+                    //     dungeonMap[x][y] = VERTICAL_WALL;
+                }
+            }
+        }
+
+        // for (int x = 0; x < width; x++) {
+        //     for (int y = 0; y < height; y++) {
+        //         if (dungeonMap[x][y] == WALL) {
+        //             dungeonMap[x][y] = HORIZONTAL_WALL;
+        //         }
+        //     }
+        // }
+
+        // return dungeonMap;
+    }
+
+    private void 
+    // private TileTypeEntity[][]
+    buildBacktrackingDungeon(TileTypeEntity dungeonMap[][], int x, int y){
         int[] dx = { 1, -1, 0, 0 };
         int[] dy = { 0, 0, 1, -1 };
 
@@ -109,24 +166,30 @@ public class MapGeneratorSystem {
             int ny = y + dy[dir] * 2;
 
             if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length && dungeonMap[ny][nx] instanceof Wall) {
-                dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getImage()); // ta esquisito isso
-                dungeonMap[ny][nx] = new Floor(imagens.getFloorImage());
+                dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getImage("floor(0)"));
+                dungeonMap[ny][nx] = new Floor(imagens.getImage("floor(0)"));
                 buildBacktrackingDungeon(dungeonMap, nx, ny);
             }
         }
+        // return dungeonMap;
     }
 
 
-    public void buildDungeon(TileTypeEntity dungeonMap[][]) {
+    public TileTypeEntity[][] buildDungeon(TileTypeEntity dungeonMap[][]) {
         // buildDungeonComponent(mapData.getSizeMap()[0], mapData.getSizeMap()[1]);
-        dungeonMap = new TileTypeEntity [mapData.getSizeMap()[1]][mapData.getSizeMap()[1]];
+        dungeonMap = new TileTypeEntity [mapData.getSizeMap()[0]][mapData.getSizeMap()[1]];
+        // dungeonMap = 
         buildWallTileDungeon(dungeonMap);
+        // dungeonMap = 
         buildBacktrackingDungeon(dungeonMap, mapData.getStartPosition()[0], mapData.getStartPosition()[1]);
-        buildTileDungeonComponent(dungeonMap);
-        
-    }
+        // dungeonMap = 
+        buildTileDungeon(dungeonMap);
+        // dungeonMap = 
+        buildVerticalWall(dungeonMap);
 
-    
+
+        return dungeonMap;
+    }
 }
 
 // package DungeonsOfLatserolf;
