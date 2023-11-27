@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import DungeonsOfLatserolf.graphics.AssetImage;
 import DungeonsOfLatserolf.map.tile.Chest;
+import javafx.geometry.Pos;
 import DungeonsOfLatserolf.database.UserEntity;
 import DungeonsOfLatserolf.entity.monster.MonsterEntity;
 import DungeonsOfLatserolf.entity.player.components.PlayerComponent;
@@ -12,11 +13,11 @@ public class PlayerEntity {
     
     private PlayerComponent playerStats;
     private UserEntity user;
-    private AssetImage image;
+    private AssetImage[] image;
 
     // Para iniciar com um valor padrão
-    public PlayerEntity() {
-        this.playerStats = new PlayerComponent();
+    public PlayerEntity(int[] positionPlayer) {
+        this.playerStats = new PlayerComponent(positionPlayer);
         // this.user = new UserEntity();
         // this.image = new AssetImage("player.png");
     }
@@ -30,6 +31,10 @@ public class PlayerEntity {
 
     public int[] getPositionPlayer(){
         return playerStats.getPositionPlayer();
+    }
+
+    public void setPositionPlayer(int[] positionPlayer){
+        this.playerStats.setPositionPlayer(positionPlayer);
     }
 
     public int getAttack(){
@@ -98,11 +103,11 @@ public class PlayerEntity {
         this.user = user;
     }
 
-    public AssetImage getImage() {
+    public AssetImage[] getImage() {
         return image;
     }
 
-    public void setImage(AssetImage image) {
+    public void setImage(AssetImage[] image) {
         this.image = image;
     }
 

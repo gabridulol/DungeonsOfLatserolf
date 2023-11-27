@@ -11,10 +11,10 @@ public class PlayerComponent {
     private int defense;
 
     // Para iniciar com um valor padrão
-    public PlayerComponent() {
+    public PlayerComponent(int[] positionPlayer) {
         this.score = 0;
         this.totalKeys = 0;
-        this.positionPlayer = new int[2];
+        this.positionPlayer = positionPlayer;
         this.health = 100;
         this.attack = 10;
         this.defense = 10;

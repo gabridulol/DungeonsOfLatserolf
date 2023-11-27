@@ -61,7 +61,10 @@ public class Chest extends TileTypeEntity {
 
     @Override
     public boolean isWalkable() {
-        return true;
+        if (this.openChest) {
+            return true;
+        }
+        return false;
     }
 
     @Override

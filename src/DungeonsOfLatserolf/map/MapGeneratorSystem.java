@@ -126,31 +126,13 @@ public class MapGeneratorSystem {
         for (int x = 1; x < width-1; x++) {
             for (int y = 1; y < height-1; y++) {
                 if (dungeonMap[x][y] instanceof Wall) {
-                    if (!(dungeonMap[x][y-1] instanceof Wall && dungeonMap[x][y+1] instanceof Wall))
+                    if (!(dungeonMap[x][y+1] instanceof Wall))
                         if (dungeonMap[x + 1][y] instanceof Wall || dungeonMap[x - 1][y] instanceof Wall)
                             dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
-
-                    // if (dungeonMap[x - 1][y] instanceof Wall)
-                    //     dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
-
-                    // if (dungeonMap[x + 1][y] instanceof BOARD)
-                    //     dungeonMap[x][y] = VERTICAL_WALL;
-
-                    // if (dungeonMap[x + 1][y] instanceof BOARD)
-                    //     dungeonMap[x][y] = VERTICAL_WALL;
                 }
             }
         }
 
-        // for (int x = 0; x < width; x++) {
-        //     for (int y = 0; y < height; y++) {
-        //         if (dungeonMap[x][y] == WALL) {
-        //             dungeonMap[x][y] = HORIZONTAL_WALL;
-        //         }
-        //     }
-        // }
-
-        // return dungeonMap;
     }
 
     private void 

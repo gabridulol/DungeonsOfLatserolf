@@ -150,11 +150,9 @@ public class DungeonGame {
         // Set character's initial position to the entrance
         characterX = startX;
         characterY = startY;
-        System.out.println(width);
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (dungeon[x][y] == WALL) {
-                    System.out.println(x+1);
                     if (dungeon[x + 1][y] == WALL)
                         dungeon[x][y] = VERTICAL_WALL;
 
