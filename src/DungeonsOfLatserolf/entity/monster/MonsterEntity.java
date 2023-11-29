@@ -27,6 +27,7 @@ public class MonsterEntity {
         
         health = (rand.nextInt(10) + 5 + random * 2) ;
         attack = ((rand.nextInt(10) + 5 + random * 2) / 3);
+        defense = ((rand.nextInt(10) + 5 + random * 2) / 3);
         score = attack*defense + level*health;
     }
 
@@ -55,8 +56,8 @@ public class MonsterEntity {
     }
 
     public String getName() {
-        if(name == "Galinha") return "uma" + name;
-        return "um" + name;
+        if(name == "Galinha") return "uma " + name;
+        return "um " + name;
     }
 
     public String getDescription() {
