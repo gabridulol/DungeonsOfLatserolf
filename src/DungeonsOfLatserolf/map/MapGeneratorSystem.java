@@ -4,7 +4,6 @@ import DungeonsOfLatserolf.map.tile.*;
 
 import java.util.Random;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapData;
 

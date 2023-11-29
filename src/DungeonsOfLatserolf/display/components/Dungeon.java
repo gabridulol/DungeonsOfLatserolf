@@ -26,7 +26,7 @@ public class Dungeon extends JPanel {
     private int cellSize;
 
     public Dungeon(MapEntity mapEntity, PlayerEntity playerEntity) {
-        zoom = 4.0f;
+        zoom = 2.0f;
         cellSize = 16;
 
         this.mapEntity = mapEntity;

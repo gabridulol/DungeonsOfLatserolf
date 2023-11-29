@@ -1,8 +1,8 @@
 package DungeonsOfLatserolf.entity.player;
 
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
-import DungeonsOfLatserolf.graphics.AssetImage;
 import DungeonsOfLatserolf.map.tile.Chest;
 import javafx.geometry.Pos;
 import DungeonsOfLatserolf.database.UserEntity;
@@ -13,11 +13,15 @@ public class PlayerEntity {
     
     private PlayerComponent playerStats;
     private UserEntity user;
-    private AssetImage[] image;
+    private BufferedImage[] playerImages;
 
     // Para iniciar com um valor padrão
-    public PlayerEntity(int[] positionPlayer) {
+    public PlayerEntity(int[] positionPlayer
+    // ,  BufferedImage[] playerImages
+    ) {
         this.playerStats = new PlayerComponent(positionPlayer);
+        // this.playerImages = playerImages;
+
         // this.user = new UserEntity();
         // this.image = new AssetImage("player.png");
     }
@@ -103,13 +107,13 @@ public class PlayerEntity {
         this.user = user;
     }
 
-    public AssetImage[] getImage() {
-        return image;
-    }
+    // public AssetImage[] getImage() {
+    //     return image;
+    // }
 
-    public void setImage(AssetImage[] image) {
-        this.image = image;
-    }
+    // public void setImage(AssetImage[] image) {
+    //     this.image = image;
+    // }
 
     // public PlayerEntity() {
     //     health = 100;
