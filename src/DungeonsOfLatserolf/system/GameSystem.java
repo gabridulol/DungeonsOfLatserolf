@@ -34,6 +34,8 @@ public class GameSystem {
     private PlayerEntity player;
     private Dungeon dungeonPanel;
     private Display display;
+    private BattleSystem battleSystem;
+
 
     public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player){
         this.assetLibrary = assetLibrary;
@@ -80,11 +82,15 @@ public class GameSystem {
 
                 if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
+                    battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                    battleSystem.startBattle();
                     door.setDoorEmpty();
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
+                    battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                    battleSystem.startBattle();
                     door.setDoorEmpty();
                 }
             }

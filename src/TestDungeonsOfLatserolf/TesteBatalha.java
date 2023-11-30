@@ -8,9 +8,10 @@ import DungeonsOfLatserolf.entity.monster.*;
 public class TesteBatalha {
     public static void main(String[] args) {
         PlayerEntity playerEntity = new PlayerEntity(null);
-        MonsterEntity monsterEntity = new MonsterEntity();
+        MonsterGenerator monsterGenerator = new MonsterGenerator();
+        
 
-        BattleSystem battleSystem = new BattleSystem(monsterEntity, playerEntity);
-        battleSystem.battle();
+        BattleSystem battleSystem = new BattleSystem(monsterGenerator.generateMonster(), playerEntity);
+        battleSystem.startBattle();
     }
 }

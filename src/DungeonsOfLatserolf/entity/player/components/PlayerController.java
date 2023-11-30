@@ -2,6 +2,8 @@ package DungeonsOfLatserolf.entity.player.components;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import DungeonsOfLatserolf.system.BattleSystem;
 import DungeonsOfLatserolf.system.GameSystem;
 
 public class PlayerController implements KeyListener {
