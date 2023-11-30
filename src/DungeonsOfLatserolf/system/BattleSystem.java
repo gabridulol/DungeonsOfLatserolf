@@ -95,7 +95,14 @@ public class BattleSystem {
                 }else System.out.println("Voce errou o ataque!");
         } 
         }
-        if(healthPlayer==0) return false;
-        else return true;
+        if(healthPlayer==0) {
+            System.out.println("Voce foi derrotado");
+            return false;
+        }
+
+        else{
+            System.out.println("Voce derrotou " + monster.getName());
+            return true;
+        }
      }
 }
