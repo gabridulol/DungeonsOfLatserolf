@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import DungeonsOfLatserolf.database.UserEntity;
 import DungeonsOfLatserolf.entity.monster.MonsterEntity;
 import DungeonsOfLatserolf.entity.player.components.PlayerComponent;
+import DungeonsOfLatserolf.entity.player.components.PlayerController;
 
 public class PlayerEntity {
     

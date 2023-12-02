@@ -21,6 +21,8 @@ public class Dungeon extends JPanel {
     private MapEntity mapEntity;
     private PlayerEntity playerEntity;
     private boolean[][] visitados;
+    private String playerDirection = "down";
+    private int playerDirectionNum = 0;
 
     private float zoom;
     private int cellSize;
@@ -68,7 +70,7 @@ public class Dungeon extends JPanel {
         int yOffset = (int) Math.max(0,
                 Math.min(characterY * cellSize * zoom - halfPanelHeight, dungeonHeight - panelHeight));
 
-        
+        BufferedImage playerImage = getPlayerImage();
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.scale(zoom, zoom);
@@ -99,7 +101,27 @@ public class Dungeon extends JPanel {
         int characterYPosition = (int) ((characterY * cellSize) - yOffset / zoom);
         
         // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("down(0)"), characterX* cellSize, characterY* cellSize, this);
-        g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("down(0)"), characterXPosition, characterYPosition, this);
+        g2d.drawImage(playerImage, characterXPosition, characterYPosition, this);
         
+    }
+
+    protected BufferedImage getPlayerImage(){
+        return mapEntity.getMapSystem().getImagemDoSistema().getImage(playerDirection + "(" + playerDirectionNum + ")");
+    }
+
+    public void setPlayerDirection(String playerDirection){
+        this.playerDirection = playerDirection;
+    }
+
+    public String getPlayerDirection(){
+        return playerDirection;
+    }
+
+    public void setPlayerDirectionNum(int playerDirectionNum){
+        this.playerDirectionNum = playerDirectionNum;
+    }
+
+    public int getPlayerDirectionNum(){
+        return playerDirectionNum;
     }
 }

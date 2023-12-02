@@ -60,6 +60,10 @@ public class GameSystem {
         this.dungeonPanel = dungeonPanel;
     }
 
+    public Dungeon getDungeonPanel(){
+        return dungeonPanel;
+    }
+
     public void moveCharacter(int[] movimento){
         int[] positionPlayer = player.getPositionPlayer();
         int[] newPositionPlayer = new int[]{positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1]};
@@ -70,22 +74,26 @@ public class GameSystem {
                     Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
                     player.catchItems(chest);
                     chest.setChestEmpty();
+                    // dungeonPanel.setPlayerDirection("up");
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Chest){ 
                     Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
                     player.catchItems(chest);
                     chest.setChestEmpty();
+                    // dungeonPanel.setPlayerDirection("left");
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
                     door.setDoorEmpty();
+                    // dungeonPanel.setPlayerDirection("down");
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
                     door.setDoorEmpty();
+                    // dungeonPanel.setPlayerDirection("right");
                 }
             }
 
