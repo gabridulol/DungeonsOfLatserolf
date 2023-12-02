@@ -46,7 +46,7 @@ public class BattleSystem {
         return monster.getAttack();
     }
 
-    public boolean battle() {        
+    public boolean startBattle(){
         int healthPlayer = player.getHealth();
 
         System.out.println("Você se depara com " + monster.getName());

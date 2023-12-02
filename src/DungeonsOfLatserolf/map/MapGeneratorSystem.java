@@ -16,6 +16,7 @@ public class MapGeneratorSystem {
     public MapGeneratorSystem(AssetLibrary imagens) {
         this.mapData = new MapData(31, 31, 3, 1);
         this.imagens = imagens;
+        monsterGenerator = new MonsterGenerator();
     }
 
     public MapData getMapData() {
@@ -83,7 +84,11 @@ public class MapGeneratorSystem {
 
                     if (surroundedByWalls) {
                         if (Math.random() < mapData.getDoorProbability()) {
-                            dungeonMap[x][y] = new Door(null, imagens.getImage("door(0)"), imagens.getImage("door(1)"));
+                            dungeonMap[x][y] = new Door(monsterGenerator.generateMonster(), imagens.getImage("door(0)"), imagens.getImage("door(1)"));
+                            // System.out.println("Door");
+                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getName());
+                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getDescription());
+                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getAttack());
                         }
                     }
                 }

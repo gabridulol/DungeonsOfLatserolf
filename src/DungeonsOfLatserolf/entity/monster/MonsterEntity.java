@@ -3,8 +3,7 @@ package DungeonsOfLatserolf.entity.monster;
 import java.util.Random;
 
 public class MonsterEntity {
-    private String name;
-    private String description;
+    private MonsterCategory monsterCategory;
     private int attack;
     private int defense;
     private int health;
@@ -20,14 +19,13 @@ public class MonsterEntity {
             "Um mago poderoso que se tornou imortal ao transferir sua alma para um objeto. Ele tem uma aparência cadavérica, com pele pálida e cabelos ralos. Ele usa mantos escuros e joias místicas, como anéis e colares. Ele é inteligente e cruel, e busca aumentar seu conhecimento e poder. Ele controla os mortos-vivos e lança feitiços devastadores.",
             "Uma criatura lendária que tem escamas, asas e garras. Ele tem uma cor variada, dependendo de seu elemento, como vermelho para fogo, azul para água, ou verde para terra. Ele usa sua respiração, como fogo, gelo, ou veneno, para atacar seus inimigos. Ele é sábio e orgulhoso, e guarda tesouros e segredos em sua caverna. Ele é respeitado e temido por todos." };
 
-    public MonsterEntity() {
-        int random = rand.nextInt(names.length) + 1; 
-        name = names[random];
-        description = descriptions[random];
+    public MonsterEntity(MonsterCategory monsterCategory) {
+        this.monsterCategory = monsterCategory;
+        int power = monsterCategory.getPower();
         
-        health = (rand.nextInt(10) + 5 + random * 2) ;
-        attack = ((rand.nextInt(10) + 5 + random * 2) / 3);
-        defense = ((rand.nextInt(10) + 5 + random * 2) / 3);
+        health = (rand.nextInt(10) + 5 + power * 2) ;
+        attack = ((rand.nextInt(10) + 5 + power * 2) / 3);
+        defense = ((rand.nextInt(10) + 5 + power * 2) / 3);
         score = attack*defense + level*health;
     }
 
@@ -56,12 +54,12 @@ public class MonsterEntity {
     }
 
     public String getName() {
-        if(name == "Galinha") return "uma " + name;
-        return "um " + name;
+        if(monsterCategory.getName() == "Galinha") return "uma " + monsterCategory.getName();
+        return "um " + monsterCategory.getName();
     }
 
     public String getDescription() {
-        return description;
+        return monsterCategory.getDescription();
     }
 
     public int getAttack() {
