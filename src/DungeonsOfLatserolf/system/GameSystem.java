@@ -18,6 +18,8 @@ import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Chest;
 import DungeonsOfLatserolf.map.tile.Door;
 
+import DungeonsOfLatserolf.system.BattleSystem;
+
 // + createAndShowGUI()
 
 // + paintComponent( g: Graphics): void
@@ -34,6 +36,7 @@ public class GameSystem {
     private PlayerEntity player;
     private Dungeon dungeonPanel;
     private Display display;
+    private BattleSystem battleSystem;
 
     public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player){
         this.assetLibrary = assetLibrary;

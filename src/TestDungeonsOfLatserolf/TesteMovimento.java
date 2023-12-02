@@ -8,7 +8,7 @@ import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.display.components.Dungeon;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 
-import DungeonsOfLatserolf.system.GameSystem;
+import DungeonsOfLatserolf.system.*;
 
 public class TesteMovimento extends JFrame{
     public TesteMovimento(MapEntity mapEntity, PlayerEntity player, PlayerController playerController, GameSystem game) {

@@ -3,11 +3,12 @@ package DungeonsOfLatserolf.entity.player.components;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import DungeonsOfLatserolf.system.GameSystem;
-import DungeonsOfLatserolf.display.components.Dungeon;
+import DungeonsOfLatserolf.system.BattleSystem;
 
 public class PlayerController implements KeyListener {
 
     GameSystem game;
+    BattleSystem battleSystem;
 
     public PlayerController(GameSystem game) {
         this.game = game;
