@@ -90,17 +90,25 @@ public class GameSystem {
 
                 if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
-                    battleSystem = new BattleSystem(door.getMonsterDoor(), player);
-                    battleSystem.startBattle();
-                    door.setDoorEmpty();
-                    // dungeonPanel.setPlayerDirection("down");
+                    if(door.getMonsterDoor()!=null){ 
+                        battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                        if(battleSystem.startBattle() == false){
+                            // fecha o jogo
+                        }
+                        
+                    }
+                     door.setDoorEmpty();
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
-                    battleSystem = new BattleSystem(door.getMonsterDoor(), player);
-                    battleSystem.startBattle();
-                    door.setDoorEmpty();
+                    if(door.getMonsterDoor()!=null){ 
+                        battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                        if(battleSystem.startBattle() == false){
+                            // fecha o jogo
+                        }
+                    }
+                     door.setDoorEmpty();
                     // dungeonPanel.setPlayerDirection("right");
                 }
             }

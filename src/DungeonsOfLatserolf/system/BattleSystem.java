@@ -65,7 +65,7 @@ public class BattleSystem {
         while (monster.getHealth() > 0 || healthPlayer > 0) {
             int dado;
 
-            printLife();
+            printLife(healthPlayer);
 
             printRollDice();
 
@@ -125,7 +125,6 @@ public class BattleSystem {
                 return false;
             }
         }
-
         return false;
     }
 
@@ -137,9 +136,9 @@ public class BattleSystem {
         return player;
     }
 
-    public void printLife() {
+    public void printLife(int healthPlayer) {
         System.out.printf("\nVida do %s: %d\n", monster.getName(), monster.getHealth());
-        System.out.printf("Sua vida: %d\n", player.getHealth());
+        System.out.printf("Sua vida: %d\n", healthPlayer);
     }
 
     public void printRollDice(){

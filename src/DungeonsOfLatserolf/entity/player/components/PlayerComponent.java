@@ -15,7 +15,7 @@ public class PlayerComponent {
         this.score = 0;
         this.totalKeys = 0;
         this.positionPlayer = positionPlayer;
-        this.health = 100;
+        this.health = 10;
         this.attack = 10;
         this.defense = 10;
     }
