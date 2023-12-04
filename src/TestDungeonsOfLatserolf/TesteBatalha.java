@@ -12,6 +12,8 @@ public class TesteBatalha {
         
 
         BattleSystem battleSystem = new BattleSystem(monsterGenerator.generateMonster(), playerEntity);
-        battleSystem.startBattle();
+        if(battleSystem.acceptBattle(monsterGenerator.generateMonster())){
+            battleSystem.startBattle();
+        }
     }
 }
