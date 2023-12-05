@@ -2,11 +2,14 @@ package DungeonsOfLatserolf.system;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 import javax.swing.*;
 import javax.swing.text.html.parser.Entity;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import DungeonsOfLatserolf.entity.monster.MonsterEntity;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
@@ -60,15 +63,24 @@ public class BattleSystem {
         int mInitiative = rollIniciative(monster.getAttack(), monster.getDefense());
         boolean first = pInitiative >= mInitiative;
 
-        // if (first) {
-        // System.out.println("Você começa atacando");
-        // } else {
-        // System.out.println("O monstro começa atacando");
-        // }
-        BattleFrame battleFrame = new BattleFrame(
-                "Você se depara com " + monster.getName() + "\n" + monster.getDescription(),
-                "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth(),
-                first ? "Você começa atacando" : "O monstro começa atacando");
+        BattleFrame battleFrame = new BattleFrame(first ? "Você começa atacando" : "O monstro começa atacando");
+
+        // Adiciona o botão "Continuar" após cada movimento
+
+        battleFrame.setVisible(true);
+
+        // battleFrame.revalidate();
+        // battleFrame.repaint();
+        // Exibe a janela de batalha
+
+        battleFrame.waitForContinue();
+
+        // battleFrame.setVisible(true);
+
+        // Remove o botão para a próxima iteração
+        // battleFrame.remove(continueButton);
+        // battleFrame.revalidate();
+        // battleFrame.repaint();
 
         while (monster.getHealth() > 0 || healthPlayer > 0) {
             int dado;
@@ -76,100 +88,144 @@ public class BattleSystem {
             battleFrame.setBattleInfoTextArea(
                     "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth());
 
-            battleFrame.setVisible(true);
-
-            // printLife(healthPlayer);
-            // printRollDice();
-
             if (first) {
+                dado = rollDice();
+
+                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
+                    monster.setHealth(attackP(dado));
+                    battleFrame.setBattleInfoTextArea(
+                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+                } else {
+                    battleFrame.setBattleInfoTextArea("Você errou o ataque!");
+                }
+
+                // battleFrame.add(continueButton);
+                // Aguarda a resposta do usuário antes de continuar
+                battleFrame.waitForContinue();
+
+                dado = rollDice();
+
+                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+                    healthPlayer -= attackM(dado);
+                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+                } else {
+                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
+                }
+            } else {
+                dado = rollDice();
+
+                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+                    healthPlayer -= attackM(dado);
+                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+                } else {
+                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
+                }
+
+                // battleFrame.add(continueButton);
+                // Aguarda a resposta do usuário antes de continuar
+                battleFrame.waitForContinue();
 
                 dado = rollDice();
 
                 if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
                     monster.setHealth(attackP(dado));
                     battleFrame.setBattleInfoTextArea(
-                            "Voce desferiu " + attackP(dado) + " de dano no " + monster.getName());
-                    battleFrame.setVisible(true);
-
-                    System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado), monster.getName());
+                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
                 } else {
-                    battleFrame.setBattleInfoTextArea("Voce errou o ataque!");
-                    battleFrame.setVisible(true);
-
-                    System.out.println("Voce errou o ataque!");
-                }
-
-                // printRollDice();
-
-                dado = rollDice();
-
-                if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de dano");
-                    battleFrame.setVisible(true);
-
-                    System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
-                } else {
-                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
-                    battleFrame.setVisible(true);
-
-                    System.out.println("O monstro errou o ataque!");
+                    battleFrame.setBattleInfoTextArea("Você errou o ataque!");
                 }
             }
 
-            else {
-
-                dado = rollDice();
-
-                if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de dano");
-                    battleFrame.setVisible(true);
-
-                    System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
-                } else {
-                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
-                    battleFrame.setVisible(true);
-
-                    System.out.println("O monstro errou o ataque!");
-                }
-
-                // printRollDice();
-
-                dado = rollDice();
-
-                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-                    monster.setHealth(attackP(dado));
-                    battleFrame.setBattleInfoTextArea(
-                            "Voce desferiu " + attackP(dado) + " de dano no " + monster.getName());
-                    battleFrame.setVisible(true);
-
-                    System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado), monster.getName());
-                } else {
-                    battleFrame.setBattleInfoTextArea("Voce errou o ataque!");
-                    battleFrame.setVisible(true);
-
-                    System.out.println("Voce errou o ataque!");
-                }
-            }
+            // battleFrame.add(continueButton);
+            // Aguarda a resposta do usuário antes de continuar
+            battleFrame.waitForContinue();
 
             if (monster.getHealth() <= 0) {
-                battleFrame.setBattleInfoTextArea("Voce venceu a batalha!");
-                battleFrame.setVisible(true);
-
-                System.out.println("Voce venceu a batalha!");
+                battleFrame.setBattleInfoTextArea("Você venceu a batalha!");
+                battleFrame.waitForContinue();
+                battleFrame.dispose();
                 return true;
             }
 
             if (healthPlayer <= 0) {
-                battleFrame.setBattleInfoTextArea("Voce perdeu a batalha!");
-                battleFrame.setVisible(true);
-
-                System.out.println("Voce perdeu a batalha!");
+                battleFrame.setBattleInfoTextArea("Você perdeu a batalha!");
+                battleFrame.waitForContinue();
+                battleFrame.dispose();
                 return false;
             }
         }
         return false;
+    }
+
+    public static void applyDarkTheme() {
+        Font defaultFont = new Font("JetBrainsMono", Font.PLAIN, 20);
+        UIManager.put("OptionPane.messageFont", defaultFont);
+        UIManager.put("OptionPane.buttonFont", defaultFont);
+        UIManager.put("Label.font", defaultFont);
+        UIManager.put("TextArea.font", defaultFont);
+        UIManager.put("OptionPane.background", Color.DARK_GRAY);
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("Panel.background", Color.DARK_GRAY);
+        UIManager.put("Button.background", Color.gray);
+        UIManager.put("Button.foreground", Color.WHITE);
+    }
+
+    public boolean acceptBattle() {
+        MonsterEntity monster = getMonster();
+        applyDarkTheme();
+
+        JTextArea battleInfoTextArea = new JTextArea(
+                "Você se depara com " + monster.getName() + "\n\n" + monster.getDescription());
+        configureTextArea(battleInfoTextArea);
+
+        JLabel questionLabel = new JLabel("Deseja batalhar?");
+        configureLabel(questionLabel);
+
+        // Painel personalizado com layout BoxLayout
+        JPanel customPanel = new JPanel();
+        customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
+        customPanel.add(battleInfoTextArea);
+
+        customPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        customPanel.add(questionLabel);
+
+        customPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        Object[] options = { "Sim", "Não" };
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                customPanel,
+                "Batalha",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        return choice == JOptionPane.YES_OPTION;
+    }
+
+    private static void configureTextArea(JTextArea textArea) {
+        // textArea.setEditable(false);
+        textArea.setForeground(Color.white);
+        textArea.setBackground(Color.DARK_GRAY);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setPreferredSize(new Dimension(400, 250)); // Ajuste conforme necessário
+    }
+
+    private static void configureLabel(JLabel label) {
+        label.setForeground(Color.white);
+    }
+
+    public MonsterEntity getMonster() {
+        return monster;
+    }
+
+    public PlayerEntity getPlayer() {
+        return player;
     }
 
     // printRoll
@@ -286,93 +342,4 @@ public class BattleSystem {
     // return false;
     // }
 
-    public static void applyDarkTheme() {
-        Font defaultFont = new Font("Arial", Font.PLAIN, 20);
-        UIManager.put("OptionPane.messageFont", defaultFont);
-        UIManager.put("OptionPane.buttonFont", defaultFont);
-        UIManager.put("Label.font", defaultFont);
-        UIManager.put("TextArea.font", defaultFont);
-        UIManager.put("OptionPane.background", Color.DARK_GRAY);
-        UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        UIManager.put("Panel.background", Color.DARK_GRAY);
-        UIManager.put("Button.background", Color.gray);
-        UIManager.put("Button.foreground", Color.WHITE);
-    }
-
-    public boolean acceptBattle() {
-        MonsterEntity monster = getMonster();
-        applyDarkTheme();
-
-        JTextArea battleInfoTextArea = new JTextArea("Você se depara com " + monster.getName() + "\n\n" + monster.getDescription());
-        configureTextArea(battleInfoTextArea);
-
-        JLabel questionLabel = new JLabel("Deseja batalhar?");
-        configureLabel(questionLabel);
-
-        // Painel personalizado com layout BoxLayout
-        JPanel customPanel = new JPanel();
-        customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
-        customPanel.add(battleInfoTextArea);
-        
-        customPanel.add(Box.createRigidArea(new Dimension(0, 20))); 
-
-        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        customPanel.add(questionLabel);
-
-        customPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        Object[] options = { "Sim", "Não" };
-        int choice = JOptionPane.showOptionDialog(
-            null,
-            customPanel,
-            "Batalha",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            options,
-            options[0]
-        );
-
-        return choice == JOptionPane.YES_OPTION;
-    }
-
-    private static void configureTextArea(JTextArea textArea) {
-        // textArea.setEditable(false);
-        textArea.setForeground(Color.white);
-        textArea.setBackground(Color.DARK_GRAY);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setPreferredSize(new Dimension(400, 230)); // Ajuste conforme necessário
-    }
-
-    private static void configureLabel(JLabel label) {
-        label.setForeground(Color.white);
-    }
-
-    // public boolean acceptBattle() {
-    //     BattleDialog battleDialog = new BattleDialog(null, "Batalha",
-    //             "Você se depara com " + monster.getName() + "\n" + monster.getDescription(),
-    //             "Sua vida: " + player.getHealth() + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth(),
-    //             "Você encontrou um monstro, deseja batalhar?");
-    //     return battleDialog.acceptBattle();
-    // }
-
-    public MonsterEntity getMonster() {
-        return monster;
-    }
-
-    public PlayerEntity getPlayer() {
-        return player;
-    }
-
-    public void printLife(int healthPlayer) {
-        System.out.printf("\nVida do %s: %d\n", monster.getName(), monster.getHealth());
-        System.out.printf("Sua vida: %d\n", healthPlayer);
-    }
-
-    public void printRollDice() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nAperte enter para rolar o dado");
-        scanner.nextLine();
-    }
 }

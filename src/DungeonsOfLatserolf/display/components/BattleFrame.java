@@ -4,44 +4,74 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.CountDownLatch;
 
 public class BattleFrame extends JFrame {
-    private boolean battleAccepted;
     private JTextArea battleInfoTextArea;
+    private CountDownLatch latch = new CountDownLatch(1);
 
-    public BattleFrame(String monsterInfo, String battleInfo, String battleIniciative) {
+    public BattleFrame(String Text) {
         super("Batalha");
 
-        battleInfoTextArea = new JTextArea(monsterInfo + "\n" + battleInfo + "\n" + battleIniciative);
+        setLayout(new BorderLayout());
+
+        battleInfoTextArea = new JTextArea(Text);
         battleInfoTextArea.setEditable(false);
 
-        JButton continueButton = new JButton("Continue");
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                battleAccepted = true;
-                dispose(); // Fechar a janela da batalha
-            }
-        });
+        JScrollPane scrollPane = new JScrollPane(battleInfoTextArea);  
+        
+        JButton continueButton = new JButton("Continuar");
+        continueButton.addActionListener(e -> latch.countDown());
 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        add(battleInfoTextArea);
-        add(continueButton);
+        add(scrollPane, BorderLayout.CENTER);
+        add(continueButton, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 300);
-        setLocationRelativeTo(null); // Centralizar na tela
+        setSize(400,200);
+        setLocationRelativeTo(null);
         setVisible(true);
 
-        // Bloquear o restante da interface enquanto a janela de batalha estiver aberta
-        setEnabled(false);
+        // JButton continueButton = new JButton("Continuar");
+        // continueButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         battleAccepted = true;
+        //         setVisible(false); // Esconder a janela da batalha
+        //     }
+        // });
+
+        // setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        // add(battleInfoTextArea);
+        // // add(continueButton);
+
+        // setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        // pack();  // Use pack to resize the frame based on its components
+        // setLocationRelativeTo(null); // Centralizar na tela
+        // setVisible(true);
     }
 
-    public boolean isBattleAccepted() {
-        return battleAccepted;
+    protected void paintComponent(Graphics g) {
+        super.paintComponents(g);
     }
 
     public void setBattleInfoTextArea(String battleInfo) {
         battleInfoTextArea.setText(battleInfo);
-    }   
+    }
+
+    public JButton createContinueButton(ActionListener actionListener) {
+        JButton continueButton = new JButton("Continuar");
+        continueButton.addActionListener(actionListener);
+        return continueButton;
+    }
+
+    public void waitForContinue() {
+        latch = new CountDownLatch(1);
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
