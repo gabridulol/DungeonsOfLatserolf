@@ -30,7 +30,13 @@ public class BattleFrame extends JFrame {
         setSize(400,200);
         setLocationRelativeTo(null);
         setVisible(true);
+        repaint();
 
+        // waitForContinue();
+        // new Thread(() -> {
+        //     waitForContinue();
+        // }).start();
+        
         // JButton continueButton = new JButton("Continuar");
         // continueButton.addActionListener(new ActionListener() {
         //     @Override
@@ -73,5 +79,3 @@ public class BattleFrame extends JFrame {
         }
     }
 }
-
-

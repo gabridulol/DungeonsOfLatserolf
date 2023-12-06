@@ -65,15 +65,16 @@ public class BattleSystem {
 
         BattleFrame battleFrame = new BattleFrame(first ? "Você começa atacando" : "O monstro começa atacando");
 
+        // battleFrame.setBattleInfoTextArea(
+                // "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth());
+
+
+        if(true)
+            System.out.println("oi");
         // Adiciona o botão "Continuar" após cada movimento
-
-        battleFrame.setVisible(true);
-
         // battleFrame.revalidate();
         // battleFrame.repaint();
         // Exibe a janela de batalha
-
-        battleFrame.waitForContinue();
 
         // battleFrame.setVisible(true);
 
@@ -82,78 +83,78 @@ public class BattleSystem {
         // battleFrame.revalidate();
         // battleFrame.repaint();
 
-        while (monster.getHealth() > 0 || healthPlayer > 0) {
-            int dado;
+        // while (monster.getHealth() > 0 || healthPlayer > 0) {
+        //     int dado;
 
-            battleFrame.setBattleInfoTextArea(
-                    "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth());
+        //     battleFrame.setBattleInfoTextArea(
+        //             "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth());
 
-            if (first) {
-                dado = rollDice();
+        //     if (first) {
+        //         dado = rollDice();
 
-                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-                    monster.setHealth(attackP(dado));
-                    battleFrame.setBattleInfoTextArea(
-                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
-                } else {
-                    battleFrame.setBattleInfoTextArea("Você errou o ataque!");
-                }
+        //         if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
+        //             monster.setHealth(attackP(dado));
+        //             battleFrame.setBattleInfoTextArea(
+        //                     "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+        //         } else {
+        //             battleFrame.setBattleInfoTextArea("Você errou o ataque!");
+        //         }
 
-                // battleFrame.add(continueButton);
-                // Aguarda a resposta do usuário antes de continuar
-                battleFrame.waitForContinue();
+        //         // battleFrame.add(continueButton);
+        //         // Aguarda a resposta do usuário antes de continuar
+        //         battleFrame.waitForContinue();
 
-                dado = rollDice();
+        //         dado = rollDice();
 
-                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
-                } else {
-                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
-                }
-            } else {
-                dado = rollDice();
+        //         if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+        //             healthPlayer -= attackM(dado);
+        //             battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+        //         } else {
+        //             battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
+        //         }
+        //     } else {
+        //         dado = rollDice();
 
-                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
-                } else {
-                    battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
-                }
+        //         if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+        //             healthPlayer -= attackM(dado);
+        //             battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+        //         } else {
+        //             battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
+        //         }
 
-                // battleFrame.add(continueButton);
-                // Aguarda a resposta do usuário antes de continuar
-                battleFrame.waitForContinue();
+        //         // battleFrame.add(continueButton);
+        //         // Aguarda a resposta do usuário antes de continuar
+        //         battleFrame.waitForContinue();
 
-                dado = rollDice();
+        //         dado = rollDice();
 
-                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-                    monster.setHealth(attackP(dado));
-                    battleFrame.setBattleInfoTextArea(
-                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
-                } else {
-                    battleFrame.setBattleInfoTextArea("Você errou o ataque!");
-                }
-            }
+        //         if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
+        //             monster.setHealth(attackP(dado));
+        //             battleFrame.setBattleInfoTextArea(
+        //                     "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+        //         } else {
+        //             battleFrame.setBattleInfoTextArea("Você errou o ataque!");
+        //         }
+        //     }
 
-            // battleFrame.add(continueButton);
-            // Aguarda a resposta do usuário antes de continuar
-            battleFrame.waitForContinue();
+        //     // battleFrame.add(continueButton);
+        //     // Aguarda a resposta do usuário antes de continuar
+        //     battleFrame.waitForContinue();
 
-            if (monster.getHealth() <= 0) {
-                battleFrame.setBattleInfoTextArea("Você venceu a batalha!");
-                battleFrame.waitForContinue();
-                battleFrame.dispose();
-                return true;
-            }
+        //     if (monster.getHealth() <= 0) {
+        //         battleFrame.setBattleInfoTextArea("Você venceu a batalha!");
+        //         battleFrame.waitForContinue();
+        //         battleFrame.dispose();
+        //         return true;
+        //     }
 
-            if (healthPlayer <= 0) {
-                battleFrame.setBattleInfoTextArea("Você perdeu a batalha!");
-                battleFrame.waitForContinue();
-                battleFrame.dispose();
-                return false;
-            }
-        }
+        //     if (healthPlayer <= 0) {
+        //         battleFrame.setBattleInfoTextArea("Você perdeu a batalha!");
+        //         battleFrame.waitForContinue();
+        //         battleFrame.dispose();
+        //         return false;
+        //     }
+        // }
         return false;
     }
 
