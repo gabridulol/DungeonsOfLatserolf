@@ -1,7 +1,7 @@
 package TestDungeonsOfLatserolf;
 
 import javax.swing.JFrame;
-import DungeonsOfLatserolf.entity.player.components.PlayerController;;
+import DungeonsOfLatserolf.entity.player.components.PlayerController;
 
 public class TesteTeclado {
     public static void main(String[] args) {

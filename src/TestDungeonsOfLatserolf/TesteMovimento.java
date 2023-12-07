@@ -25,7 +25,6 @@ public class TesteMovimento extends JFrame{
         setLocationRelativeTo(null); // Center the JFrame on the screen
         setVisible(true);
         game.setDungeonPanel(dungeonPanel);
-
     }
 
     public static void main(String[] args) {
