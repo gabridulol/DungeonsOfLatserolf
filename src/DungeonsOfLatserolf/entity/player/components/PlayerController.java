@@ -19,7 +19,6 @@ public class PlayerController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
         if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
             // System.out.println("A");
             game.moveCharacter(new int[]{-1, 0});
@@ -65,7 +64,6 @@ public class PlayerController implements KeyListener {
         }
         
         else if (keyCode == KeyEvent.VK_E){
-            // System.out.println("E");
             game.moveCharacter(new int[]{0, 0});
         }
         

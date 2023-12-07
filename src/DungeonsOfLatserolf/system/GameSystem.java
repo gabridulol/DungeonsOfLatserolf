@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import DungeonsOfLatserolf.display.Display;
 import DungeonsOfLatserolf.display.components.Dungeon;
@@ -37,12 +38,14 @@ public class GameSystem {
     private Dungeon dungeonPanel;
     private Display display;
     private BattleSystem battleSystem;
+    private AtomicBoolean batalhando;
 
 
     public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player){
         this.assetLibrary = assetLibrary;
         this.mapEntity = mapEntity;
         this.player = player;
+        this.batalhando = new AtomicBoolean(false);
         // display = new Display();
     }
 
@@ -69,6 +72,9 @@ public class GameSystem {
     }
 
     public void moveCharacter(int[] movimento){
+
+        if (batalhando.get()) return;
+
         int[] positionPlayer = player.getPositionPlayer();
         int[] newPositionPlayer = new int[]{positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1]};
 
@@ -91,11 +97,15 @@ public class GameSystem {
                 if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
                     if(door.getMonsterDoor()!=null){ 
-                        battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                        battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
                         if(battleSystem.acceptBattle() != false){
-                            if(battleSystem.startBattle() == false){
+                            batalhando.set(true);
+
+                            if(battleSystem.startBattle(batalhando) == false){
                                 // fecha o jogo
+
                             } else{
+                                // batalhando = false;
                                 door.setDoorEmpty();
                             }
                         }                        
@@ -107,9 +117,11 @@ public class GameSystem {
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
                     if(door.getMonsterDoor()!=null){ 
-                        battleSystem = new BattleSystem(door.getMonsterDoor(), player);
+                        battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
                         if(battleSystem.acceptBattle() != false){
-                            if(battleSystem.startBattle() == false){
+                            batalhando.set(true);
+
+                            if(battleSystem.startBattle(batalhando) == false){
                                 // fecha o jogo
                             } else{
                                 door.setDoorEmpty();
@@ -127,27 +139,9 @@ public class GameSystem {
         else if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]].isWalkable()){
             player.setPositionPlayer(newPositionPlayer);
         }
-
-        dungeonPanel.repaint();
-    }
-
-    public void createAndShowGUI(){
-        // this.dungeon = dungeon;
-        // this.cellSize = cellSize;
-        // this.characterX = dungeon[0].length / 2;
-        // this.characterY = dungeon[0].length / 2;
-
-        // int panelWidth = (int) (dungeon[0].length * cellSize * zoom);
-        // int panelHeight = (int) (dungeon.length * cellSize * zoom);
-        // setPreferredSize(new Dimension(panelHeight, panelWidth));
-    }
-
-    public void paintComponent( Graphics g){
         
-    }
-
-    public void detectKey(){
-        
+        if(batalhando.get() == false)
+            dungeonPanel.repaint();
     }
     
 }
