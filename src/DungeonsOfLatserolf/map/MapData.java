@@ -21,9 +21,9 @@ public class MapData {
         startPosition[0] = width / 2;
         startPosition[1] = height / 2;
         this.totalKeys = totalKeys;
-        doorProbability = 0.5;
+        doorProbability = 0.2;
         monsterProbability = 0.7;
-        chestProbability = 0.01;
+        chestProbability = 0.1;
         this.level = level;
     }
 

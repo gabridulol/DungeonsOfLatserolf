@@ -147,7 +147,6 @@ public class GameSystem {
                     // dungeonPanel.setPlayerDirection("right");
                 }
             }
-
         }
 
         else if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]].isWalkable()){
