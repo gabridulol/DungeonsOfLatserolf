@@ -79,56 +79,70 @@ public class GameSystem {
         int[] newPositionPlayer = new int[]{positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1]};
 
         if (movimento[0] == 0 && movimento[1] == 0) {
-            for (int i = -1; i < 2; i++){
+            for (int i = -1; i < 2; i+=2){
                 if (mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Chest){ 
                     Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
-                    player.catchItems(chest);
-                    chest.setChestEmpty();
+                    if(chest.isInteractable()){
+                        player.catchItems(chest);
+                        chest.setChestEmpty();
+                        break;
+                    }
                     // dungeonPanel.setPlayerDirection("up");
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Chest){ 
                     Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
-                    player.catchItems(chest);
-                    chest.setChestEmpty();
+                    if(chest.isInteractable()){
+                        player.catchItems(chest);
+                        chest.setChestEmpty();
+                        break;
+                    }
                     // dungeonPanel.setPlayerDirection("left");
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
-                    if(door.getMonsterDoor()!=null){ 
-                        battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
-                        if(battleSystem.acceptBattle() != false){
-                            batalhando.set(true);
+                    if(door.isInteractable()){
+                        if(door.getMonsterDoor()!=null){ 
+                            battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
+                            if(battleSystem.acceptBattle() != false){
+                                batalhando.set(true);
 
-                            if(battleSystem.startBattle(batalhando) == false){
-                                // fecha o jogo
+                                if(battleSystem.startBattle(batalhando) == false){
+                                    // fecha o jogo
 
-                            } else{
-                                // batalhando = false;
-                                door.setDoorEmpty();
-                            }
-                        }                        
-                    } else{
-                        door.setDoorEmpty();
+                                } else{
+                                    // batalhando = false;
+                                    door.setDoorEmpty();
+                                }
+                            }                        
+                        } else{
+                            door.setDoorEmpty();
+                        }
+                        break;
                     }
                 }
 
                 if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
                     Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
-                    if(door.getMonsterDoor()!=null){ 
-                        battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
-                        if(battleSystem.acceptBattle() != false){
-                            batalhando.set(true);
+                    if(door.isInteractable()){
+                        if(door.getMonsterDoor()!=null){ 
+                            battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
+                            if(battleSystem.acceptBattle() != false){
+                                batalhando.set(true);
 
-                            if(battleSystem.startBattle(batalhando) == false){
-                                // fecha o jogo
-                            } else{
-                                door.setDoorEmpty();
+                                if(battleSystem.startBattle(batalhando) == false){
+                                    // fecha o jogo
+                                } else{
+                                    door.setDoorEmpty();
+                                }
                             }
+                        } 
+                        
+                        else{
+                            door.setDoorEmpty();
                         }
-                    } else{
-                        door.setDoorEmpty();
+                        break;
                     }
                     // dungeonPanel.setPlayerDirection("right");
                 }
