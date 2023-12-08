@@ -22,7 +22,7 @@ import DungeonsOfLatserolf.display.components.BattleDialog;
 import DungeonsOfLatserolf.display.components.BattleFrame;
 import DungeonsOfLatserolf.display.components.Inicia;
 
-public class BattleSystem extends JFrame{
+public class BattleSystem extends JFrame {
     private MonsterEntity monster;
     private PlayerEntity player;
     private AssetLibrary assetLibrary;
@@ -72,16 +72,16 @@ public class BattleSystem extends JFrame{
         boolean first = pInitiative >= mInitiative;
 
         BufferedImage[][] map = new BufferedImage[7][6];
-        
+
         for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++){
-                if (i == 0 || i == 5 || j == 0 || j == 5) { //borda
+            for (int j = 0; j < 6; j++) {
+                if (i == 0 || i == 5 || j == 0 || j == 5) { // borda
                     if (i == 0 || i == 5)
                         map[i][j] = assetLibrary.getImage("wall(0)");
                     else
                         map[i][j] = assetLibrary.getImage("wall(1)");
 
-                } 
+                }
 
                 else {
                     map[i][j] = assetLibrary.getImage("floor(0)");
@@ -95,26 +95,26 @@ public class BattleSystem extends JFrame{
         map[6][0] = assetLibrary.getImage("up(0)");
         map[6][1] = assetLibrary.getImage("down(0)");
 
-
         ArrayList<String> listaBatalha = new ArrayList<>();
         ArrayList<String> infoBatalha = new ArrayList<>();
 
         listaBatalha.add(first ? "Você começa atacando" : "O monstro começa atacando");
 
         while (monster.getHealth() > 0 || healthPlayer > 0) {
-            infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
+            infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": "
+                    + monster.getHealth());
 
-            if(first){
+            if (first) {
                 playerAttack(listaBatalha, infoBatalha);
-            } else{
+            } else {
                 healthPlayer = monsterAttack(listaBatalha, infoBatalha, healthPlayer);
             }
 
-            if(verificaBatalha(monster.getHealth(), healthPlayer)){
-                if(verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha, infoBatalha, map)){
+            if (verificaBatalha(monster.getHealth(), healthPlayer)) {
+                if (verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha, infoBatalha, map)) {
                     System.out.println("FGanhou");
                     return true;
-                } else{
+                } else {
                     System.out.println("FPerdeu");
                     return false;
                 }
@@ -123,110 +123,113 @@ public class BattleSystem extends JFrame{
             first = !first;
 
             // if (first) {
-            //     dado = rollDice();
+            // dado = rollDice();
 
-            //     if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-            //         monster.setHealth(attackP(dado));
-            //         listaBatalha.add(
-            //                 "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
-            //     } else {
-            //         listaBatalha.add("Você errou o ataque!");
-            //     }
-
-            //     // battleFrame.add(continueButton);
-            //     // Aguarda a resposta do usuário antes de continuar
-            //     // battleFrame.waitForContinue();
-            //     if(verificaBatalha(monster.getHealth(), healthPlayer)){
-            //         verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha, infoBatalha, map);
-            //     }
-            //     infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
-
-            //     dado = rollDice();
-
-            //     if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-            //         healthPlayer -= attackM(dado);
-            //         listaBatalha.add("Você sofreu " + attackM(dado) + " de dano");
-            //     } else {
-            //         listaBatalha.add("O monstro errou o ataque!");
-            //     }
+            // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
+            // monster.setHealth(attackP(dado));
+            // listaBatalha.add(
+            // "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
             // } else {
-            //     dado = rollDice();
+            // listaBatalha.add("Você errou o ataque!");
+            // }
 
-            //     if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-            //         healthPlayer -= attackM(dado);
-            //         listaBatalha.add("Você sofreu " + attackM(dado) + " de dano");
-            //     } else {
-            //         listaBatalha.add("O monstro errou o ataque!");
-            //     }
+            // // battleFrame.add(continueButton);
+            // // Aguarda a resposta do usuário antes de continuar
+            // // battleFrame.waitForContinue();
+            // if(verificaBatalha(monster.getHealth(), healthPlayer)){
+            // verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha,
+            // infoBatalha, map);
+            // }
+            // infoBatalha.add("Sua vida: " + healthPlayer + " " + "Vida do " +
+            // monster.getName() + ": " + monster.getHealth());
 
-            //     // battleFrame.add(continueButton);
-            //     // Aguarda a resposta do usuário antes de continuar
-            //     // battleFrame.waitForContinue();
-            //     infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
+            // dado = rollDice();
 
-            //     dado = rollDice();
+            // if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+            // healthPlayer -= attackM(dado);
+            // listaBatalha.add("Você sofreu " + attackM(dado) + " de dano");
+            // } else {
+            // listaBatalha.add("O monstro errou o ataque!");
+            // }
+            // } else {
+            // dado = rollDice();
 
-            //     if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-            //         monster.setHealth(attackP(dado));
-            //         listaBatalha.add(
-            //                 "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
-            //     } else {
-            //         listaBatalha.add("Você errou o ataque!");
-            //     }
+            // if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
+            // healthPlayer -= attackM(dado);
+            // listaBatalha.add("Você sofreu " + attackM(dado) + " de dano");
+            // } else {
+            // listaBatalha.add("O monstro errou o ataque!");
+            // }
+
+            // // battleFrame.add(continueButton);
+            // // Aguarda a resposta do usuário antes de continuar
+            // // battleFrame.waitForContinue();
+            // infoBatalha.add("Sua vida: " + healthPlayer + " " + "Vida do " +
+            // monster.getName() + ": " + monster.getHealth());
+
+            // dado = rollDice();
+
+            // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
+            // monster.setHealth(attackP(dado));
+            // listaBatalha.add(
+            // "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+            // } else {
+            // listaBatalha.add("Você errou o ataque!");
+            // }
             // }
 
             // battleFrame.add(continueButton);
             // Aguarda a resposta do usuário antes de continuar
             // battleFrame.waitForContinue();
             // if (monster.getHealth() <= 0) {
-            //     infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
-            //     listaBatalha.add("Você venceu a batalha!");
-            //     // battleFrame.waitForContinue();
-            //     // battleFrame.dispose();
-            //     System.out.println(batalhando.get());
-            //     new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
-            //     // batalhando.set(false);
-            //     return true;
+            // infoBatalha.add("Sua vida: " + healthPlayer + " " + "Vida do " +
+            // monster.getName() + ": " + 0);
+            // listaBatalha.add("Você venceu a batalha!");
+            // // battleFrame.waitForContinue();
+            // // battleFrame.dispose();
+            // System.out.println(batalhando.get());
+            // new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
+            // // batalhando.set(false);
+            // return true;
             // }
 
             // if (healthPlayer <= 0) {
-            //     infoBatalha.add("Sua vida: " + 0 + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
-            //     listaBatalha.add("Você perdeu a batalha!");
-            //     // battleFrame.waitForContinue();
-            //     // battleFrame.dispose();
-            //     new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
-            //     return false;
+            // infoBatalha.add("Sua vida: " + 0 + " " + "Vida do " + monster.getName() + ":
+            // " + monster.getHealth());
+            // listaBatalha.add("Você perdeu a batalha!");
+            // // battleFrame.waitForContinue();
+            // // battleFrame.dispose();
+            // new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
+            // return false;
             // }
         }
-        // new BattleFrame(listaBatalha, infoBatalha,  batalhando, map);
+        // new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
         return false;
     }
 
     public boolean verificaBatalha(int monsterHealth, int playerHealth) {
-        if(monsterHealth <= 0 || playerHealth <= 0){
+        if (monsterHealth <= 0 || playerHealth <= 0) {
             return true;
         }
         return false;
     }
 
-    public boolean verificaGanhou(int monsterHealth, int healthPlayer, AtomicBoolean batalhando, ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, BufferedImage[][] map) {
+    public boolean verificaGanhou(int monsterHealth, int healthPlayer, AtomicBoolean batalhando,
+            ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, BufferedImage[][] map) {
         if (monster.getHealth() <= 0) {
-                listaBatalha.add("Você venceu a batalha!");
-                infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
-                // battleFrame.waitForContinue();
-                // battleFrame.dispose();
-                System.out.println(batalhando.get());
-                new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
-                // batalhando.set(false);
-                return true;
-            }else {
-                listaBatalha.add("Você perdeu a batalha!");
-                infoBatalha.add("Sua vida: " + 0 + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
-                // battleFrame.waitForContinue();
-                // battleFrame.dispose();
-                new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
-                return false;
-            }
+            listaBatalha.add("Você venceu a batalha!");
+            infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
+            System.out.println(batalhando.get());
+            new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
+            // batalhando.set(false);
+            return true;
+        } else {
+            listaBatalha.add("Você perdeu a batalha!");
+            infoBatalha
+                    .add("Sua vida: " + 0 + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
+            new BattleFrame(listaBatalha, infoBatalha, batalhando, map);
+            return false;
+        }
     }
 
     private void playerAttack(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha) {
@@ -324,119 +327,4 @@ public class BattleSystem extends JFrame{
     public PlayerEntity getPlayer() {
         return player;
     }
-
-    // printRoll
-
-    // BattleDialog battleDialog = new BattleDialog(null, "Batalha", "Você se depara
-    // com " + monster.getName() + "\n" + monster.getDescription(), "Sua vida: " +
-    // healthPlayer + "\n" + "Vida do " + monster.getName() + ": " +
-    // monster.getHealth(), first ? "Você começa atacando" : "O monstro começa
-    // atacando");
-
-    // while (monster.getHealth() > 0 || healthPlayer > 0) {
-    // int dado;
-
-    // battleDialog.setBattleInfoTextArea("Sua vida: " + healthPlayer + "\n" + "Vida
-    // do " + monster.getName() + ": " + monster.getHealth());
-
-    // battleDialog.setVisible(true);
-
-    // // printLife(healthPlayer);
-    // // printRollDice();
-
-    // if (first) {
-
-    // dado = rollDice();
-
-    // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-    // monster.setHealth(attackP(dado));
-    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dado) + " de
-    // dano no " + monster.getName());
-    // battleDialog.setVisible(true);
-
-    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado),
-    // monster.getName());
-    // } else{
-    // battleDialog.setBattleInfoTextArea("Voce errou o ataque!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("Voce errou o ataque!");
-    // }
-
-    // // printRollDice();
-
-    // dado = rollDice();
-
-    // if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-    // healthPlayer -= attackM(dado);
-    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de
-    // dano");
-    // battleDialog.setVisible(true);
-
-    // System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
-    // } else{
-    // battleDialog.setBattleInfoTextArea("O monstro errou o ataque!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("O monstro errou o ataque!");
-    // }
-    // }
-
-    // else {
-
-    // dado = rollDice();
-
-    // if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-    // healthPlayer -= attackM(dado);
-    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de
-    // dano");
-    // battleDialog.setVisible(true);
-
-    // System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
-    // } else{
-    // battleDialog.setBattleInfoTextArea("O monstro errou o ataque!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("O monstro errou o ataque!");
-    // }
-
-    // // printRollDice();
-
-    // dado = rollDice();
-
-    // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-    // monster.setHealth(attackP(dado));
-    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dado) + " de
-    // dano no " + monster.getName());
-    // battleDialog.setVisible(true);
-
-    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado),
-    // monster.getName());
-    // } else{
-    // battleDialog.setBattleInfoTextArea("Voce errou o ataque!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("Voce errou o ataque!");
-    // }
-    // }
-
-    // if (monster.getHealth() <= 0) {
-    // battleDialog.setBattleInfoTextArea("Voce venceu a batalha!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("Voce venceu a batalha!");
-    // return true;
-    // }
-
-    // if (healthPlayer <= 0) {
-    // battleDialog.setBattleInfoTextArea("Voce perdeu a batalha!");
-    // battleDialog.setVisible(true);
-
-    // System.out.println("Voce perdeu a batalha!");
-    // return false;
-    // }
-    // }
-    // return false;
-    // }
-
 }
