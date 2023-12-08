@@ -18,40 +18,53 @@ import java.awt.image.BufferedImage;
 public class BattleFrame extends JFrame {
     // private Graphics2D g2d;
     private ArrayList<String> listaBatalha;
+    private ArrayList<String> infoBatalha; 
     private BufferedImage[][] map;
     private BufferedImage playerImage;
     private BufferedImage monsterImage;
     private int cont;
 
-    public BattleFrame(ArrayList<String> listaBatalha, AtomicBoolean batalhando, BufferedImage[][] map) {
+    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, AtomicBoolean batalhando, BufferedImage[][] map) {
         this.listaBatalha = listaBatalha;
+        this.infoBatalha = infoBatalha;
         this.map = map;
 
         cont = 0;
 
         setLayout(new FlowLayout());
         JLabel label = new JLabel();
+        JLabel label2 = new JLabel();
+        label2.setForeground(Color.WHITE);
+        label2.setText(infoBatalha.get(cont));
         label.setForeground(Color.WHITE);
-
         label.setText(listaBatalha.get(cont));
         add(label);
+        add(label2);
         repaint();
         cont++;
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (cont < listaBatalha.size()) {
-                        label.setText(listaBatalha.get(cont));
-                        // add(label);
-                        repaint();
-                    } 
-                    
-                    else {
+                    try {
+                        if (cont < listaBatalha.size()) {
+                            label.setText(listaBatalha.get(cont));
+                            label2.setText(infoBatalha.get(cont));
+                            repaint();
+                            
+                        } 
+                        
+                        else {
+                            batalhando.set(false);
+                            setVisible(false);                    
+                        }
+                        cont ++;
+                    } catch (IndexOutOfBoundsException exception) {
+                        label.setText("Fim da batalha");
                         batalhando.set(false);
-                        setVisible(false);                    
+                        setVisible(false);
                     }
-                    cont ++;
+                    
                 }
             }
         });

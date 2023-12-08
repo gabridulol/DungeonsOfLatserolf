@@ -130,9 +130,9 @@ public class GameSystem {
                             battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
                             if(battleSystem.acceptBattle() != false){
                                 batalhando.set(true);
-
                                 if(battleSystem.startBattle(batalhando) == false){
-                                    // fecha o jogo
+                                    System.out.println("Fim de jogo");
+                                    System.exit(0);
                                 } else{
                                     door.setDoorEmpty();
                                 }
