@@ -29,27 +29,29 @@ public class BattleSystem {
 
     public int rollDice() {
         Random rand = new Random();
-        return rand.nextInt(20) + 1;
+        int dice =  rand.nextInt(20) + 1;
+        System.out.printf("Voce tirou %d no dado!\n", dice);
+        return dice;
     }
 
-    public int rollAttack(int attack, int dado) {
-        return (dado + (attack / 4));
+    public int rollAttack(int attack, int dice) {
+        return (dice + (attack / 4));
     }
 
     public int rollIniciative(int attack, int defense) {
         return rollDice() + (attack / defense);
     }
 
-    public int attackP(int dado) {
-        if (dado == 20) {
+    public int attackP(int dice) {
+        if (dice == 20) {
             System.out.println("Voce acertou um critico");
             return player.getAttack() * 2;
         }
         return player.getAttack();
     }
 
-    public int attackM(int dado) {
-        if (dado == 20) {
+    public int attackM(int dice) {
+        if (dice == 20) {
             System.out.printf("%s acertou um critico\n", monster.getName());
             return monster.getAttack() * 2;
         }
@@ -83,18 +85,18 @@ public class BattleSystem {
         // battleFrame.repaint();
 
         while (monster.getHealth() > 0 || healthPlayer > 0) {
-            int dado;
+            int dice;
 
             battleFrame.setBattleInfoTextArea(
                     "Sua vida: " + healthPlayer + "\n" + "Vida do " + monster.getName() + ": " + monster.getHealth());
 
             if (first) {
-                dado = rollDice();
+                dice = rollDice();
 
-                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-                    monster.setHealth(attackP(dado));
+                if (rollAttack(player.getAttack(), dice) > monster.getDefense()) {
+                    monster.setHealth(attackP(dice));
                     battleFrame.setBattleInfoTextArea(
-                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+                            "Você desferiu " + attackP(dice) + " de dano no " + monster.getName());
                 } else {
                     battleFrame.setBattleInfoTextArea("Você errou o ataque!");
                 }
@@ -103,20 +105,20 @@ public class BattleSystem {
                 // Aguarda a resposta do usuário antes de continuar
                 battleFrame.waitForContinue();
 
-                dado = rollDice();
+                dice = rollDice();
 
-                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+                if (rollAttack(monster.getAttack(), dice) > player.getDefense()) {
+                    healthPlayer -= attackM(dice);
+                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dice) + " de dano");
                 } else {
                     battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
                 }
             } else {
-                dado = rollDice();
+                dice = rollDice();
 
-                if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
-                    healthPlayer -= attackM(dado);
-                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dado) + " de dano");
+                if (rollAttack(monster.getAttack(), dice) > player.getDefense()) {
+                    healthPlayer -= attackM(dice);
+                    battleFrame.setBattleInfoTextArea("Você sofreu " + attackM(dice) + " de dano");
                 } else {
                     battleFrame.setBattleInfoTextArea("O monstro errou o ataque!");
                 }
@@ -125,12 +127,12 @@ public class BattleSystem {
                 // Aguarda a resposta do usuário antes de continuar
                 battleFrame.waitForContinue();
 
-                dado = rollDice();
+                dice = rollDice();
 
-                if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-                    monster.setHealth(attackP(dado));
+                if (rollAttack(player.getAttack(), dice) > monster.getDefense()) {
+                    monster.setHealth(attackP(dice));
                     battleFrame.setBattleInfoTextArea(
-                            "Você desferiu " + attackP(dado) + " de dano no " + monster.getName());
+                            "Você desferiu " + attackP(dice) + " de dano no " + monster.getName());
                 } else {
                     battleFrame.setBattleInfoTextArea("Você errou o ataque!");
                 }
@@ -237,7 +239,7 @@ public class BattleSystem {
     // atacando");
 
     // while (monster.getHealth() > 0 || healthPlayer > 0) {
-    // int dado;
+    // int dice;
 
     // battleDialog.setBattleInfoTextArea("Sua vida: " + healthPlayer + "\n" + "Vida
     // do " + monster.getName() + ": " + monster.getHealth());
@@ -249,15 +251,15 @@ public class BattleSystem {
 
     // if (first) {
 
-    // dado = rollDice();
+    // dice = rollDice();
 
-    // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-    // monster.setHealth(attackP(dado));
-    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dado) + " de
+    // if (rollAttack(player.getAttack(), dice) > monster.getDefense()) {
+    // monster.setHealth(attackP(dice));
+    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dice) + " de
     // dano no " + monster.getName());
     // battleDialog.setVisible(true);
 
-    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado),
+    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dice),
     // monster.getName());
     // } else{
     // battleDialog.setBattleInfoTextArea("Voce errou o ataque!");
@@ -268,15 +270,15 @@ public class BattleSystem {
 
     // // printRollDice();
 
-    // dado = rollDice();
+    // dice = rollDice();
 
     // if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-    // healthPlayer -= attackM(dado);
-    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de
+    // healthPlayer -= attackM(dice);
+    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dice) + " de
     // dano");
     // battleDialog.setVisible(true);
 
-    // System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
+    // System.out.printf("Voce sofreu %d de dano\n", attackM(dice));
     // } else{
     // battleDialog.setBattleInfoTextArea("O monstro errou o ataque!");
     // battleDialog.setVisible(true);
@@ -287,15 +289,15 @@ public class BattleSystem {
 
     // else {
 
-    // dado = rollDice();
+    // dice = rollDice();
 
     // if (rollAttack(monster.getAttack(), rollDice()) > player.getDefense()) {
-    // healthPlayer -= attackM(dado);
-    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dado) + " de
+    // healthPlayer -= attackM(dice);
+    // battleDialog.setBattleInfoTextArea("Voce sofreu " + attackM(dice) + " de
     // dano");
     // battleDialog.setVisible(true);
 
-    // System.out.printf("Voce sofreu %d de dano\n", attackM(dado));
+    // System.out.printf("Voce sofreu %d de dano\n", attackM(dice));
     // } else{
     // battleDialog.setBattleInfoTextArea("O monstro errou o ataque!");
     // battleDialog.setVisible(true);
@@ -305,15 +307,15 @@ public class BattleSystem {
 
     // // printRollDice();
 
-    // dado = rollDice();
+    // dice = rollDice();
 
-    // if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
-    // monster.setHealth(attackP(dado));
-    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dado) + " de
+    // if (rollAttack(player.getAttack(), dice) > monster.getDefense()) {
+    // monster.setHealth(attackP(dice));
+    // battleDialog.setBattleInfoTextArea("Voce desferiu " + attackP(dice) + " de
     // dano no " + monster.getName());
     // battleDialog.setVisible(true);
 
-    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dado),
+    // System.out.printf("Voce desferiu %d de dano no %s\n", attackP(dice),
     // monster.getName());
     // } else{
     // battleDialog.setBattleInfoTextArea("Voce errou o ataque!");
