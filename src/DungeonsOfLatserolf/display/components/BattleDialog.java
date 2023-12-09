@@ -17,9 +17,7 @@ public class BattleDialog extends JDialog {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Adicione aqui a lógica para continuar a batalha
-                // Pode ser a feitura do próximo turno da batalha ou qualquer outra ação desejada
-                BattleDialog.this.dispose(); // Fecha o diálogo
+                BattleDialog.this.dispose(); 
             }
         });
 
@@ -34,7 +32,7 @@ public class BattleDialog extends JDialog {
     }
 
     public boolean acceptBattle() {
-        Object[] options = {"Sim", "Não"};
+        Object[] options = { "Sim", "Não" };
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Você encontrou um monstro, deseja batalhar?",
@@ -43,8 +41,7 @@ public class BattleDialog extends JDialog {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[0]
-        );
+                options[0]);
 
         return choice == JOptionPane.YES_OPTION;
     }
@@ -57,4 +54,3 @@ public class BattleDialog extends JDialog {
         return this;
     }
 }
-
