@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.awt.image.BufferedImage;
 
-import DungeonsOfLatserolf.display.Display;
+import DungeonsOfLatserolf.display.InterfaceFrame;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Wall;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
