@@ -95,7 +95,7 @@ public class BattleSystem extends JFrame {
         map[1][3] = assetLibrary.getImage("chest(0)");
         map[5][1] = assetLibrary.getImage("door(1)");
         map[6][0] = assetLibrary.getImage("up(0)");
-        map[6][1] = assetLibrary.getImage("down(0)");
+        map[6][1] = monster.getMonsterCategory().getMonsterImage();
 
         ArrayList<String> listaBatalha = new ArrayList<>();
         ArrayList<String> infoBatalha = new ArrayList<>();

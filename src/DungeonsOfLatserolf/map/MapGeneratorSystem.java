@@ -16,7 +16,7 @@ public class MapGeneratorSystem {
     public MapGeneratorSystem(AssetLibrary imagens) {
         this.mapData = new MapData(31, 31, 3, 1);
         this.imagens = imagens;
-        monsterGenerator = new MonsterGenerator();
+        monsterGenerator = new MonsterGenerator(imagens);
     }
 
     public MapData getMapData() {

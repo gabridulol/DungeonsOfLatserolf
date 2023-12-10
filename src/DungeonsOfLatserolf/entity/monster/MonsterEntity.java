@@ -82,6 +82,14 @@ public class MonsterEntity {
         return rand;
     }
 
+    public MonsterCategory getMonsterCategory() {
+        return monsterCategory;
+    }
+
+    public void setMonsterCategory(MonsterCategory monsterCategory) {
+        this.monsterCategory = monsterCategory;
+    }
+
     // public String[] getNames() {
     //     return names;
     // }
