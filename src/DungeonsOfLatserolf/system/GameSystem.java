@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import DungeonsOfLatserolf.display.Display;
+import DungeonsOfLatserolf.display.InterfaceFrame;
 import DungeonsOfLatserolf.display.components.Dungeon;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
@@ -36,7 +36,7 @@ public class GameSystem {
     private MapEntity mapEntity;
     private PlayerEntity player;
     private Dungeon dungeonPanel;
-    private Display display;
+    private InterfaceFrame interfaceFrame;
     private BattleSystem battleSystem;
     private AtomicBoolean batalhando;
 
@@ -85,6 +85,7 @@ public class GameSystem {
                     if(chest.isInteractable()){
                         player.catchItems(chest);
                         chest.setChestEmpty();
+                        System.out.println("Score: " + player.getScore());
                         break;
                     }
                     // dungeonPanel.setPlayerDirection("up");
@@ -95,6 +96,7 @@ public class GameSystem {
                     if(chest.isInteractable()){
                         player.catchItems(chest);
                         chest.setChestEmpty();
+                        System.out.println("Score: " + player.getScore());
                         break;
                     }
                     // dungeonPanel.setPlayerDirection("left");
