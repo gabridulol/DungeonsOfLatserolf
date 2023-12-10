@@ -11,7 +11,8 @@ import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.system.GameSystem;
 
 public class InterfaceFrame extends JFrame {
-    public InterfaceFrame(MapEntity mapEntity, PlayerEntity player, PlayerController playerController, GameSystem game) {
+    public InterfaceFrame(MapEntity mapEntity, PlayerEntity player, PlayerController playerController,
+            GameSystem game) {
         Dungeon dungeonPanel = new Dungeon(mapEntity, player);
 
         // Set up the JFrame
@@ -19,7 +20,6 @@ public class InterfaceFrame extends JFrame {
         JLabel label = new JLabel("Dungeons of Latserolf");
         label.setText("Score:" + player.getScore());
         add(label);
-        
 
         addKeyListener(playerController);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

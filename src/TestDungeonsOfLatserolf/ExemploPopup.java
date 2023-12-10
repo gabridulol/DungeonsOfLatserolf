@@ -3,12 +3,12 @@ package TestDungeonsOfLatserolf;
 import javax.swing.JOptionPane;
 
 public class ExemploPopup {
-
     public static void main(String[] args) {
         // Exemplo de uso de JOptionPane para exibir uma mensagem simples
         exibirPopup("Bem-vindo ao jogo!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
 
-        // Exemplo de uso de JOptionPane para exibir uma mensagem com um botão de confirmação
+        // Exemplo de uso de JOptionPane para exibir uma mensagem com um botão de
+        // confirmação
         int resultado = exibirPopupComBotao("Você deseja abrir a porta?", "Pergunta", JOptionPane.YES_NO_OPTION);
 
         // Verifica a resposta do usuário
