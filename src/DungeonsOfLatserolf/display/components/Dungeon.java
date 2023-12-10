@@ -2,20 +2,10 @@ package DungeonsOfLatserolf.display.components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 import java.awt.image.BufferedImage;
 
-import DungeonsOfLatserolf.display.InterfaceFrame;
 import DungeonsOfLatserolf.map.MapEntity;
-import DungeonsOfLatserolf.map.tile.Wall;
-import DungeonsOfLatserolf.entity.player.PlayerEntity;
-import DungeonsOfLatserolf.map.tile.*;;
-
+import DungeonsOfLatserolf.entity.player.PlayerEntity;;
 
 public class Dungeon extends JPanel {
     private MapEntity mapEntity;
@@ -41,10 +31,9 @@ public class Dungeon extends JPanel {
         int panelHeight = (int) (dx * cellSize * zoom);
 
         visitados = new boolean[dy][dx];
-        
+
         setPreferredSize(new Dimension(panelHeight, panelWidth));
 
-        
     }
 
     @Override
@@ -78,10 +67,10 @@ public class Dungeon extends JPanel {
         g2d.scale(zoom, zoom);
 
         for (int i = -1; i < 2; i++)
-            for(int j = -1; j < 2; j++)
-                visitados[i+playerEntity.getPositionPlayer()[0]][j+playerEntity.getPositionPlayer()[1]] = true;
+            for (int j = -1; j < 2; j++)
+                visitados[i + playerEntity.getPositionPlayer()[0]][j + playerEntity.getPositionPlayer()[1]] = true;
 
-        for (int x = 0; x < dx ; x++) {
+        for (int x = 0; x < dx; x++) {
             for (int y = 0; y < dy; y++) {
                 int cellX = (int) (x * cellSize - xOffset / zoom);
                 int cellY = (int) (y * cellSize - yOffset / zoom);
@@ -89,42 +78,45 @@ public class Dungeon extends JPanel {
                 BufferedImage image = mapEntity.getMap()[x][y].getAssetImage();
 
                 if (image != null) {
-                    if(visitados[x][y])
+                    if (visitados[x][y])
                         // g2d.drawImage(image, x * cellSize, y * cellSize, this);
                         g2d.drawImage(image, cellX, cellY, this);
                     else
-                        // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"), x * cellSize, y * cellSize, this);
-                        g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"), cellX, cellY, this);
+                        // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"),
+                        // x * cellSize, y * cellSize, this);
+                        g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"), cellX, cellY,
+                                this);
                 }
             }
         }
 
         int characterXPosition = (int) ((characterX * cellSize) - xOffset / zoom);
         int characterYPosition = (int) ((characterY * cellSize) - yOffset / zoom);
-        
-        // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("down(0)"), characterX* cellSize, characterY* cellSize, this);
+
+        // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("down(0)"),
+        // characterX* cellSize, characterY* cellSize, this);
         g2d.drawImage(playerImage, characterXPosition, characterYPosition, this);
         // repaint();
-        
+
     }
 
-    protected BufferedImage getPlayerImage(){
+    protected BufferedImage getPlayerImage() {
         return mapEntity.getMapSystem().getImagemDoSistema().getImage(playerDirection + "(" + playerDirectionNum + ")");
     }
 
-    public void setPlayerDirection(String playerDirection){
+    public void setPlayerDirection(String playerDirection) {
         this.playerDirection = playerDirection;
     }
 
-    public String getPlayerDirection(){
+    public String getPlayerDirection() {
         return playerDirection;
     }
 
-    public void setPlayerDirectionNum(int playerDirectionNum){
+    public void setPlayerDirectionNum(int playerDirectionNum) {
         this.playerDirectionNum = playerDirectionNum;
     }
 
-    public int getPlayerDirectionNum(){
+    public int getPlayerDirectionNum() {
         return playerDirectionNum;
     }
 }

@@ -1,7 +1,6 @@
 package DungeonsOfLatserolf.entity.monster;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 public class MonsterCategory {
     private String name;

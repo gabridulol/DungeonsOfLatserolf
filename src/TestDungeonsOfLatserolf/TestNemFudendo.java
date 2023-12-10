@@ -26,13 +26,13 @@ public class TestNemFudendo extends JFrame {
 
     public static void main(String[] args) {
         AssetLibrary assetLibrary = new AssetLibrary();
-        // Create a MapEntity (you need to instantiate it according to your implementation)
+        // Create a MapEntity (you need to instantiate it according to your
+        // implementation)
         MapEntity mapEntity = new MapEntity(assetLibrary);
         mapEntity.buildMap();
 
         System.out.println(mapEntity.getMap()[0].length);
         System.out.println(mapEntity.getMap().length);
-
 
         // Create the DungeonFrame with the MapEntity
         SwingUtilities.invokeLater(() -> new TestNemFudendo(mapEntity));

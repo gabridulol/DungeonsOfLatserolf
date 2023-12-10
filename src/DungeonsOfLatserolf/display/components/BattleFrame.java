@@ -2,17 +2,11 @@ package DungeonsOfLatserolf.display.components;
 
 import javax.swing.*;
 
-import DungeonsOfLatserolf.map.tile.TileTypeEntity;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class BattleFrame extends JFrame {
@@ -23,7 +17,8 @@ public class BattleFrame extends JFrame {
     private BufferedImage monsterImage;
     private int cont;
 
-    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado, AtomicBoolean batalhando,
+    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado,
+            AtomicBoolean batalhando,
             BufferedImage[][] map) {
         this.listaBatalha = listaBatalha;
         this.infoBatalha = infoBatalha;
@@ -39,15 +34,13 @@ public class BattleFrame extends JFrame {
         panel.setLayout(new GridBagLayout());
         panel.setBackground(black);
 
-
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
         JLabel label3 = new JLabel();
-        
+
         label1.setForeground(Color.WHITE);
         label1.setHorizontalAlignment(JLabel.CENTER);
         label1.setText(listaDado.get(cont));
-        
 
         label2.setForeground(Color.WHITE);
         label2.setHorizontalAlignment(JLabel.CENTER);
@@ -56,7 +49,7 @@ public class BattleFrame extends JFrame {
         label3.setForeground(Color.WHITE);
         label3.setHorizontalAlignment(JLabel.CENTER);
         label3.setText(listaBatalha.get(cont));
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -64,7 +57,7 @@ public class BattleFrame extends JFrame {
         panel.add(label1, gbc);
         panel.add(label2, gbc);
         panel.add(label3, gbc);
-        
+
         add(panel, BorderLayout.NORTH);
         repaint();
         cont++;
@@ -75,7 +68,8 @@ public class BattleFrame extends JFrame {
                     try {
                         if (cont < listaBatalha.size()) {
                             label1.setText(listaDado.get(cont));
-                            // label2.setText("<html>" + listaBatalha.get(cont).replace("\n", "<br>") + "</html>");
+                            // label2.setText("<html>" + listaBatalha.get(cont).replace("\n", "<br>") +
+                            // "</html>");
                             label2.setText(listaBatalha.get(cont));
                             label3.setText(infoBatalha.get(cont));
                             repaint();

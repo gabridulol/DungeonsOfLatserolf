@@ -7,7 +7,6 @@ public class MapEntity {
     private MapGeneratorSystem mapSystem;
     private TileTypeEntity[][] map;
 
-    
     public MapEntity(AssetLibrary imagens) {
         mapSystem = new MapGeneratorSystem(imagens);
     }

@@ -1,6 +1,5 @@
 package TestDungeonsOfLatserolf;
 
-
 import DungeonsOfLatserolf.system.BattleSystem;
 import DungeonsOfLatserolf.entity.player.*;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
@@ -17,9 +16,10 @@ public class TesteBatalha {
         MonsterGenerator monsterGenerator = new MonsterGenerator(assetLibrary);
         AtomicBoolean batalhando = new AtomicBoolean(false);
 
-        BattleSystem battleSystem = new BattleSystem(monsterGenerator.generateMonster(), playerEntity, new AssetLibrary());
-        
-        if(battleSystem.acceptBattle()){
+        BattleSystem battleSystem = new BattleSystem(monsterGenerator.generateMonster(), playerEntity,
+                new AssetLibrary());
+
+        if (battleSystem.acceptBattle()) {
             battleSystem.startBattle(batalhando);
         }
     }

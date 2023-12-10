@@ -7,14 +7,14 @@ public class Chest extends TileTypeEntity {
     private boolean keyChest;
     private int goldPieces;
 
-    public Chest (int goldPieces, BufferedImage asset, BufferedImage assetOpen) {
+    public Chest(int goldPieces, BufferedImage asset, BufferedImage assetOpen) {
         super(asset, assetOpen);
         this.openChest = false;
         this.keyChest = false;
         this.goldPieces = goldPieces;
     }
 
-    public Chest (BufferedImage assetImage, BufferedImage assetImageOpen) {
+    public Chest(BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openChest = false;
         this.keyChest = true;
@@ -45,14 +45,14 @@ public class Chest extends TileTypeEntity {
         this.goldPieces = goldPieces;
     }
 
-    public void setChestEmpty(){
+    public void setChestEmpty() {
         this.openChest = true;
         this.keyChest = false;
         this.goldPieces = 0;
     }
 
     @Override
-    public BufferedImage getAssetImage(){
+    public BufferedImage getAssetImage() {
         if (this.openChest) {
             return getAssetOpen();
         }

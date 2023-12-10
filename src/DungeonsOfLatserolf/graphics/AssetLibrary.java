@@ -40,13 +40,13 @@ public class AssetLibrary {
                         assets.put(keyString, valueImage);
                     }
                 }
-            } 
-            
+            }
+
             else {
                 System.out.println("Folder is empty.");
             }
-        } 
-        
+        }
+
         else {
             System.out.println("Path to assets does not exist or is not a directory.");
         }
@@ -57,14 +57,14 @@ public class AssetLibrary {
 
         try {
             return ImageIO.read(new File(filePath));
-        } 
-        
+        }
+
         catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public HashMap<String, BufferedImage> getAssets() {
         return assets;
     }

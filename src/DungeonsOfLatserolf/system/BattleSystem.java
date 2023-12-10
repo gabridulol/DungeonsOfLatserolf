@@ -2,25 +2,15 @@ package DungeonsOfLatserolf.system;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
-import javax.swing.text.html.parser.Entity;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import DungeonsOfLatserolf.entity.monster.MonsterEntity;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
-import DungeonsOfLatserolf.map.tile.*;
-import DungeonsOfLatserolf.display.components.BattleDialog;
 import DungeonsOfLatserolf.display.components.BattleFrame;
 
 public class BattleSystem extends JFrame {
@@ -110,18 +100,19 @@ public class BattleSystem extends JFrame {
 
             if (first) {
                 playerAttack(listaBatalha, infoBatalha, listaDado);
-            } 
-            
+            }
+
             else {
                 healthPlayer = monsterAttack(listaBatalha, infoBatalha, listaDado, healthPlayer);
             }
 
             if (verificaBatalha(monster.getHealth(), healthPlayer)) {
-                if (verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha, infoBatalha, listaDado, map)) {
+                if (verificaGanhou(monster.getHealth(), healthPlayer, batalhando, listaBatalha, infoBatalha, listaDado,
+                        map)) {
                     System.out.println("FGanhou");
                     return true;
-                } 
-                
+                }
+
                 else {
                     System.out.println("FPerdeu");
                     return false;
@@ -140,11 +131,11 @@ public class BattleSystem extends JFrame {
     }
 
     public boolean verificaGanhou(int monsterHealth, int healthPlayer, AtomicBoolean batalhando,
-                                ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, 
-                                ArrayList<String> listaDado, BufferedImage[][] map){
+            ArrayList<String> listaBatalha, ArrayList<String> infoBatalha,
+            ArrayList<String> listaDado, BufferedImage[][] map) {
 
         listaDado.add("");
-        
+
         if (monster.getHealth() <= 0) {
             listaBatalha.add("Você venceu a batalha!");
             infoBatalha.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
@@ -161,9 +152,10 @@ public class BattleSystem extends JFrame {
         }
     }
 
-    private void playerAttack(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado) {
+    private void playerAttack(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha,
+            ArrayList<String> listaDado) {
         int dado = rollDice();
-        listaDado.add("Seu dado: "+ dado);
+        listaDado.add("Seu dado: " + dado);
 
         if (rollAttack(player.getAttack(), dado) > monster.getDefense()) {
             monster.setHealth(attackP(dado));
@@ -173,9 +165,10 @@ public class BattleSystem extends JFrame {
         }
     }
 
-    private int monsterAttack(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado, int healthPlayer) {
+    private int monsterAttack(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha,
+            ArrayList<String> listaDado, int healthPlayer) {
         int dado = rollDice();
-        listaDado.add("Dado do monstro: "+ dado);
+        listaDado.add("Dado do monstro: " + dado);
 
         if (rollAttack(monster.getAttack(), dado) > player.getDefense()) {
             healthPlayer -= attackM(dado);

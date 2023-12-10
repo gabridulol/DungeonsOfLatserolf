@@ -10,8 +10,9 @@ import DungeonsOfLatserolf.entity.player.PlayerEntity;
 
 import DungeonsOfLatserolf.system.*;
 
-public class TesteMovimento extends JFrame{
-    public TesteMovimento(MapEntity mapEntity, PlayerEntity player, PlayerController playerController, GameSystem game) {
+public class TesteMovimento extends JFrame {
+    public TesteMovimento(MapEntity mapEntity, PlayerEntity player, PlayerController playerController,
+            GameSystem game) {
         // Create a new Dungeon panel
         Dungeon dungeonPanel = new Dungeon(mapEntity, player);
 
@@ -37,16 +38,14 @@ public class TesteMovimento extends JFrame{
         GameSystem game = new GameSystem(assetLibrary, mapEntity, player);
 
         game.startGame();
-        
+
         PlayerController playerController = new PlayerController(game);
 
         // frame.addKeyListener(playerController);
 
-        
-
         // frame.setSize(300, 200);
         // frame.setVisible(true);
-        
+
         // Create the DungeonFrame with the MapEntity
         SwingUtilities.invokeLater(() -> new TesteMovimento(mapEntity, player, playerController, game));
 
