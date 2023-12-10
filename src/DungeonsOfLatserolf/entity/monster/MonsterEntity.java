@@ -26,7 +26,9 @@ public class MonsterEntity {
         health = (rand.nextInt(10) + 5 + power * 2) ;
         attack = ((rand.nextInt(10) + 5 + power * 2) / 3);
         defense = ((rand.nextInt(10) + 5 + power * 2) / 3);
-        score = attack*defense + level*health;
+        score = (attack + defense + health)*10;
+    
+    
     }
 
     public int getDefense() {
