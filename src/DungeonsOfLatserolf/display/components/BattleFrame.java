@@ -62,14 +62,14 @@ public class BattleFrame extends JFrame {
         repaint();
         cont++;
 
+        AtomicBoolean lose = new AtomicBoolean("perdeu".equals(listaBatalha.get(listaBatalha.size()-1).split(" ")[1]));
+
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         if (cont < listaBatalha.size()) {
                             label1.setText(listaDado.get(cont));
-                            // label2.setText("<html>" + listaBatalha.get(cont).replace("\n", "<br>") +
-                            // "</html>");
                             label2.setText(listaBatalha.get(cont));
                             label3.setText(infoBatalha.get(cont));
                             repaint();
@@ -78,12 +78,17 @@ public class BattleFrame extends JFrame {
                         else {
                             batalhando.set(false);
                             setVisible(false);
+                            
+                            if(lose.get())
+                                System.exit(0);
                         }
                         cont++;
                     } catch (IndexOutOfBoundsException exception) {
-                        label2.setText("Fim da batalha");
                         batalhando.set(false);
                         setVisible(false);
+
+                        if(lose.get())
+                            System.exit(0);
                     }
 
                 }

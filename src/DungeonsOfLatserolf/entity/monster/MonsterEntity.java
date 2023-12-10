@@ -71,10 +71,14 @@ public class MonsterEntity {
         this.level = level;
     }
 
-    public String getName() {
+    public String getArtigo(){
         if (monsterCategory.getName() == "Galinha")
-            return "uma " + monsterCategory.getName();
-        return "um " + monsterCategory.getName();
+            return "uma";
+        return "um";
+    }
+
+    public String getName() {
+        return monsterCategory.getName();
     }
 
     public String getDescription() {
