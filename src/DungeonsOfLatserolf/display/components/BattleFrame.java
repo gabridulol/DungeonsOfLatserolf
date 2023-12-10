@@ -1,77 +1,142 @@
 package DungeonsOfLatserolf.display.components;
 
 import javax.swing.*;
+
+import DungeonsOfLatserolf.map.tile.TileTypeEntity;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 public class BattleFrame extends JFrame {
-    private JTextArea battleInfoTextArea;
-    private CountDownLatch latch = new CountDownLatch(1);
+    private ArrayList<String> listaBatalha;
+    private ArrayList<String> infoBatalha;
+    private BufferedImage[][] map;
+    private BufferedImage playerImage;
+    private BufferedImage monsterImage;
+    private int cont;
 
-    public BattleFrame(String Text) {
-        super("Batalha");
+    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado, AtomicBoolean batalhando,
+            BufferedImage[][] map) {
+        this.listaBatalha = listaBatalha;
+        this.infoBatalha = infoBatalha;
+        this.map = map;
 
+        cont = 0;
+
+        // setLayout(new FlowLayout());
         setLayout(new BorderLayout());
+        Color black = new Color(23, 17, 26);
 
-        battleInfoTextArea = new JTextArea(Text);
-        battleInfoTextArea.setEditable(false);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        panel.setBackground(black);
 
-        JScrollPane scrollPane = new JScrollPane(battleInfoTextArea);  
+
+        JLabel label1 = new JLabel();
+        JLabel label2 = new JLabel();
+        JLabel label3 = new JLabel();
         
-        JButton continueButton = new JButton("Continuar");
-        continueButton.addActionListener(e -> latch.countDown());
+        label1.setForeground(Color.WHITE);
+        label1.setHorizontalAlignment(JLabel.CENTER);
+        label1.setText(listaDado.get(cont));
+        
 
-        add(scrollPane, BorderLayout.CENTER);
-        add(continueButton, BorderLayout.SOUTH);
+        label2.setForeground(Color.WHITE);
+        label2.setHorizontalAlignment(JLabel.CENTER);
+        label2.setText(infoBatalha.get(cont));
 
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400,200);
-        setLocationRelativeTo(null);
+        label3.setForeground(Color.WHITE);
+        label3.setHorizontalAlignment(JLabel.CENTER);
+        label3.setText(listaBatalha.get(cont));
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        panel.add(label1, gbc);
+        panel.add(label2, gbc);
+        panel.add(label3, gbc);
+        
+        add(panel, BorderLayout.NORTH);
+        repaint();
+        cont++;
+
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    try {
+                        if (cont < listaBatalha.size()) {
+                            label1.setText(listaDado.get(cont));
+                            // label2.setText("<html>" + listaBatalha.get(cont).replace("\n", "<br>") + "</html>");
+                            label2.setText(listaBatalha.get(cont));
+                            label3.setText(infoBatalha.get(cont));
+                            repaint();
+                        }
+
+                        else {
+                            batalhando.set(false);
+                            setVisible(false);
+                        }
+                        cont++;
+                    } catch (IndexOutOfBoundsException exception) {
+                        label2.setText("Fim da batalha");
+                        batalhando.set(false);
+                        setVisible(false);
+                    }
+
+                }
+            }
+        });
+
+        getContentPane().setBackground(black);
+        setPreferredSize(new Dimension(600, 520));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("batalha");
+        setResizable(false);
+        pack();
+        setLocationRelativeTo(null); // Center the JFrame on the screen
         setVisible(true);
-
-        // JButton continueButton = new JButton("Continuar");
-        // continueButton.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         battleAccepted = true;
-        //         setVisible(false); // Esconder a janela da batalha
-        //     }
-        // });
-
-        // setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        // add(battleInfoTextArea);
-        // // add(continueButton);
-
-        // setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // pack();  // Use pack to resize the frame based on its components
-        // setLocationRelativeTo(null); // Centralizar na tela
-        // setVisible(true);
     }
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponents(g);
-    }
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
 
-    public void setBattleInfoTextArea(String battleInfo) {
-        battleInfoTextArea.setText(battleInfo);
-    }
+        int cellSize = 16;
 
-    public JButton createContinueButton(ActionListener actionListener) {
-        JButton continueButton = new JButton("Continuar");
-        continueButton.addActionListener(actionListener);
-        return continueButton;
-    }
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.scale(4, 4);
 
-    public void waitForContinue() {
-        latch = new CountDownLatch(1);
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        int cellX;
+        int cellY;
+        int dist = 2 * 14;
+
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                cellX = (int) (x * cellSize) + dist;
+                cellY = (int) (y * cellSize) + dist;
+
+                if (map[x][y] != null)
+                    g2d.drawImage(map[x][y], cellY, cellX, this);
+            }
         }
+
+        cellX = (int) (1 * cellSize) + dist;
+        cellY = (int) (4 * cellSize) + dist;
+
+        g2d.drawImage(map[6][0], cellX, cellY, this);
+
+        cellX = (int) (3 * cellSize) + dist;
+        cellY = (int) (2 * cellSize) + dist;
+
+        g2d.drawImage(map[6][1], cellX, cellY, this);
     }
 }
-
-

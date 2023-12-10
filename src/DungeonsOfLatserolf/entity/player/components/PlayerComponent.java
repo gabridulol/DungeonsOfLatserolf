@@ -1,7 +1,5 @@
 package DungeonsOfLatserolf.entity.player.components;
 
-import java.util.ArrayList;
-
 public class PlayerComponent {
     private int score;
     private int totalKeys;
