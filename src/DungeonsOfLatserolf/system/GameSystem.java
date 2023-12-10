@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import DungeonsOfLatserolf.display.Interface;
 import DungeonsOfLatserolf.display.InterfaceFrame;
 import DungeonsOfLatserolf.display.components.Dungeon;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
