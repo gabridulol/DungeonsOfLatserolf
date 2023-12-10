@@ -47,6 +47,14 @@ public class PlayerEntity {
         return this.playerStats.getHealth();
     }
 
+    public int getScore() {
+        return this.playerStats.getScore();
+    }
+
+    public int getTotalKeys() {
+        return this.playerStats.getTotalKeys();
+    }
+
     public void addScore(int score) {
         this.playerStats.setScore(this.playerStats.getScore() + score);
     }

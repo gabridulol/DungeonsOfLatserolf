@@ -43,6 +43,8 @@ public class Dungeon extends JPanel {
         visitados = new boolean[dy][dx];
         
         setPreferredSize(new Dimension(panelHeight, panelWidth));
+
+        
     }
 
     @Override
@@ -102,6 +104,7 @@ public class Dungeon extends JPanel {
         
         // g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("down(0)"), characterX* cellSize, characterY* cellSize, this);
         g2d.drawImage(playerImage, characterXPosition, characterYPosition, this);
+        // repaint();
         
     }
 

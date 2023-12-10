@@ -22,7 +22,6 @@ import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.tile.*;
 import DungeonsOfLatserolf.display.components.BattleDialog;
 import DungeonsOfLatserolf.display.components.BattleFrame;
-import DungeonsOfLatserolf.display.components.Inicia;
 
 public class BattleSystem extends JFrame {
     private MonsterEntity monster;
@@ -204,6 +203,9 @@ public class BattleSystem extends JFrame {
         MonsterEntity monster = getMonster();
         applyDarkTheme();
 
+        // Color black = new Color(23, 17, 26);
+        // setBackground(black);
+
         JTextArea battleInfoTextArea = new JTextArea(
                 "Você se depara com " + monster.getName() + "\n\n" + monster.getDescription());
         configureTextArea(battleInfoTextArea);
@@ -244,7 +246,7 @@ public class BattleSystem extends JFrame {
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setPreferredSize(new Dimension(400, 250)); // Ajuste conforme necessário
+        textArea.setPreferredSize(new Dimension(570, 360)); // Ajuste conforme necessário
     }
 
     private static void configureLabel(JLabel label) {

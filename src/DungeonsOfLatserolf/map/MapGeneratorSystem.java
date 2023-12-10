@@ -14,7 +14,7 @@ public class MapGeneratorSystem {
     private MonsterGenerator monsterGenerator;
 
     public MapGeneratorSystem(AssetLibrary imagens) {
-        this.mapData = new MapData(31, 31, 3, 1);
+        this.mapData = new MapData(19, 19, 3, 1);
         this.imagens = imagens;
         monsterGenerator = new MonsterGenerator(imagens);
     }
