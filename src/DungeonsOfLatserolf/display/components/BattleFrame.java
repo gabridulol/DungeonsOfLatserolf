@@ -23,7 +23,7 @@ public class BattleFrame extends JFrame {
     private BufferedImage monsterImage;
     private int cont;
 
-    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, AtomicBoolean batalhando,
+    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado, AtomicBoolean batalhando,
             BufferedImage[][] map) {
         this.listaBatalha = listaBatalha;
         this.infoBatalha = infoBatalha;
@@ -31,15 +31,41 @@ public class BattleFrame extends JFrame {
 
         cont = 0;
 
-        setLayout(new FlowLayout());
-        JLabel label = new JLabel();
+        // setLayout(new FlowLayout());
+        setLayout(new BorderLayout());
+        Color black = new Color(23, 17, 26);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        panel.setBackground(black);
+
+
+        JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
+        JLabel label3 = new JLabel();
+        
+        label1.setForeground(Color.WHITE);
+        label1.setHorizontalAlignment(JLabel.CENTER);
+        label1.setText(listaDado.get(cont));
+        
+
         label2.setForeground(Color.WHITE);
+        label2.setHorizontalAlignment(JLabel.CENTER);
         label2.setText(infoBatalha.get(cont));
-        label.setForeground(Color.WHITE);
-        label.setText(listaBatalha.get(cont));
-        add(label);
-        add(label2);
+
+        label3.setForeground(Color.WHITE);
+        label3.setHorizontalAlignment(JLabel.CENTER);
+        label3.setText(listaBatalha.get(cont));
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        panel.add(label1, gbc);
+        panel.add(label2, gbc);
+        panel.add(label3, gbc);
+        
+        add(panel, BorderLayout.NORTH);
         repaint();
         cont++;
 
@@ -48,8 +74,10 @@ public class BattleFrame extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         if (cont < listaBatalha.size()) {
-                            label.setText(listaBatalha.get(cont));
-                            label2.setText(infoBatalha.get(cont));
+                            label1.setText(listaDado.get(cont));
+                            // label2.setText("<html>" + listaBatalha.get(cont).replace("\n", "<br>") + "</html>");
+                            label2.setText(listaBatalha.get(cont));
+                            label3.setText(infoBatalha.get(cont));
                             repaint();
                         }
 
@@ -59,7 +87,7 @@ public class BattleFrame extends JFrame {
                         }
                         cont++;
                     } catch (IndexOutOfBoundsException exception) {
-                        label.setText("Fim da batalha");
+                        label2.setText("Fim da batalha");
                         batalhando.set(false);
                         setVisible(false);
                     }
@@ -68,7 +96,8 @@ public class BattleFrame extends JFrame {
             }
         });
 
-        setPreferredSize(new Dimension(500, 500));
+        getContentPane().setBackground(black);
+        setPreferredSize(new Dimension(600, 520));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("batalha");
         setResizable(false);
@@ -84,11 +113,11 @@ public class BattleFrame extends JFrame {
         int cellSize = 16;
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.scale(2, 2);
+        g2d.scale(4, 4);
 
         int cellX;
         int cellY;
-        int dist = 5 * 16;
+        int dist = 2 * 14;
 
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
