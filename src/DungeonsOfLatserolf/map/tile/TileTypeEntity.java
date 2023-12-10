@@ -29,7 +29,7 @@ public abstract class TileTypeEntity {
     }
 
     public abstract BufferedImage getAssetImage();
-    
+
     public abstract boolean isWalkable();
 
     public abstract boolean isInteractable();

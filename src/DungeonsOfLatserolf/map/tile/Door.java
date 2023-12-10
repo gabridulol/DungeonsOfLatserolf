@@ -14,7 +14,7 @@ public class Door extends TileTypeEntity {
         this.monsterDoor = monsterDoor;
     }
 
-    public boolean getOpenDoor() {  // ver se a porta esta aberta
+    public boolean getOpenDoor() { // ver se a porta esta aberta
         return openDoor;
     }
 
@@ -30,13 +30,13 @@ public class Door extends TileTypeEntity {
         this.monsterDoor = monsterDoor;
     }
 
-    public void setDoorEmpty(){
+    public void setDoorEmpty() {
         this.openDoor = true;
         this.monsterDoor = null;
     }
 
     @Override
-    public BufferedImage getAssetImage(){
+    public BufferedImage getAssetImage() {
         if (this.openDoor) {
             return getAssetOpen();
         }

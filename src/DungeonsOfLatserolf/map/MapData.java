@@ -1,9 +1,7 @@
 package DungeonsOfLatserolf.map;
 
-import java.util.ArrayList;
-
 public class MapData {
-    private boolean isCompleted;    
+    private boolean isCompleted;
     private int[] sizeMap = new int[2];
     private int[] startPosition = new int[2];
     private int keysMap;

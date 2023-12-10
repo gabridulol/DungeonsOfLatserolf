@@ -6,7 +6,6 @@ import DungeonsOfLatserolf.display.components.Dungeon;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapEntity;
 
-
 public class TestImage extends JFrame {
 
     private BufferedImage image;
@@ -41,8 +40,9 @@ public class TestImage extends JFrame {
 
     private static BufferedImage loadYourImage() {
         // Implementar o código para carregar a sua BufferedImage aqui
-        // Exemplo: BufferedImage image = ImageIO.read(new File("caminho/para/sua/imagem.png"));
-        return null;  // Retorne a BufferedImage carregada
+        // Exemplo: BufferedImage image = ImageIO.read(new
+        // File("caminho/para/sua/imagem.png"));
+        return null; // Retorne a BufferedImage carregada
     }
 
     private static class ImagePanel extends JPanel {

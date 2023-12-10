@@ -14,7 +14,7 @@ public class MapGeneratorSystem {
     private MonsterGenerator monsterGenerator;
 
     public MapGeneratorSystem(AssetLibrary imagens) {
-        this.mapData = new MapData(19, 19, 3, 1);
+        this.mapData = new MapData(11, 11, 3, 1);
         this.imagens = imagens;
         monsterGenerator = new MonsterGenerator(imagens);
     }
@@ -31,26 +31,25 @@ public class MapGeneratorSystem {
         return imagens;
     }
 
-    private void buildWallTileDungeon(TileTypeEntity dungeonMap[][]){
+    private void buildWallTileDungeon(TileTypeEntity dungeonMap[][]) {
         int width = mapData.getSizeMap()[1];
         int height = mapData.getSizeMap()[0];
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (x == 0 || x == width - 1 || y == 0 || y == height - 1) { //borda
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1) { // borda
                     if (x == 0 || x == width - 1)
                         dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
                     else
                         dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
 
-                } 
+                }
 
                 else {
                     dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
                 }
             }
         }
-        
 
     }
 
@@ -71,37 +70,36 @@ public class MapGeneratorSystem {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (dungeonMap[x][y] instanceof Floor) {
-                    boolean surroundedByWalls = false;
+                if (mapData.getStartPosition()[0] != x && mapData.getStartPosition()[1] != y) {
+                    if (dungeonMap[x][y] instanceof Floor) {
+                        boolean surroundedByWalls = false;
 
-                    if ((x > 0 && x < width - 1) && dungeonMap[x - 1][y] instanceof Wall && dungeonMap[x + 1][y] instanceof Wall) {
-                        surroundedByWalls = true;
-                    }
-                    
-                    if ((y > 0 && y < height - 1) && dungeonMap[x][y - 1] instanceof Wall && dungeonMap[x][y + 1] instanceof Wall) {
-                        surroundedByWalls = true;
-                    }
+                        if ((x > 0 && x < width - 1) && dungeonMap[x - 1][y] instanceof Wall
+                                && dungeonMap[x + 1][y] instanceof Wall) {
+                            surroundedByWalls = true;
+                        }
 
-                    if (surroundedByWalls) {
-                        if (Math.random() < mapData.getDoorProbability()) {
-                            dungeonMap[x][y] = new Door(monsterGenerator.generateMonster(), imagens.getImage("door(0)"), imagens.getImage("door(1)"));
-                            // System.out.println("Door");
-                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getName());
-                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getDescription());
-                            // System.out.println(((Door) dungeonMap[x][y]).getMonsterDoor().getAttack());
+                        if ((y > 0 && y < height - 1) && dungeonMap[x][y - 1] instanceof Wall
+                                && dungeonMap[x][y + 1] instanceof Wall) {
+                            surroundedByWalls = true;
+                        }
+
+                        if (surroundedByWalls) {
+                            if (Math.random() < mapData.getDoorProbability()) {
+                                dungeonMap[x][y] = new Door(monsterGenerator.generateMonster(), imagens.getImage("door(0)"),
+                                        imagens.getImage("door(1)"));
+                            }
                         }
                     }
-                }
 
-                if (dungeonMap[x][y] instanceof Floor) {
-                    if (Math.random() < mapData.getChestProbability()) {
-                        dungeonMap[x][y] = new Chest(imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
+                    if (dungeonMap[x][y] instanceof Floor) {
+                        if (Math.random() < mapData.getChestProbability()) {
+                            dungeonMap[x][y] = new Chest(random.nextInt(200), imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
+                        }
                     }
                 }
             }
         }
-
-        // dungeonMap[mapData.getStartPosition()[0]][mapData.getStartPosition()[1]] = new Start(imagens.getImage("start(0)"), null);
 
         int exitX, exitY;
         do {
@@ -113,15 +111,15 @@ public class MapGeneratorSystem {
 
     }
 
-    private void buildVerticalWall(TileTypeEntity dungeonMap[][]){
+    private void buildVerticalWall(TileTypeEntity dungeonMap[][]) {
 
         int width = mapData.getSizeMap()[1];
         int height = mapData.getSizeMap()[0];
 
-        for (int x = 1; x < width-1; x++) {
-            for (int y = 1; y < height-1; y++) {
+        for (int x = 1; x < width - 1; x++) {
+            for (int y = 1; y < height - 1; y++) {
                 if (dungeonMap[x][y] instanceof Wall) {
-                    if (!(dungeonMap[x][y+1] instanceof Wall))
+                    if (!(dungeonMap[x][y + 1] instanceof Wall))
                         if (dungeonMap[x + 1][y] instanceof Wall || dungeonMap[x - 1][y] instanceof Wall)
                             dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
                 }
@@ -130,7 +128,7 @@ public class MapGeneratorSystem {
 
     }
 
-    private void buildBacktrackingDungeon(TileTypeEntity dungeonMap[][], int x, int y){
+    private void buildBacktrackingDungeon(TileTypeEntity dungeonMap[][], int x, int y) {
         int[] dx = { 1, -1, 0, 0 };
         int[] dy = { 0, 0, 1, -1 };
 
@@ -140,7 +138,8 @@ public class MapGeneratorSystem {
             int nx = x + dx[dir] * 2;
             int ny = y + dy[dir] * 2;
 
-            if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length && dungeonMap[ny][nx] instanceof Wall) {
+            if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length
+                    && dungeonMap[ny][nx] instanceof Wall) {
                 dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getImage("floor(0)"));
                 dungeonMap[ny][nx] = new Floor(imagens.getImage("floor(0)"));
                 buildBacktrackingDungeon(dungeonMap, nx, ny);
@@ -148,15 +147,29 @@ public class MapGeneratorSystem {
         }
     }
 
+    private void buildChestKey(TileTypeEntity dungeonMap[][]) {
+        Random random = new Random();
+        int keys = 0;
+
+        while (keys < 3) {
+            int x = random.nextInt(mapData.getSizeMap()[1]);
+            int y = random.nextInt(mapData.getSizeMap()[0]);
+
+            if (dungeonMap[y][x] instanceof Floor) {
+                dungeonMap[y][x] = new Chest(imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
+                keys++;
+            }
+        }
+    }
 
     public TileTypeEntity[][] buildDungeon(TileTypeEntity dungeonMap[][]) {
         // buildDungeonComponent(mapData.getSizeMap()[0], mapData.getSizeMap()[1]);
-        dungeonMap = new TileTypeEntity [mapData.getSizeMap()[0]][mapData.getSizeMap()[1]];
+        dungeonMap = new TileTypeEntity[mapData.getSizeMap()[0]][mapData.getSizeMap()[1]];
         buildWallTileDungeon(dungeonMap);
         buildBacktrackingDungeon(dungeonMap, mapData.getStartPosition()[0], mapData.getStartPosition()[1]);
         buildTileDungeon(dungeonMap);
+        buildChestKey(dungeonMap);
         buildVerticalWall(dungeonMap);
-
 
         return dungeonMap;
     }

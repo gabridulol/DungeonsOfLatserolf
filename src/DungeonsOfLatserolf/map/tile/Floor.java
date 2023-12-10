@@ -2,14 +2,13 @@ package DungeonsOfLatserolf.map.tile;
 
 import java.awt.image.BufferedImage;
 
-
-public class Floor extends TileTypeEntity{
+public class Floor extends TileTypeEntity {
     public Floor(BufferedImage assetImage) {
         super(assetImage, null);
     }
 
     @Override
-    public BufferedImage getAssetImage(){
+    public BufferedImage getAssetImage() {
         return getAsset();
     }
 
@@ -19,7 +18,7 @@ public class Floor extends TileTypeEntity{
     }
 
     @Override
-    public boolean isInteractable(){
+    public boolean isInteractable() {
         return false;
     }
 }

@@ -17,7 +17,7 @@ public class BattleDialog extends JDialog {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BattleDialog.this.dispose(); 
+                BattleDialog.this.dispose();
             }
         });
 
