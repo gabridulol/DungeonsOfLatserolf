@@ -99,7 +99,6 @@ public class GameSystem {
     private void exitInteract(Exit start) {
         start.canBeOpened(player.getTotalKeys());
         if (start.getOpenOutput()) {
-            System.out.println("Parabéns, você venceu!");
             System.exit(0);
         }
     }
