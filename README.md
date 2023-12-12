@@ -2,6 +2,19 @@
 
 Em **Dungeons of Latserolf**...
 
+## Desenvolvedores
+
+Alan Araújo dos Reis - 5096
+
+Álvaro Gomes da Silva Neto - 5095
+
+Arthur Ataíde de Melo Saraiva - 5070
+
+Gabriel Rodrigues Marques - 5097
+
+Marcos Biscotto de Oliveira - 4236
+
+
 ## Organização do Projeto
 
 A estrutura do projeto é organizada da seguinte forma:
