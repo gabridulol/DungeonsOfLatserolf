@@ -7,7 +7,6 @@ public class MapEntity {
     private MapGeneratorSystem mapSystem;
     private TileTypeEntity[][] map;
 
-    
     public MapEntity(AssetLibrary imagens) {
         mapSystem = new MapGeneratorSystem(imagens);
     }
@@ -35,5 +34,4 @@ public class MapEntity {
     public void buildMap() {
         map = mapSystem.buildDungeon(map);
     }
-
 }

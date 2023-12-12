@@ -7,52 +7,52 @@ public class Chest extends TileTypeEntity {
     private boolean keyChest;
     private int goldPieces;
 
-    public Chest (int goldPieces, BufferedImage asset, BufferedImage assetOpen) {
+    public Chest(int goldPieces, BufferedImage asset, BufferedImage assetOpen) {
         super(asset, assetOpen);
         this.openChest = false;
         this.keyChest = false;
         this.goldPieces = goldPieces;
     }
 
-    public Chest (BufferedImage assetImage, BufferedImage assetImageOpen) {
+    public Chest(BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openChest = false;
         this.keyChest = true;
         this.goldPieces = 0;
     }
 
-    public boolean getOpenChest() { // ver se esta aberto
+    public boolean getOpenChest() {
         return openChest;
     }
 
-    public void setOpenChest(boolean openChest) { // abrir o baú
+    public void setOpenChest(boolean openChest) {
         this.openChest = openChest;
     }
 
-    public boolean getKeyChest() { // ver se tem chave
+    public boolean getKeyChest() {
         return keyChest;
     }
 
-    public void setKeyChest(boolean keyChest) { // pegar a chave
+    public void setKeyChest(boolean keyChest) {
         this.keyChest = keyChest;
     }
 
-    public int getGoldPieces() { // ver quantas moedas tem
+    public int getGoldPieces() {
         return goldPieces;
     }
 
-    public void setGoldPieces(int goldPieces) { // pegar as moedas
+    public void setGoldPieces(int goldPieces) {
         this.goldPieces = goldPieces;
     }
 
-    public void setChestEmpty(){
+    public void setChestEmpty() {
         this.openChest = true;
         this.keyChest = false;
         this.goldPieces = 0;
     }
 
     @Override
-    public BufferedImage getAssetImage(){
+    public BufferedImage getAssetImage() {
         if (this.openChest) {
             return getAssetOpen();
         }

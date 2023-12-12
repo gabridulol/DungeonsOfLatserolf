@@ -1,162 +1,137 @@
 package DungeonsOfLatserolf.system;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import DungeonsOfLatserolf.display.InterfaceFrame;
-import DungeonsOfLatserolf.display.components.Dungeon;
+import javax.swing.JLabel;
+
+import DungeonsOfLatserolf.display.components.DungeonFrame;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Chest;
 import DungeonsOfLatserolf.map.tile.Door;
-
-import DungeonsOfLatserolf.system.BattleSystem;
-
-// + createAndShowGUI()
-
-// + paintComponent( g: Graphics): void
-
-// + detectKey():void
-
+import DungeonsOfLatserolf.map.tile.Exit;
+import DungeonsOfLatserolf.map.tile.TileTypeEntity;
 
 public class GameSystem {
-    // private static final int cellSize = 16; // 16x16 pixels
-    // private static final double zoom = 5.0f; // 5x zoom
-
     private AssetLibrary assetLibrary;
     private MapEntity mapEntity;
     private PlayerEntity player;
-    private Dungeon dungeonPanel;
-    private InterfaceFrame interfaceFrame;
+    private DungeonFrame dungeonPanel;
+
+    private JLabel labelChest;
+    private JLabel labelKey;
+
     private BattleSystem battleSystem;
-    private AtomicBoolean batalhando;
+    private AtomicBoolean isBattle;
 
-
-    public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player){
+    public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player) {
         this.assetLibrary = assetLibrary;
         this.mapEntity = mapEntity;
         this.player = player;
-        this.batalhando = new AtomicBoolean(false);
-        // display = new Display();
+        this.isBattle = new AtomicBoolean(false);
     }
 
-    public MapEntity getMapEntity(){
+    public MapEntity getMapEntity() {
         return mapEntity;
     }
 
-    public PlayerEntity getPlayerEntity(){
+    public PlayerEntity getPlayerEntity() {
         return player;
     }
 
-    public void startGame(){
+    public void startGame() {
         mapEntity.buildMap();
-        // display.createAndShowGUI();
-        // display.detectKey();
     }
 
-    public void setDungeonPanel(Dungeon dungeonPanel){
+    public void setDungeonPanel(DungeonFrame dungeonPanel) {
         this.dungeonPanel = dungeonPanel;
     }
 
-    public Dungeon getDungeonPanel(){
+    public DungeonFrame getDungeonPanel() {
         return dungeonPanel;
     }
 
-    public void moveCharacter(int[] movimento){
+    public void setLabels(JLabel labelChest, JLabel labelKey) {
+        this.labelChest = labelChest;
+        this.labelKey = labelKey;
+    }
 
-        if (batalhando.get()) return;
+    private void chestInterated(Chest chest) {
+        if (chest.isInteractable()) {
+            if (chest.getKeyChest()) {
+                player.upLevel();
+            }
+            player.catchItems(chest);
+            chest.setChestEmpty();
+            labelChest.setText("Score: " + player.getScore());
+            labelKey.setText("Keys: " + player.getTotalKeys());
+        }
+    }
 
-        int[] positionPlayer = player.getPositionPlayer();
-        int[] newPositionPlayer = new int[]{positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1]};
-
-        if (movimento[0] == 0 && movimento[1] == 0) {
-            for (int i = -1; i < 2; i+=2){
-                if (mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Chest){ 
-                    Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
-                    if(chest.isInteractable()){
-                        player.catchItems(chest);
-                        chest.setChestEmpty();
-                        System.out.println("Score: " + player.getScore());
-                        break;
-                    }
-                    // dungeonPanel.setPlayerDirection("up");
-                }
-
-                if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Chest){ 
-                    Chest chest = (Chest) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
-                    if(chest.isInteractable()){
-                        player.catchItems(chest);
-                        chest.setChestEmpty();
-                        System.out.println("Score: " + player.getScore());
-                        break;
-                    }
-                    // dungeonPanel.setPlayerDirection("left");
-                }
-
-                if(mapEntity.getMap()[newPositionPlayer[0] + i][newPositionPlayer[1]] instanceof Door){
-                    Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]+i][newPositionPlayer[1]];
-                    if(door.isInteractable()){
-                        if(door.getMonsterDoor()!=null){ 
-                            battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
-                            if(battleSystem.acceptBattle() != false){
-                                batalhando.set(true);
-
-                                if(battleSystem.startBattle(batalhando) == false){
-                                    // fecha o jogo
-
-                                } else{
-                                    // batalhando = false;
-                                    door.setDoorEmpty();
-                                }
-                            }                        
-                        } else{
-                            door.setDoorEmpty();
-                        }
-                        break;
-                    }
-                }
-
-                if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i] instanceof Door){
-                    Door door = (Door) mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]+i];
-                    if(door.isInteractable()){
-                        if(door.getMonsterDoor()!=null){ 
-                            battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
-                            if(battleSystem.acceptBattle() != false){
-                                batalhando.set(true);
-                                if(battleSystem.startBattle(batalhando) == false){
-                                    System.out.println("Fim de jogo");
-                                    System.exit(0);
-                                } else{
-                                    door.setDoorEmpty();
-                                }
-                            }
-                        } 
-                        
-                        else{
-                            door.setDoorEmpty();
-                        }
-                        break;
-                    }
-                    // dungeonPanel.setPlayerDirection("right");
+    private void doorInterated(Door door) {
+        if (door.isInteractable()) {
+            if (door.getMonsterDoor() != null) {
+                battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
+                if (battleSystem.acceptBattle() != false) {
+                    isBattle.set(true);
+                    battleSystem.startBattle(isBattle, labelChest);
+                    door.setDoorEmpty();
+                    player.addScore(door.getMonsterDoor().getXP());
                 }
             }
+
+            else {
+                door.setDoorEmpty();
+            }
+        }
+    }
+
+    private void interated(TileTypeEntity tileTypeEntity) {
+        if (tileTypeEntity instanceof Chest)
+            chestInterated((Chest) tileTypeEntity);
+
+        else if (tileTypeEntity instanceof Door)
+            doorInterated((Door) tileTypeEntity);
+    }
+
+    private void exitInterated(Exit start) {
+        start.canBeOpened(player.getTotalKeys());
+        if (start.getOpenOutput()) {
+            System.exit(0);
+        }
+    }
+
+    public void moveCharacter(int[] movimento) {
+
+        if (isBattle.get()) {
+            return;
         }
 
-        else if(mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]].isWalkable()){
+        int[] positionPlayer = player.getPositionPlayer();
+        int[] newPositionPlayer = new int[] { positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1] };
+
+        if (movimento[0] == 0 && movimento[1] == 0) {
+            if (mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]] instanceof Exit)
+                exitInterated((Exit) mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]]);
+
+            if (dungeonPanel.getPlayerDirection() == "down")
+                interated(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] + 1]);
+
+            if (dungeonPanel.getPlayerDirection() == "up")
+                interated(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] - 1]);
+
+            if (dungeonPanel.getPlayerDirection() == "left")
+                interated(mapEntity.getMap()[positionPlayer[0] - 1][positionPlayer[1]]);
+
+            if (dungeonPanel.getPlayerDirection() == "right")
+                interated(mapEntity.getMap()[positionPlayer[0] + 1][positionPlayer[1]]);
+        } else if (mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]].isWalkable()) {
             player.setPositionPlayer(newPositionPlayer);
         }
-        
-        if(batalhando.get() == false)
+
+        if (isBattle.get() == false) {
             dungeonPanel.repaint();
+        }
     }
-    
 }

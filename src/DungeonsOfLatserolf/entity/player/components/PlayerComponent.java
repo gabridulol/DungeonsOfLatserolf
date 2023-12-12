@@ -8,18 +8,17 @@ public class PlayerComponent {
     private int attack;
     private int defense;
 
-    // Para iniciar com um valor padrão
     public PlayerComponent(int[] positionPlayer) {
         this.score = 0;
         this.totalKeys = 0;
         this.positionPlayer = positionPlayer;
-        this.health = 10;
-        this.attack = 10;
-        this.defense = 10;
+        this.health = 12;
+        this.attack = 5;
+        this.defense = 12;
     }
 
-    // Para inicar com um valor específico
-    public PlayerComponent(int level, int score, int totalKeys, int[] positionPlayer, int health, int attack, int defense) {
+    public PlayerComponent(int level, int score, int totalKeys, int[] positionPlayer, int health, int attack,
+            int defense) {
         this.score = score;
         this.totalKeys = totalKeys;
         this.positionPlayer = positionPlayer;

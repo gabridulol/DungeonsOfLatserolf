@@ -1,6 +1,7 @@
 package DungeonsOfLatserolf.display.components;
 
 import javax.swing.*;
+
 import java.awt.event.*;
 
 public class BattleDialog extends JDialog {
@@ -17,7 +18,7 @@ public class BattleDialog extends JDialog {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BattleDialog.this.dispose(); 
+                BattleDialog.this.dispose();
             }
         });
 
@@ -28,7 +29,7 @@ public class BattleDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(parent);
         pack();
-        setSize(1000, 1000); // Altera o tamanho do JDialog
+        setSize(1000, 1000);
         setVisible(true);
     }
 
