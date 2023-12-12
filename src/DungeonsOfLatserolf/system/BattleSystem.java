@@ -146,7 +146,7 @@ public class BattleSystem extends JFrame {
         if (monster.getHealth() <= 0) {
             battleList.add("Você venceu a batalha!");
             battleInfo.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
-            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP());
+            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP() + player.getScore());
             return true;
         }
 
@@ -154,7 +154,7 @@ public class BattleSystem extends JFrame {
             battleList.add("Você perdeu a batalha!");
             battleInfo
                     .add("Sua vida: " + 0 + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
-            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP());
+            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, player.getScore());
             return false;
         }
     }

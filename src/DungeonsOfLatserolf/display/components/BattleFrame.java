@@ -79,7 +79,7 @@ public class BattleFrame extends JFrame {
                             setVisible(false);
                             if (lose.get())
                                 System.exit(0);
-                            labelScore.setText("Keys: " + score);
+                            labelScore.setText("Score: " + score);
                         }
 
                         cont++;
@@ -89,7 +89,7 @@ public class BattleFrame extends JFrame {
 
                         if (lose.get())
                             System.exit(0);
-                        labelScore.setText("Keys: " + score);
+                        labelScore.setText("Score: " + score);
                     }
 
                 }

@@ -76,13 +76,10 @@ public class GameSystem {
                 if (battleSystem.acceptBattle() != false) {
                     batalhando.set(true);
                     battleSystem.startBattle(batalhando, labelChest);
-                    //player.addScore(door.getMonsterDoor().getXP());
-                    //labelChest.setText("Keys: "+ door.getMonsterDoor().getXP());
-                        door.setDoorEmpty();
-
+                    door.setDoorEmpty();
+                    player.addScore(door.getMonsterDoor().getXP());
                 }
             }
-
             else {
                 door.setDoorEmpty();
             }
