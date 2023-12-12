@@ -66,9 +66,8 @@ public class DatabaseManagerSystem {
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 this.currentUser = new UserEntity(
-                    resultSet.getString("userEmail"),
-                    resultSet.getString("userName")
-                    );
+                        resultSet.getString("userEmail"),
+                        resultSet.getString("userName"));
                 this.currentUser.setUserScore(resultSet.getInt("userScore"));
                 System.out.println("Login realizar com sucesso!");
                 resultSet.close();

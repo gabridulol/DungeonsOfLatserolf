@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -150,7 +148,7 @@ public class BattleSystem extends JFrame {
             battleList.add("Você venceu a batalha!");
             battleInfo.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
             new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP() + player.getScore());
-            player.upLevel();
+            // player.upLevel();
             return true;
         }
 
@@ -270,7 +268,7 @@ public class BattleSystem extends JFrame {
     }
 
     private static void configureLabel(JLabel label) {
-        label.setBackground(new Color(23,17,26));
+        label.setBackground(new Color(23, 17, 26));
         label.setForeground(Color.white);
 
         SimpleAttributeSet attrs = new SimpleAttributeSet();

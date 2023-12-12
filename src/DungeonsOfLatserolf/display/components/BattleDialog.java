@@ -1,3 +1,5 @@
+package DungeonsOfLatserolf.display.components;
+
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -53,7 +55,7 @@ public class BattleDialog extends JDialog {
     }
 
     public boolean acceptBattle() {
-        Object[] options = {"Sim", "Não"};
+        Object[] options = { "Sim", "Não" };
         int choice = JOptionPane.showOptionDialog(
                 BattleDialog.this,
                 "Você encontrou um monstro, deseja batalhar?",

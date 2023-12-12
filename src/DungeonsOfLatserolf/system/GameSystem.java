@@ -3,12 +3,8 @@ package DungeonsOfLatserolf.system;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-
-import DungeonsOfLatserolf.display.GameInterface;
 import DungeonsOfLatserolf.display.components.DungeonFrame;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
-import DungeonsOfLatserolf.entity.player.components.PlayerController;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Chest;

@@ -70,7 +70,7 @@ public class BattleFrame extends JFrame {
                             label2.setText(listaBatalha.get(cont));
                             label3.setText(infoBatalha.get(cont));
                             repaint();
-                
+
                         }
 
                         else {
