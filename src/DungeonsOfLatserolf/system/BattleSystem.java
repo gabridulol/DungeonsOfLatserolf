@@ -22,9 +22,7 @@ public class BattleSystem extends JFrame {
         this.monster = monster;
         this.player = player;
         this.assetLibrary = assetLibrary;
-        System.out.println("Attack: " + player.getAttack());
-        System.out.println("Defense: " + player.getDefense());
-        System.out.println("Health: " + player.getHealth());
+        
     }
 
     public int rollDice() {
@@ -55,7 +53,7 @@ public class BattleSystem extends JFrame {
         return monster.getAttack();
     }
 
-    public boolean startBattle(AtomicBoolean isBattle) {
+    public boolean startBattle(AtomicBoolean isBattle, JLabel labelScore) {
         int healthPlayer = player.getHealth();
 
         int pInitiative = rollInitiative(player.getAttack(), player.getDefense());
@@ -113,7 +111,7 @@ public class BattleSystem extends JFrame {
 
             if (checkBattle(monster.getHealth(), healthPlayer)) {
                 if (checkWin(monster.getHealth(), healthPlayer, isBattle, battleList, battleInfo, diceList,
-                        map)) {
+                        map, labelScore)) {
                     battleList.add("");
                     battleInfo.add("");
                     diceList.add("");
@@ -141,15 +139,14 @@ public class BattleSystem extends JFrame {
 
     public boolean checkWin(int monsterHealth, int healthPlayer, AtomicBoolean i,
             ArrayList<String> battleList, ArrayList<String> battleInfo,
-            ArrayList<String> diceList, BufferedImage[][] map) {
+            ArrayList<String> diceList, BufferedImage[][] map, JLabel labelScore) {
 
         diceList.add(" ");
 
         if (monster.getHealth() <= 0) {
             battleList.add("Você venceu a batalha!");
             battleInfo.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
-            System.out.println(i.get());
-            new BattleFrame(battleList, battleInfo, diceList, i, map);
+            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP());
             return true;
         }
 
@@ -157,7 +154,7 @@ public class BattleSystem extends JFrame {
             battleList.add("Você perdeu a batalha!");
             battleInfo
                     .add("Sua vida: " + 0 + "        " + "Vida do " + monster.getName() + ": " + monster.getHealth());
-            new BattleFrame(battleList, battleInfo, diceList, i, map);
+            new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP());
             return false;
         }
     }

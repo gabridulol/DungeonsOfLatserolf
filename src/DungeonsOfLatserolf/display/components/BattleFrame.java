@@ -17,7 +17,7 @@ public class BattleFrame extends JFrame {
             ArrayList<String> infoBatalha,
             ArrayList<String> listaDado,
             AtomicBoolean batalhando,
-            BufferedImage[][] map) {
+            BufferedImage[][] map, JLabel labelScore, int score) {
 
         this.map = map;
 
@@ -71,15 +71,17 @@ public class BattleFrame extends JFrame {
                             label2.setText(listaBatalha.get(cont));
                             label3.setText(infoBatalha.get(cont));
                             repaint();
+                
                         }
 
                         else {
                             batalhando.set(false);
                             setVisible(false);
-
                             if (lose.get())
                                 System.exit(0);
+                            labelScore.setText("Keys: " + score);
                         }
+
                         cont++;
                     } catch (IndexOutOfBoundsException exception) {
                         batalhando.set(false);
@@ -87,6 +89,7 @@ public class BattleFrame extends JFrame {
 
                         if (lose.get())
                             System.exit(0);
+                        labelScore.setText("Keys: " + score);
                     }
 
                 }

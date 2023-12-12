@@ -75,14 +75,11 @@ public class GameSystem {
                 battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
                 if (battleSystem.acceptBattle() != false) {
                     batalhando.set(true);
-                    if (battleSystem.startBattle(batalhando) == false) {
-                        // fecha o jogo
-
-                    }
-
-                    else {
+                    battleSystem.startBattle(batalhando, labelChest);
+                    //player.addScore(door.getMonsterDoor().getXP());
+                    //labelChest.setText("Keys: "+ door.getMonsterDoor().getXP());
                         door.setDoorEmpty();
-                    }
+
                 }
             }
 
