@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class AssetLibrary {
     private static final String PATH_TO_ASSETS = "./res/assets";
@@ -40,14 +39,10 @@ public class AssetLibrary {
                         assets.put(keyString, valueImage);
                     }
                 }
-            }
-
-            else {
+            } else {
                 System.out.println("Folder is empty.");
             }
-        }
-
-        else {
+        } else {
             System.out.println("Path to assets does not exist or is not a directory.");
         }
     }
@@ -57,23 +52,14 @@ public class AssetLibrary {
 
         try {
             return ImageIO.read(new File(filePath));
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
     public HashMap<String, BufferedImage> getAssets() {
         return assets;
-    }
-
-    public <K, V> void printHashMap() {
-        for (Entry<String, BufferedImage> entry : assets.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-            System.out.println();
-        }
     }
 }

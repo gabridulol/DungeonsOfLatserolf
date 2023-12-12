@@ -28,7 +28,7 @@ public class BattleDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(parent);
         pack();
-        setSize(1000, 1000); // Altera o tamanho do JDialog
+        setSize(1000, 1000);
         setVisible(true);
     }
 

@@ -1,6 +1,6 @@
 import javax.swing.SwingUtilities;
 
-import DungeonsOfLatserolf.display.InterfaceFrame;
+import DungeonsOfLatserolf.display.GameInterface;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 import DungeonsOfLatserolf.entity.player.components.PlayerController;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
@@ -17,6 +17,6 @@ public class Main {
 
         game.startGame();
 
-        SwingUtilities.invokeLater(() -> new InterfaceFrame(mapEntity, player, playerController, game));
+        SwingUtilities.invokeLater(() -> new GameInterface(mapEntity, player, playerController, game));
     }
 }

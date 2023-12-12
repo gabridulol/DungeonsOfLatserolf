@@ -1,27 +1,17 @@
 package DungeonsOfLatserolf.entity.player;
 
-import java.util.ArrayList;
-import java.awt.image.BufferedImage;
-
 import DungeonsOfLatserolf.map.tile.Chest;
-import javafx.geometry.Pos;
 import DungeonsOfLatserolf.database.UserEntity;
-import DungeonsOfLatserolf.entity.monster.MonsterEntity;
 import DungeonsOfLatserolf.entity.player.components.PlayerComponent;
-import DungeonsOfLatserolf.entity.player.components.PlayerController;
 
 public class PlayerEntity {
-
     private PlayerComponent playerStats;
     private UserEntity user;
-    private BufferedImage[] playerImages;
 
-    // Para iniciar com um valor padrão
     public PlayerEntity(int[] positionPlayer) {
         this.playerStats = new PlayerComponent(positionPlayer);
     }
 
-    // Para iniciar com um valor específico
     public PlayerEntity(int level, int score, int totalKeys, int[] positionPlayer, int health, int attack,
             int defense) {
         this.playerStats = new PlayerComponent(level, score, totalKeys, positionPlayer, health, attack, defense);

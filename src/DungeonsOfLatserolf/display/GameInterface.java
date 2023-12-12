@@ -1,23 +1,24 @@
 package DungeonsOfLatserolf.display;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.Color;
 
 import javax.swing.*;
 
-import DungeonsOfLatserolf.display.components.Dungeon;
+import DungeonsOfLatserolf.display.components.DungeonFrame;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
 import DungeonsOfLatserolf.entity.player.components.PlayerController;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.system.GameSystem;
 
-public class InterfaceFrame extends JFrame {
+public class GameInterface extends JFrame {
 
-    public InterfaceFrame(MapEntity mapEntity, PlayerEntity player, PlayerController playerController,
+    public GameInterface(MapEntity mapEntity,
+            PlayerEntity player,
+            PlayerController playerController,
             GameSystem game) {
-        Dungeon dungeonPanel = new Dungeon(mapEntity, player);
+
+        DungeonFrame dungeonPanel = new DungeonFrame(mapEntity, player);
 
         Color black = new Color(23, 17, 26);
 

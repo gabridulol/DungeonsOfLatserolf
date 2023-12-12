@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 import DungeonsOfLatserolf.system.BattleSystem;
 import DungeonsOfLatserolf.system.GameSystem;
-import DungeonsOfLatserolf.system.BattleSystem;
 
 public class PlayerController implements KeyListener {
 
@@ -20,7 +19,6 @@ public class PlayerController implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
-            // System.out.println("A");
             game.moveCharacter(new int[] { -1, 0 });
             if (game.getDungeonPanel().getPlayerDirection() != "left") {
                 game.getDungeonPanel().setPlayerDirection("left");
@@ -31,7 +29,6 @@ public class PlayerController implements KeyListener {
         }
 
         else if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
-            // System.out.println("D");
             game.moveCharacter(new int[] { 1, 0 });
             if (game.getDungeonPanel().getPlayerDirection() != "right") {
                 game.getDungeonPanel().setPlayerDirection("right");
@@ -42,7 +39,6 @@ public class PlayerController implements KeyListener {
         }
 
         else if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
-            // System.out.println("W");
             game.moveCharacter(new int[] { 0, -1 });
             if (game.getDungeonPanel().getPlayerDirection() != "up") {
                 game.getDungeonPanel().setPlayerDirection("up");
@@ -53,7 +49,6 @@ public class PlayerController implements KeyListener {
         }
 
         else if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
-            // System.out.println("S");
             game.moveCharacter(new int[] { 0, 1 });
             if (game.getDungeonPanel().getPlayerDirection() != "down") {
                 game.getDungeonPanel().setPlayerDirection("down");

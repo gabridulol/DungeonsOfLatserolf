@@ -10,18 +10,15 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class BattleFrame extends JFrame {
-    private ArrayList<String> listaBatalha;
-    private ArrayList<String> infoBatalha;
     private BufferedImage[][] map;
-    private BufferedImage playerImage;
-    private BufferedImage monsterImage;
     private int cont;
 
-    public BattleFrame(ArrayList<String> listaBatalha, ArrayList<String> infoBatalha, ArrayList<String> listaDado,
+    public BattleFrame(ArrayList<String> listaBatalha,
+            ArrayList<String> infoBatalha,
+            ArrayList<String> listaDado,
             AtomicBoolean batalhando,
             BufferedImage[][] map) {
-        this.listaBatalha = listaBatalha;
-        this.infoBatalha = infoBatalha;
+
         this.map = map;
 
         cont = 0;
@@ -62,7 +59,8 @@ public class BattleFrame extends JFrame {
         repaint();
         cont++;
 
-        AtomicBoolean lose = new AtomicBoolean("perdeu".equals(listaBatalha.get(listaBatalha.size()-1).split(" ")[1]));
+        AtomicBoolean lose = new AtomicBoolean(
+                "perdeu".equals(listaBatalha.get(listaBatalha.size() - 1).split(" ")[1]));
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -78,8 +76,8 @@ public class BattleFrame extends JFrame {
                         else {
                             batalhando.set(false);
                             setVisible(false);
-                            
-                            if(lose.get())
+
+                            if (lose.get())
                                 System.exit(0);
                         }
                         cont++;
@@ -87,7 +85,7 @@ public class BattleFrame extends JFrame {
                         batalhando.set(false);
                         setVisible(false);
 
-                        if(lose.get())
+                        if (lose.get())
                             System.exit(0);
                     }
 
