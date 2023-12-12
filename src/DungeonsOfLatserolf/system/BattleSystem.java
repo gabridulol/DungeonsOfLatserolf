@@ -146,6 +146,7 @@ public class BattleSystem extends JFrame {
             battleList.add("Você venceu a batalha!");
             battleInfo.add("Sua vida: " + healthPlayer + "        " + "Vida do " + monster.getName() + ": " + 0);
             new BattleFrame(battleList, battleInfo, diceList, i, map, labelScore, monster.getXP() + player.getScore());
+            player.upLevel();
             return true;
         }
 
