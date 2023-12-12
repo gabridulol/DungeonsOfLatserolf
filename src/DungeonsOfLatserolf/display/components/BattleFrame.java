@@ -23,7 +23,6 @@ public class BattleFrame extends JFrame {
 
         cont = 0;
 
-        // setLayout(new FlowLayout());
         setLayout(new BorderLayout());
         Color black = new Color(23, 17, 26);
 
