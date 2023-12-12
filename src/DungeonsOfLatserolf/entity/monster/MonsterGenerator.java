@@ -42,7 +42,7 @@ public class MonsterGenerator {
                                 5, 0.2, assetLibrary.getImage("demilich")));
                 monsterCategory.add(new MonsterCategory("Demônio",
                                 "Uma entidade infernal, com chifres retorcidos e pele enegrecida. Suas asas escuras e olhos flamejantes revelam a natureza ardente de sua origem. Possui habilidades mágicas capazes de invocar horrores e encher a atmosfera com um cheiro de enxofre.",
-                                3, 0.5, assetLibrary.getImage("demon")));
+                                4, 0.25, assetLibrary.getImage("demon")));
                 monsterCategory.add(new MonsterCategory("Sapo",
                                 "Este sapo peculiar exala uma aura mágica. Sua língua é capaz de capturar pequenos objetos, e sua pele secreta uma substância alucinógena. Aqueles que menosprezam sua aparência inofensiva podem encontrar-se presos em um mundo de ilusões.",
                                 1, 0.2, assetLibrary.getImage("frog")));
@@ -66,7 +66,7 @@ public class MonsterGenerator {
                                 3, 0.5, assetLibrary.getImage("werewolf")));
                 monsterCategory.add(new MonsterCategory("Bruxa",
                                 "Vestida em trajes escuros e rodeada por um halo de mistério, a bruxa é uma conjuradora de feitiços sinistros. Seu caldeirão fumegante borbulha com poções mágicas, enquanto corvos negros a rodeiam, servindo como seus olhos e ouvidos nos recantos mais sombrios do reino.",
-                                2, 0.3, assetLibrary.getImage("witch")));
+                                3, 0.5, assetLibrary.getImage("witch")));
                 monsterCategory.add(new MonsterCategory("Mímico",
                                 "Camuflado como um objeto comum, este ser metamórfico espera pacientemente sua presa. Quando menos se espera, revela sua verdadeira forma, uma gosma viscosa repleta de dentes afiados. Sua capacidade de se disfarçar o torna um mestre na arte da emboscada.",
                                 3, 0.5, assetLibrary.getImage("mimic")));

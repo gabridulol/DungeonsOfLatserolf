@@ -1,6 +1,7 @@
 package DungeonsOfLatserolf.display.components;
 
 import javax.swing.*;
+
 import java.awt.event.*;
 
 public class BattleDialog extends JDialog {

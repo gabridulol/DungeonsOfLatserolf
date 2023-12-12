@@ -34,5 +34,4 @@ public class MapEntity {
     public void buildMap() {
         map = mapSystem.buildDungeon(map);
     }
-
 }

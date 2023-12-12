@@ -21,27 +21,27 @@ public class Chest extends TileTypeEntity {
         this.goldPieces = 0;
     }
 
-    public boolean getOpenChest() { // ver se esta aberto
+    public boolean getOpenChest() {
         return openChest;
     }
 
-    public void setOpenChest(boolean openChest) { // abrir o baú
+    public void setOpenChest(boolean openChest) {
         this.openChest = openChest;
     }
 
-    public boolean getKeyChest() { // ver se tem chave
+    public boolean getKeyChest() {
         return keyChest;
     }
 
-    public void setKeyChest(boolean keyChest) { // pegar a chave
+    public void setKeyChest(boolean keyChest) {
         this.keyChest = keyChest;
     }
 
-    public int getGoldPieces() { // ver quantas moedas tem
+    public int getGoldPieces() {
         return goldPieces;
     }
 
-    public void setGoldPieces(int goldPieces) { // pegar as moedas
+    public void setGoldPieces(int goldPieces) {
         this.goldPieces = goldPieces;
     }
 

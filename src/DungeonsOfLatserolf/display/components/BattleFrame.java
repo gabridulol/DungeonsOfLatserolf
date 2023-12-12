@@ -99,7 +99,7 @@ public class BattleFrame extends JFrame {
         getContentPane().setBackground(black);
         setPreferredSize(new Dimension(600, 520));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("batalha");
+        setTitle("Batalha");
         setResizable(false);
         pack();
         setLocationRelativeTo(null); // Center the JFrame on the screen

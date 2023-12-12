@@ -20,7 +20,7 @@ public class MapData {
         startPosition[1] = height / 2;
         this.totalKeys = totalKeys;
         doorProbability = 0.2;
-        monsterProbability = 0.7;
+        monsterProbability = 0.8;
         chestProbability = 0.1;
         this.level = level;
     }
@@ -96,5 +96,4 @@ public class MapData {
     public void setTotalKeys(int totalKeys) {
         this.totalKeys = totalKeys;
     }
-
 }
