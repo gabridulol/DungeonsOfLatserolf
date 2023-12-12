@@ -19,8 +19,29 @@ Neste diretório, você encontrará o código-fonte do jogo. As pastas internas 
 [Adicione uma descrição mais detalhada da estrutura e do conteúdo das pastas, se desejar.]
 
 ## Como Executar
+1. Instalação da Fonte:
 
-[Adicione instruções sobre como executar o jogo ou quaisquer pré-requisitos necessários, se aplicável.]
+    Abra a pasta "res".
+    Instale a fonte disponível na pasta.
+
+2. Verificação do Java Development Kit (JDK):
+
+    Certifique-se de ter o Java Development Kit instalado, versão 17 ou superior.
+
+3. Navegação até o Diretório do Jogo:
+
+    Abra o terminal.
+    Navegue até a pasta DungeonsOfLatserolf.
+
+3. Execução do Jogo:
+
+    No terminal, digite o seguinte comando:
+
+        java -jar DungeonsOfLatserolf.jar
+
+        Pressione Enter para iniciar o jogo.
+
+Certifique-se de seguir essas etapas na ordem fornecida para garantir uma execução bem-sucedida do jogo. Se você encontrar algum problema, verifique se todas as etapas foram concluídas corretamente.
 
 ## Recursos
 
