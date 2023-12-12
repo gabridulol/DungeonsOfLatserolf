@@ -15,11 +15,37 @@ public class MapGeneratorSystem {
     public MapGeneratorSystem(AssetLibrary imagens) {
         // Passar nível para o construtor
         // Gerar níveis de tamanho aleatório - Não implementado
-        // Random rand = new Random();
-        // int size = rand.nextInt(25) + 7;
-        this.mapData = new MapData(31, 31, 3, 1);
-        this.imagens = imagens;
         monsterGenerator = new MonsterGenerator(imagens);
+        this.imagens = imagens;
+
+        Random rand = new Random();
+
+        int size = gerarPrimo();
+        // size = 7;
+        int keys = rand.nextInt(5) + size/5 + 1;
+
+        this.mapData = new MapData(size, size, keys, 1);
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int gerarPrimo(){
+        Random rand = new Random();
+        int primo = rand.nextInt(101) + 7;
+        while(!isPrime(primo)){
+            primo = rand.nextInt(101) + 7;
+        }
+        return primo;
     }
 
     public MapData getMapData() {
@@ -110,7 +136,7 @@ public class MapGeneratorSystem {
         } while (!(dungeonMap[exitY][exitX] instanceof Floor && exitX != mapData.getStartPosition()[0]
                 && exitY != mapData.getStartPosition()[1]));
 
-        dungeonMap[exitY][exitX] = new Exit(imagens.getImage("exit(0)"), null);
+        dungeonMap[exitY][exitX] = new Exit(imagens.getImage("exit(0)"), null, mapData.getKeysMap());
         dungeonMap[mapData.getStartPosition()[1]][mapData.getStartPosition()[0]] = new Floor(
                 imagens.getImage("start(0)"));
     }
@@ -142,7 +168,7 @@ public class MapGeneratorSystem {
             int nx = x + dx[dir] * 2;
             int ny = y + dy[dir] * 2;
 
-            if (nx >= 0 && nx < dungeonMap[0].length && ny >= 0 && ny < dungeonMap.length
+            if (nx > 0 && nx < dungeonMap[0].length-1 && ny > 0 && ny < dungeonMap.length-1
                     && dungeonMap[ny][nx] instanceof Wall) {
                 dungeonMap[y + dy[dir]][x + dx[dir]] = new Floor(imagens.getImage("floor(0)"));
                 dungeonMap[ny][nx] = new Floor(imagens.getImage("floor(0)"));
@@ -155,11 +181,14 @@ public class MapGeneratorSystem {
         Random random = new Random();
         int keys = 0;
 
-        while (keys < 3) {
+        
+
+        while (keys < mapData.getKeysMap()) {
             int x = random.nextInt(mapData.getSizeMap()[1]);
             int y = random.nextInt(mapData.getSizeMap()[0]);
 
-            if (dungeonMap[y][x] instanceof Floor) {
+            if (dungeonMap[y][x] instanceof Floor && !(mapData.getStartPosition()[0] == x
+                    && mapData.getStartPosition()[1] == y)) {
                 dungeonMap[y][x] = new Chest(imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
                 keys++;
             }

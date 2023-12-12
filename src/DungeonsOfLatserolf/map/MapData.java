@@ -10,15 +10,13 @@ public class MapData {
     private double chestProbability;
     private int level;
 
-    private int totalKeys;
-
-    public MapData(int width, int height, int totalKeys, int level) {
+    public MapData(int width, int height, int keysMap, int level) {
         isCompleted = false;
         this.sizeMap[0] = width;
         this.sizeMap[1] = height;
         startPosition[0] = width / 2;
         startPosition[1] = height / 2;
-        this.totalKeys = totalKeys;
+        this.keysMap = keysMap;
         doorProbability = 0.2;
         monsterProbability = 0.8;
         chestProbability = 0.1;
@@ -87,13 +85,5 @@ public class MapData {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public int getTotalKeys() {
-        return totalKeys;
-    }
-
-    public void setTotalKeys(int totalKeys) {
-        this.totalKeys = totalKeys;
     }
 }

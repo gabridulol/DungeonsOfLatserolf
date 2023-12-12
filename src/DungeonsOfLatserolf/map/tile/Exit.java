@@ -4,10 +4,12 @@ import java.awt.image.BufferedImage;
 
 public class Exit extends TileTypeEntity {
     public boolean openOutput;
+    private int necessaryKeys;
 
-    public Exit(BufferedImage assetImage, BufferedImage assetImageOpen) {
+    public Exit(BufferedImage assetImage, BufferedImage assetImageOpen, int necessaryKeys) {
         super(assetImage, assetImageOpen);
         this.openOutput = false;
+        this.necessaryKeys = necessaryKeys;
     }
 
     public boolean getOpenOutput() {
@@ -19,7 +21,7 @@ public class Exit extends TileTypeEntity {
     }
 
     public void canBeOpened(int keys) {
-        if (keys == 3)
+        if (keys == necessaryKeys)
             this.openOutput = true;
     }
 

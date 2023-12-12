@@ -2,6 +2,7 @@ package DungeonsOfLatserolf.display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class GameInterface extends JFrame {
         labelChest.setHorizontalAlignment(JLabel.LEFT); // Centraliza o texto no JLabel
         labelChest.setFont(font);
 
-        JLabel labelKey = new JLabel("Keys: " + player.getTotalKeys());
+        JLabel labelKey = new JLabel("Keys: " + player.getTotalKeys() + "/" + mapEntity.getMapData().getKeysMap());
         labelKey.setForeground(Color.WHITE); // Define a cor do texto
         labelKey.setHorizontalAlignment(JLabel.CENTER); // Centraliza o texto no JLabel
         labelKey.setFont(font);
@@ -46,7 +47,9 @@ public class GameInterface extends JFrame {
         addKeyListener(playerController);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Dungeons of Latserolf");
+        setPreferredSize(new Dimension(1280, 720));
         setResizable(false);
+        setBackground(black);
         getContentPane().add(dungeonPanel);
         pack();
         setLocationRelativeTo(null); // Center the JFrame on the screen

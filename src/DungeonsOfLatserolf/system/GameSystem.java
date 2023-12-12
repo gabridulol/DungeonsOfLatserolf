@@ -65,7 +65,7 @@ public class GameSystem {
             player.catchItems(chest);
             chest.setChestEmpty();
             labelChest.setText("Score: " + player.getScore());
-            labelKey.setText("Keys: " + player.getTotalKeys());
+            labelKey.setText("Keys: " + player.getTotalKeys()  + "/" + mapEntity.getMapData().getKeysMap());
         }
     }
 
@@ -76,8 +76,8 @@ public class GameSystem {
                 if (battleSystem.acceptBattle() != false) {
                     isBattle.set(true);
                     battleSystem.startBattle(isBattle, labelChest);
-                    door.setDoorEmpty();
                     player.addScore(door.getMonsterDoor().getXP());
+                    door.setDoorEmpty();
                 }
             }
 

@@ -18,7 +18,7 @@ public class DungeonFrame extends JPanel {
     private int cellSize;
 
     public DungeonFrame(MapEntity mapEntity, PlayerEntity playerEntity) {
-        zoom = 2.0f;
+        zoom = 5.0f;
         cellSize = 16;
 
         this.mapEntity = mapEntity;
@@ -43,8 +43,8 @@ public class DungeonFrame extends JPanel {
         int panelWidth = getWidth();
         int panelHeight = getHeight();
 
-        int dungeonWidth = panelWidth;
-        int dungeonHeight = panelHeight;
+        int dungeonWidth = (int) (mapEntity.getMapData().getSizeMap()[0] * cellSize * zoom);
+        int dungeonHeight = (int) (mapEntity.getMapData().getSizeMap()[1] * cellSize * zoom);
 
         int halfPanelWidth = panelWidth / 2;
         int halfPanelHeight = panelHeight / 2;
@@ -55,19 +55,21 @@ public class DungeonFrame extends JPanel {
         int characterX = playerEntity.getPositionPlayer()[0];
         int characterY = playerEntity.getPositionPlayer()[1];
 
-        int xOffset = (int) Math.max(0,
-                Math.min(characterX * cellSize * zoom - halfPanelWidth, dungeonWidth - panelWidth));
-        int yOffset = (int) Math.max(0,
-                Math.min(characterY * cellSize * zoom - halfPanelHeight, dungeonHeight - panelHeight));
-
+        int xOffset = (int) (characterX * cellSize * zoom - halfPanelWidth);
+        int yOffset = (int) (characterY * cellSize * zoom - halfPanelHeight);
+    
+        xOffset = Math.max(0, Math.min(xOffset, dungeonWidth - panelWidth));
+        yOffset = Math.max(0, Math.min(yOffset, dungeonHeight - panelHeight));
+            
         BufferedImage playerImage = getPlayerImage();
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.scale(zoom, zoom);
+        g2d.scale(zoom-0.3, zoom-0.6);
 
         for (int i = -1; i < 2; i++)
             for (int j = -1; j < 2; j++)
                 visibleTiles[i + playerEntity.getPositionPlayer()[0]][j + playerEntity.getPositionPlayer()[1]] = true;
+
 
         for (int x = 0; x < dx; x++) {
             for (int y = 0; y < dy; y++) {
@@ -83,6 +85,9 @@ public class DungeonFrame extends JPanel {
                         g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"), cellX, cellY,
                                 this);
                 }
+                
+                // g2d.drawImage(image, cellX, cellY, this);
+
             }
         }
 
