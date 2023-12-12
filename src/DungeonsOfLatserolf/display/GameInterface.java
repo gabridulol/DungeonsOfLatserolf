@@ -25,12 +25,12 @@ public class GameInterface extends JFrame {
         Font font = new Font("CooperBits", Font.PLAIN, 48);
 
         JLabel labelChest = new JLabel("Score: " + player.getScore());
-        labelChest.setForeground(Color.WHITE);
+        labelChest.setForeground(new Color(251,97,7));
         labelChest.setHorizontalAlignment(JLabel.LEFT);
         labelChest.setFont(font);
 
         JLabel labelKey = new JLabel("Keys: " + player.getTotalKeys() + "/" + mapEntity.getMapData().getKeysMap());
-        labelKey.setForeground(Color.WHITE);
+        labelKey.setForeground(new Color(251,97,7));
         labelKey.setHorizontalAlignment(JLabel.CENTER);
         labelKey.setFont(font);
 

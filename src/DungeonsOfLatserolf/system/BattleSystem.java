@@ -5,6 +5,10 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -192,6 +196,7 @@ public class BattleSystem extends JFrame {
 
     public static void applyDarkTheme() {
         Color BLACK = new Color(23, 17, 26);
+        Color Orange = new Color(251, 97, 7);
         Font defaultFont = new Font("CooperBits", Font.PLAIN, 20);
 
         UIManager.put("OptionPane.messageFont", defaultFont);
@@ -199,25 +204,33 @@ public class BattleSystem extends JFrame {
         UIManager.put("Label.font", defaultFont);
         UIManager.put("TextArea.font", defaultFont);
         UIManager.put("OptionPane.background", BLACK);
-        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("OptionPane.foreground", Orange);
+        UIManager.put("OptionPane.messageForeground", Orange);
         UIManager.put("Panel.background", BLACK);
-        UIManager.put("Button.background", Color.gray);
-        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("Button.background", Orange);
+        UIManager.put("Button.foreground", Color.white);
     }
 
     public boolean acceptBattle() {
         MonsterEntity monster = getMonster();
         applyDarkTheme();
 
+        JLabel monsterJLabel = new JLabel("Você se depara com " + monster.getName());
+        configureLabel(monsterJLabel);
+        monsterJLabel.setForeground(new Color(251, 97, 7));
+
         JTextArea battleInfoTextArea = new JTextArea(
-                "Você se depara com " + monster.getName() + "\n\n" + monster.getDescription());
+                "\n\n\n" + monster.getDescription());
         configureTextArea(battleInfoTextArea);
+        // battleInfoTextArea.setForeground(new Color(251, 97, 7));
 
         JLabel questionLabel = new JLabel("Deseja batalhar?");
         configureLabel(questionLabel);
+        questionLabel.setForeground(new Color(251, 97, 7));
 
         JPanel customPanel = new JPanel();
         customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
+        customPanel.add(monsterJLabel);
         customPanel.add(battleInfoTextArea);
         customPanel.setBackground(new Color(23, 17, 26));
 
@@ -249,12 +262,22 @@ public class BattleSystem extends JFrame {
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setPreferredSize(new Dimension(570, 360));
+        textArea.setPreferredSize(new Dimension(400, 300));
+
+        textArea.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinhamento à esquerda
+        textArea.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+
     }
 
     private static void configureLabel(JLabel label) {
         label.setBackground(new Color(23,17,26));
         label.setForeground(Color.white);
+
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        StyleConstants.setBold(attrs, true);
+
+        label.setAlignmentX(Component.CENTER_ALIGNMENT); // Alinhamento à esquerda
+        label.setAlignmentY(Component.BOTTOM_ALIGNMENT);
     }
 
     public MonsterEntity getMonster() {
