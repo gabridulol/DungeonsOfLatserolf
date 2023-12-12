@@ -14,7 +14,6 @@ import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.system.GameSystem;
 
 public class GameInterface extends JFrame {
-
     public GameInterface(MapEntity mapEntity,
             PlayerEntity player,
             PlayerController playerController,
@@ -25,15 +24,14 @@ public class GameInterface extends JFrame {
         Color black = new Color(23, 17, 26);
         Font font = new Font("CooperBits", Font.PLAIN, 48);
 
-
         JLabel labelChest = new JLabel("Score: " + player.getScore());
-        labelChest.setForeground(Color.WHITE); // Define a cor do texto
-        labelChest.setHorizontalAlignment(JLabel.LEFT); // Centraliza o texto no JLabel
+        labelChest.setForeground(Color.WHITE);
+        labelChest.setHorizontalAlignment(JLabel.LEFT);
         labelChest.setFont(font);
 
         JLabel labelKey = new JLabel("Keys: " + player.getTotalKeys() + "/" + mapEntity.getMapData().getKeysMap());
-        labelKey.setForeground(Color.WHITE); // Define a cor do texto
-        labelKey.setHorizontalAlignment(JLabel.CENTER); // Centraliza o texto no JLabel
+        labelKey.setForeground(Color.WHITE);
+        labelKey.setHorizontalAlignment(JLabel.CENTER);
         labelKey.setFont(font);
 
         JPanel labelPanel = new JPanel(new BorderLayout());
@@ -42,17 +40,17 @@ public class GameInterface extends JFrame {
         labelPanel.add(labelChest, BorderLayout.CENTER);
         labelPanel.add(labelKey, BorderLayout.EAST);
 
-        add(labelPanel, BorderLayout.NORTH); // Adiciona o JPanel ao norte do JFrame
+        add(labelPanel, BorderLayout.NORTH);
 
         addKeyListener(playerController);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Dungeons of Latserolf");
         setPreferredSize(new Dimension(1280, 720));
         setResizable(false);
-        setBackground(black);
         getContentPane().add(dungeonPanel);
+        getContentPane().setBackground(black);
         pack();
-        setLocationRelativeTo(null); // Center the JFrame on the screen
+        setLocationRelativeTo(null);
         setVisible(true);
         game.setDungeonPanel(dungeonPanel);
         game.setLabels(labelChest, labelKey);

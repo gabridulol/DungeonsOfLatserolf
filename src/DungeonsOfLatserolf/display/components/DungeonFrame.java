@@ -32,8 +32,8 @@ public class DungeonFrame extends JPanel {
 
         visibleTiles = new boolean[dy][dx];
 
+        setBackground(new Color(23, 17, 26));
         setPreferredSize(new Dimension(panelHeight, panelWidth));
-
     }
 
     @Override
@@ -57,19 +57,18 @@ public class DungeonFrame extends JPanel {
 
         int xOffset = (int) (characterX * cellSize * zoom - halfPanelWidth);
         int yOffset = (int) (characterY * cellSize * zoom - halfPanelHeight);
-    
+
         xOffset = Math.max(0, Math.min(xOffset, dungeonWidth - panelWidth));
         yOffset = Math.max(0, Math.min(yOffset, dungeonHeight - panelHeight));
-            
+
         BufferedImage playerImage = getPlayerImage();
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.scale(zoom-0.3, zoom-0.6);
+        g2d.scale(zoom - 0.3, zoom - 0.6);
 
         for (int i = -1; i < 2; i++)
             for (int j = -1; j < 2; j++)
                 visibleTiles[i + playerEntity.getPositionPlayer()[0]][j + playerEntity.getPositionPlayer()[1]] = true;
-
 
         for (int x = 0; x < dx; x++) {
             for (int y = 0; y < dy; y++) {
@@ -85,7 +84,7 @@ public class DungeonFrame extends JPanel {
                         g2d.drawImage(mapEntity.getMapSystem().getImagemDoSistema().getImage("board(0)"), cellX, cellY,
                                 this);
                 }
-                
+
                 // g2d.drawImage(image, cellX, cellY, this);
 
             }

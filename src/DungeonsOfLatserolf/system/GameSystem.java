@@ -3,9 +3,12 @@ package DungeonsOfLatserolf.system;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
+import DungeonsOfLatserolf.display.GameInterface;
 import DungeonsOfLatserolf.display.components.DungeonFrame;
 import DungeonsOfLatserolf.entity.player.PlayerEntity;
+import DungeonsOfLatserolf.entity.player.components.PlayerController;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Chest;
@@ -57,7 +60,7 @@ public class GameSystem {
         this.labelKey = labelKey;
     }
 
-    private void chestInterated(Chest chest) {
+    private void chestInteract(Chest chest) {
         if (chest.isInteractable()) {
             if (chest.getKeyChest()) {
                 player.upLevel();
@@ -65,11 +68,11 @@ public class GameSystem {
             player.catchItems(chest);
             chest.setChestEmpty();
             labelChest.setText("Score: " + player.getScore());
-            labelKey.setText("Keys: " + player.getTotalKeys()  + "/" + mapEntity.getMapData().getKeysMap());
+            labelKey.setText("Keys: " + player.getTotalKeys() + "/" + mapEntity.getMapData().getKeysMap());
         }
     }
 
-    private void doorInterated(Door door) {
+    private void doorInteract(Door door) {
         if (door.isInteractable()) {
             if (door.getMonsterDoor() != null) {
                 battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
@@ -79,25 +82,24 @@ public class GameSystem {
                     player.addScore(door.getMonsterDoor().getXP());
                     door.setDoorEmpty();
                 }
-            }
-
-            else {
+            } else {
                 door.setDoorEmpty();
             }
         }
     }
 
-    private void interated(TileTypeEntity tileTypeEntity) {
+    private void interact(TileTypeEntity tileTypeEntity) {
         if (tileTypeEntity instanceof Chest)
-            chestInterated((Chest) tileTypeEntity);
+            chestInteract((Chest) tileTypeEntity);
 
         else if (tileTypeEntity instanceof Door)
-            doorInterated((Door) tileTypeEntity);
+            doorInteract((Door) tileTypeEntity);
     }
 
-    private void exitInterated(Exit start) {
+    private void exitInteract(Exit start) {
         start.canBeOpened(player.getTotalKeys());
         if (start.getOpenOutput()) {
+            System.out.println("Parabéns, você venceu!");
             System.exit(0);
         }
     }
@@ -113,19 +115,19 @@ public class GameSystem {
 
         if (movimento[0] == 0 && movimento[1] == 0) {
             if (mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]] instanceof Exit)
-                exitInterated((Exit) mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]]);
+                exitInteract((Exit) mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]]);
 
             if (dungeonPanel.getPlayerDirection() == "down")
-                interated(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] + 1]);
+                interact(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] + 1]);
 
             if (dungeonPanel.getPlayerDirection() == "up")
-                interated(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] - 1]);
+                interact(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] - 1]);
 
             if (dungeonPanel.getPlayerDirection() == "left")
-                interated(mapEntity.getMap()[positionPlayer[0] - 1][positionPlayer[1]]);
+                interact(mapEntity.getMap()[positionPlayer[0] - 1][positionPlayer[1]]);
 
             if (dungeonPanel.getPlayerDirection() == "right")
-                interated(mapEntity.getMap()[positionPlayer[0] + 1][positionPlayer[1]]);
+                interact(mapEntity.getMap()[positionPlayer[0] + 1][positionPlayer[1]]);
         } else if (mapEntity.getMap()[newPositionPlayer[0]][newPositionPlayer[1]].isWalkable()) {
             player.setPositionPlayer(newPositionPlayer);
         }
