@@ -192,15 +192,15 @@ public class BattleSystem extends JFrame {
 
     public static void applyDarkTheme() {
         Color BLACK = new Color(23, 17, 26);
-        Font defaultFont = new Font("JetBrainsMono", Font.PLAIN, 20);
+        Font defaultFont = new Font("CooperBits", Font.PLAIN, 20);
 
         UIManager.put("OptionPane.messageFont", defaultFont);
         UIManager.put("OptionPane.buttonFont", defaultFont);
         UIManager.put("Label.font", defaultFont);
         UIManager.put("TextArea.font", defaultFont);
-        UIManager.put("OptionPane.background", Color.DARK_GRAY);
+        UIManager.put("OptionPane.background", BLACK);
         UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        UIManager.put("Panel.background", Color.DARK_GRAY);
+        UIManager.put("Panel.background", BLACK);
         UIManager.put("Button.background", Color.gray);
         UIManager.put("Button.foreground", Color.WHITE);
     }
@@ -219,6 +219,7 @@ public class BattleSystem extends JFrame {
         JPanel customPanel = new JPanel();
         customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
         customPanel.add(battleInfoTextArea);
+        customPanel.setBackground(new Color(23, 17, 26));
 
         customPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
@@ -242,8 +243,9 @@ public class BattleSystem extends JFrame {
     }
 
     private static void configureTextArea(JTextArea textArea) {
+        Color BLACK = new Color(23, 17, 26);
         textArea.setForeground(Color.white);
-        textArea.setBackground(Color.DARK_GRAY);
+        textArea.setBackground(BLACK);
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -251,6 +253,7 @@ public class BattleSystem extends JFrame {
     }
 
     private static void configureLabel(JLabel label) {
+        label.setBackground(new Color(23,17,26));
         label.setForeground(Color.white);
     }
 

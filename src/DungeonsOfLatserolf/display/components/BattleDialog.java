@@ -1,18 +1,21 @@
-package DungeonsOfLatserolf.display.components;
-
 import javax.swing.*;
-
-import java.awt.event.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BattleDialog extends JDialog {
-    private JTextArea battleInfoTextArea;
+    private JTextPane battleInfoTextPane;
     private JButton continueButton;
 
     public BattleDialog(JFrame parent, String title, String monsterInfo, String battleInfo, String battleIniciative) {
         super(parent, title, true);
 
-        battleInfoTextArea = new JTextArea(monsterInfo + "\n" + battleInfo + "\n" + battleIniciative);
-        battleInfoTextArea.setEditable(false);
+        battleInfoTextPane = new JTextPane();
+        battleInfoTextPane.setEditable(false);
+        setStyledText(battleInfoTextPane, monsterInfo + "\n" + battleInfo + "\n" + battleIniciative);
 
         continueButton = new JButton("Continue");
         continueButton.addActionListener(new ActionListener() {
@@ -23,7 +26,7 @@ public class BattleDialog extends JDialog {
         });
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        add(battleInfoTextArea);
+        add(battleInfoTextPane);
         add(continueButton);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,10 +36,26 @@ public class BattleDialog extends JDialog {
         setVisible(true);
     }
 
+    private void setStyledText(JTextPane textPane, String text) {
+        StyledDocument doc = textPane.getStyledDocument();
+        SimpleAttributeSet style = new SimpleAttributeSet();
+
+        StyleConstants.setForeground(style, Color.WHITE);
+        StyleConstants.setBackground(style, new Color(23, 17, 26));
+        StyleConstants.setFontFamily(style, "CooperBits");
+        StyleConstants.setFontSize(style, 48);
+
+        try {
+            doc.insertString(0, text, style);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean acceptBattle() {
-        Object[] options = { "Sim", "Não" };
+        Object[] options = {"Sim", "Não"};
         int choice = JOptionPane.showOptionDialog(
-                null,
+                BattleDialog.this,
                 "Você encontrou um monstro, deseja batalhar?",
                 "Batalha",
                 JOptionPane.YES_NO_OPTION,
@@ -49,10 +68,6 @@ public class BattleDialog extends JDialog {
     }
 
     public void setBattleInfo(String battleInfo) {
-        battleInfoTextArea.setText(battleInfo);
-    }
-
-    public BattleDialog getBattleDialog() {
-        return this;
+        setStyledText(battleInfoTextPane, battleInfo);
     }
 }
