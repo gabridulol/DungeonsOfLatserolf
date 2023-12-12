@@ -22,7 +22,6 @@ public class BattleSystem extends JFrame {
         this.monster = monster;
         this.player = player;
         this.assetLibrary = assetLibrary;
-        
     }
 
     public int rollDice() {
@@ -191,7 +190,9 @@ public class BattleSystem extends JFrame {
     }
 
     public static void applyDarkTheme() {
+        Color BLACK = new Color(23, 17, 26);
         Font defaultFont = new Font("JetBrainsMono", Font.PLAIN, 20);
+
         UIManager.put("OptionPane.messageFont", defaultFont);
         UIManager.put("OptionPane.buttonFont", defaultFont);
         UIManager.put("Label.font", defaultFont);
@@ -245,7 +246,7 @@ public class BattleSystem extends JFrame {
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setPreferredSize(new Dimension(570, 360)); // Ajuste conforme necessário
+        textArea.setPreferredSize(new Dimension(570, 360));
     }
 
     private static void configureLabel(JLabel label) {

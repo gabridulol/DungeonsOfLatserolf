@@ -2,19 +2,19 @@ package DungeonsOfLatserolf.map.tile;
 
 import java.awt.image.BufferedImage;
 
-public class Start extends TileTypeEntity {
+public class Exit extends TileTypeEntity {
     public boolean openOutput;
 
-    public Start(BufferedImage assetImage, BufferedImage assetImageOpen) {
+    public Exit(BufferedImage assetImage, BufferedImage assetImageOpen) {
         super(assetImage, assetImageOpen);
         this.openOutput = false;
     }
 
-    public boolean getOpenOutput() { // ver se a porta esta aberta
+    public boolean getOpenOutput() {
         return openOutput;
     }
 
-    public void setOpenOutput(boolean openOutput) { // abrir a porta
+    public void setOpenOutput(boolean openOutput) {
         this.openOutput = openOutput;
     }
 

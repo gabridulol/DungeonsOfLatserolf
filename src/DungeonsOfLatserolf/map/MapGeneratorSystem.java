@@ -6,7 +6,6 @@ import java.util.Random;
 
 import DungeonsOfLatserolf.entity.monster.MonsterGenerator;
 import DungeonsOfLatserolf.graphics.AssetLibrary;
-import DungeonsOfLatserolf.map.MapData;
 
 public class MapGeneratorSystem {
     private MapData mapData;
@@ -14,7 +13,11 @@ public class MapGeneratorSystem {
     private MonsterGenerator monsterGenerator;
 
     public MapGeneratorSystem(AssetLibrary imagens) {
-        this.mapData = new MapData(11, 11, 3, 1);
+        // Passar nível para o construtor
+        // Gerar níveis de tamanho aleatório - Não implementado
+        // Random rand = new Random();
+        // int size = rand.nextInt(25) + 7;
+        this.mapData = new MapData(31, 31, 3, 1);
         this.imagens = imagens;
         monsterGenerator = new MonsterGenerator(imagens);
     }
@@ -38,19 +41,16 @@ public class MapGeneratorSystem {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1) { // borda
-                    if (x == 0 || x == width - 1)
+                    if (x == 0 || x == width - 1) {
                         dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
-                    else
+                    } else {
                         dungeonMap[x][y] = new Wall(imagens.getImage("wall(0)"));
-
-                }
-
-                else {
+                    }
+                } else {
                     dungeonMap[x][y] = new Wall(imagens.getImage("wall(1)"));
                 }
             }
         }
-
     }
 
     private static void shuffleArray(int[] arr) {
@@ -86,7 +86,8 @@ public class MapGeneratorSystem {
 
                         if (surroundedByWalls) {
                             if (Math.random() < mapData.getDoorProbability()) {
-                                dungeonMap[x][y] = new Door(monsterGenerator.generateMonster(), imagens.getImage("door(0)"),
+                                dungeonMap[x][y] = new Door(monsterGenerator.generateMonster(),
+                                        imagens.getImage("door(0)"),
                                         imagens.getImage("door(1)"));
                             }
                         }
@@ -94,7 +95,8 @@ public class MapGeneratorSystem {
 
                     if (dungeonMap[x][y] instanceof Floor) {
                         if (Math.random() < mapData.getChestProbability()) {
-                            dungeonMap[x][y] = new Chest(random.nextInt(200), imagens.getImage("chest(0)"), imagens.getImage("chest(1)"));
+                            dungeonMap[x][y] = new Chest(random.nextInt(200), imagens.getImage("chest(0)"),
+                                    imagens.getImage("chest(1)"));
                         }
                     }
                 }
@@ -105,10 +107,12 @@ public class MapGeneratorSystem {
         do {
             exitX = random.nextInt(width);
             exitY = random.nextInt(height);
-        } while (!(dungeonMap[exitY][exitX] instanceof Floor));
+        } while (!(dungeonMap[exitY][exitX] instanceof Floor && exitX != mapData.getStartPosition()[0]
+                && exitY != mapData.getStartPosition()[1]));
 
-        dungeonMap[exitY][exitX] = new Start(imagens.getImage("start(0)"), null); // End
-
+        dungeonMap[exitY][exitX] = new Exit(imagens.getImage("exit(0)"), null);
+        dungeonMap[mapData.getStartPosition()[1]][mapData.getStartPosition()[0]] = new Floor(
+                imagens.getImage("start(0)"));
     }
 
     private void buildVerticalWall(TileTypeEntity dungeonMap[][]) {
@@ -163,7 +167,6 @@ public class MapGeneratorSystem {
     }
 
     public TileTypeEntity[][] buildDungeon(TileTypeEntity dungeonMap[][]) {
-        // buildDungeonComponent(mapData.getSizeMap()[0], mapData.getSizeMap()[1]);
         dungeonMap = new TileTypeEntity[mapData.getSizeMap()[0]][mapData.getSizeMap()[1]];
         buildWallTileDungeon(dungeonMap);
         buildBacktrackingDungeon(dungeonMap, mapData.getStartPosition()[0], mapData.getStartPosition()[1]);

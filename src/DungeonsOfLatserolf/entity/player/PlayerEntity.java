@@ -56,7 +56,7 @@ public class PlayerEntity {
     public void upLevel() {
         this.playerStats.setAttack(this.playerStats.getAttack() + 1);
         this.playerStats.setDefense(this.playerStats.getDefense() + 1);
-        this.playerStats.setHealth(this.playerStats.getHealth() + 6);
+        this.playerStats.setHealth(this.playerStats.getHealth() + 3);
         this.playerStats.setScore(this.playerStats.getScore() + 100);
     }
 

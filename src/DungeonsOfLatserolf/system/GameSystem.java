@@ -10,7 +10,7 @@ import DungeonsOfLatserolf.graphics.AssetLibrary;
 import DungeonsOfLatserolf.map.MapEntity;
 import DungeonsOfLatserolf.map.tile.Chest;
 import DungeonsOfLatserolf.map.tile.Door;
-import DungeonsOfLatserolf.map.tile.Start;
+import DungeonsOfLatserolf.map.tile.Exit;
 import DungeonsOfLatserolf.map.tile.TileTypeEntity;
 
 public class GameSystem {
@@ -23,13 +23,13 @@ public class GameSystem {
     private JLabel labelKey;
 
     private BattleSystem battleSystem;
-    private AtomicBoolean batalhando;
+    private AtomicBoolean isBattle;
 
     public GameSystem(AssetLibrary assetLibrary, MapEntity mapEntity, PlayerEntity player) {
         this.assetLibrary = assetLibrary;
         this.mapEntity = mapEntity;
         this.player = player;
-        this.batalhando = new AtomicBoolean(false);
+        this.isBattle = new AtomicBoolean(false);
     }
 
     public MapEntity getMapEntity() {
@@ -74,16 +74,11 @@ public class GameSystem {
             if (door.getMonsterDoor() != null) {
                 battleSystem = new BattleSystem(door.getMonsterDoor(), player, assetLibrary);
                 if (battleSystem.acceptBattle() != false) {
-                    batalhando.set(true);
-                    battleSystem.startBattle(batalhando, labelChest);
-                    //player.addScore(door.getMonsterDoor().getXP());
-                    //labelChest.setText("Keys: "+ door.getMonsterDoor().getXP());
-                        door.setDoorEmpty();
-
+                    isBattle.set(true);
+                    battleSystem.startBattle(isBattle, labelChest);
+                    door.setDoorEmpty();
                 }
-            }
-
-            else {
+            } else {
                 door.setDoorEmpty();
             }
         }
@@ -97,22 +92,16 @@ public class GameSystem {
             doorInterated((Door) tileTypeEntity);
     }
 
-    private void exitInterated(Start start) {
-        System.out.println("tentar");
+    private void exitInterated(Exit start) {
         start.canBeOpened(player.getTotalKeys());
-
         if (start.getOpenOutput()) {
-            // mapEntity.buildMap();
-            // player.setPositionPlayer(new int[] { 1, 1 });
-            // dungeonPanel.repaint();
-            System.out.println("Fim de jogo");
             System.exit(0);
         }
     }
 
     public void moveCharacter(int[] movimento) {
 
-        if (batalhando.get()) {
+        if (isBattle.get()) {
             return;
         }
 
@@ -120,8 +109,8 @@ public class GameSystem {
         int[] newPositionPlayer = new int[] { positionPlayer[0] + movimento[0], positionPlayer[1] + movimento[1] };
 
         if (movimento[0] == 0 && movimento[1] == 0) {
-            if (mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]] instanceof Start)
-                exitInterated((Start) mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]]);
+            if (mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]] instanceof Exit)
+                exitInterated((Exit) mapEntity.getMap()[positionPlayer[0]][positionPlayer[1]]);
 
             if (dungeonPanel.getPlayerDirection() == "down")
                 interated(mapEntity.getMap()[positionPlayer[0]][positionPlayer[1] + 1]);
@@ -138,7 +127,7 @@ public class GameSystem {
             player.setPositionPlayer(newPositionPlayer);
         }
 
-        if (batalhando.get() == false) {
+        if (isBattle.get() == false) {
             dungeonPanel.repaint();
         }
     }
