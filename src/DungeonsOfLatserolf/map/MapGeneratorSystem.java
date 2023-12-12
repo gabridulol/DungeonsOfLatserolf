@@ -95,7 +95,7 @@ public class MapGeneratorSystem {
 
                     if (dungeonMap[x][y] instanceof Floor) {
                         if (Math.random() < mapData.getChestProbability()) {
-                            dungeonMap[x][y] = new Chest(random.nextInt(200), imagens.getImage("chest(0)"),
+                            dungeonMap[x][y] = new Chest((random.nextInt(20) + 1) * 10, imagens.getImage("chest(0)"),
                                     imagens.getImage("chest(1)"));
                         }
                     }
