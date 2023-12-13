@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class DatabaseManagerSystem {
     private static final String URL = "jdbc:mysql://localhost:3306/DungeonsOfLatserolf";
     private static final String USER = "root";
-    private static final String PASSWORD = "r4@P36~y_buT";
+    private static final String PASSWORD = "password";
 
     private static final String SQL_INSERT_NEW_USER = "INSERT INTO TBUser (userEmail, userName, userScore) VALUES (?, ?, ?)";
     private static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM TBUser WHERE userEmail = ?";
